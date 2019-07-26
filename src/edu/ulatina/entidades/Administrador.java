@@ -16,7 +16,7 @@ import java.util.List;
 public class Administrador extends Usuario{
    
     private List<Permiso> permisos;
-    
+
     public Administrador(){
         super();
     };
