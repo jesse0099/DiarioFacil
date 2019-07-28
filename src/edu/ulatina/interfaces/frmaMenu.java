@@ -7,6 +7,8 @@ package edu.ulatina.interfaces;
 
 import com.sun.awt.AWTUtilities;
 import edu.ulatina.entidades.Constantes;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.PanelUI;
 import rojeru_san.RSPanelsSlider;
@@ -291,12 +293,19 @@ public class frmaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnAdminProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminProveedorActionPerformed
-        if(!btnAdminProveedor.isSelected()){
-           btnAdminProveedor.setSelected(true); 
-           btnHome.setSelected(false);
-           btnAdminProduct.setSelected(false);
-           pnlSlider.setPanelSlider(1, pnlAdminProveedorHome2,RSPanelsSlider.DIRECT.RIGHT);
+       //<editor-fold defaultstate="collapsed" desc="Revision de permiso de entrada al modulo de proveedores">
+       if(Constantes.ADMINLOGUEADO.checkCredentials("Proveedores", 0)){
+           //Permiso de entrada concedido
+           if(!btnAdminProveedor.isSelected()){
+                btnAdminProveedor.setSelected(true); 
+                btnHome.setSelected(false);
+                btnAdminProduct.setSelected(false);
+                pnlSlider.setPanelSlider(1, pnlAdminProveedorHome2,RSPanelsSlider.DIRECT.RIGHT);
+           }
+       }else{
+               JOptionPane.showMessageDialog(null, "No tiene acceso al modulo", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));  
        }
+       //</editor-fold>
     }//GEN-LAST:event_btnAdminProveedorActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

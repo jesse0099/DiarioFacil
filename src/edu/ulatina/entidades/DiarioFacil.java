@@ -161,11 +161,30 @@ public class DiarioFacil implements Icrud {
     public boolean edit(int index,Object newData) {
        boolean infoRepetead= false;
        boolean niceCasting = true;
-       //Edir Usuario uwu
+       //Edit Usuario uwu
        try{
             if((Usuario)newData instanceof  Cliente){
-                //Lo implemento luego
-                return true;
+                //<editor-fold defaultstate="collapsed" desc="Edicion de usuarios(Cliente)">
+                    Usuario us  = (Usuario)newData;
+                    List<Usuario> tempUserData = new ArrayList<>();
+                    for (int i = 0; i < this.clientes.size(); i++) {
+                        if(!(i==index))
+                            tempUserData.add(this.clientes.get(i));
+                    }
+                    //Chequeo de repetidos recorriendo la lista excepto al objeto que se desea modificar
+                    for(Usuario u : tempUserData){
+                        if(us.getNombre().equals(u.getNombre()) || us.getCedula().equals(u.getCedula()) || us.getApellido().equals(u.getApellido())|| us.getEmail().equals(u.getEmail()) || us.getNombreUsuario().equals(u.getNombreUsuario())){                           infoRepetead=true;
+                           break;
+                        }
+                    }
+                    if(infoRepetead){
+                        //Retorno false porque hay informacion importante repetida
+                        return false;
+                    }else{
+                        return true;
+                    }
+                //</editor-fold>
+
             }
        }catch(Exception e){
            //Fallo por casteo erroneo
@@ -184,6 +203,7 @@ public class DiarioFacil implements Icrud {
                  for(Proveedor p  : tempData){
                      if(prov.getNombre().equals(p.getNombre()) || prov.getApellido().equals(p.getApellido()) || prov.getCedula().equals(p.getCedula())|| prov.getEmail().equals(p.getEmail())){
                          infoRepetead = true;
+                         break;
                      }
                  }
                  if(infoRepetead){

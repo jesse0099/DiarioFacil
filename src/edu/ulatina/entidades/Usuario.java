@@ -67,5 +67,23 @@ public abstract class Usuario extends Persona {
        else
            return false;
    }
+   
+   //Metodo de revision de permisos
+   public boolean checkCredentials(String modulo,int vista){
+       //La vista en 0 indica que solo tiene permiso de ver el modulo
+       //La vista en 1 indica que tiene permiso de edicion en el modulo
+       if(this instanceof Cliente)
+           return false;
+       else{
+           if(modulo.equals("Proveedores"))
+               if(vista==0){
+                    return ((Administrador)this).getPermisos().stream().filter(x-> x.getNombrePermiso().equals("VPROV") && x.getEstado()).count()>0;
+               }
+               else{
+                   return ((Administrador)this).getPermisos().stream().filter(x->x.getNombrePermiso().equals("EPROV") && x.getEstado()).count()>0;
+               }
+       }
+       return false;
+   }
     
 }
