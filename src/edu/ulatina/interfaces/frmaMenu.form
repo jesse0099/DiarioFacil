@@ -178,6 +178,9 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="inheritsPopupMenu" type="boolean" value="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonIconI3ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="rojerusan.RSButtonIconI" name="btnAdminProduct">
           <Properties>
@@ -232,6 +235,9 @@
             <Property name="text" type="java.lang.String" value="Promociones y paquetes"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonIconI4ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="rojerusan.RSButtonIconI" name="btnHome">
           <Properties>
@@ -296,7 +302,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="edu.ulatina.interfaces.pnlAdminProducts" name="pnlAdminProducts2">
+        <Component class="edu.ulatina.interfaces.pnlAdminProductsCategories" name="pnlAdminProducts2">
           <Properties>
             <Property name="name" type="java.lang.String" value="pnlAdminProducts2" noResource="true"/>
           </Properties>

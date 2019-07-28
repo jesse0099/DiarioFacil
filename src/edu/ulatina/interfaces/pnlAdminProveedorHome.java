@@ -6,12 +6,15 @@
 package edu.ulatina.interfaces;
 
 
+import edu.ulatina.entidades.Constantes;
 import edu.ulatina.entidades.Proveedor;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +35,39 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
         initComponents();
         initProveedores();
         initFiltros();
+        checkEdit();
+        //<editor-fold defaultstate="collapsed" desc="Agregar listener a un panel para saber si la visibilidad cambio">
+        jPanel1.addAncestorListener ( new AncestorListener ()
+        {
+        public void ancestorAdded ( AncestorEvent event )
+        {
+            //Revisa si el componente fue agregado a un contenedor visible y a su vez es visible
+            checkEdit();
+        }
+
+        public void ancestorRemoved ( AncestorEvent event )
+        {
+            //Revisar si el contenedor ha sido removido
+        }
+
+        public void ancestorMoved ( AncestorEvent event )
+        {
+            //Revisar si el contenedor ha sido agregado a algun sitio
+        }
+        } );
+    //</editor-fold>
+        
+    }
+    
+    private void checkEdit(){
+        //Revision de permisos de edicion
+        if(jPanel1.isShowing()){
+            if(!Constantes.ADMINLOGUEADO.checkCredentials("EPROV")){
+               btnAdd.setEnabled(false);
+               btnEdit.setEnabled(false);
+               btnDelete.setEnabled(false);
+            } 
+        }
     }
     
     private void initFiltros(){

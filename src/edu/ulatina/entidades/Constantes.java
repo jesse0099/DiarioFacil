@@ -31,7 +31,7 @@ public final  class Constantes {
                //Permiso para ver administrador de productos
                LPERMISOSUPERUSER.add(new Permiso("VPRODUCTO",true));
                //Permiso para editar en el administrador de productos
-               LPERMISOSUPERUSER.add(new Permiso("EPRODUCTO",true));
+               LPERMISOSUPERUSER.add(new Permiso("EPRODUCTO",false));
                //Permiso para ver usuarios
                LPERMISOSUPERUSER.add(new Permiso("VUSUARIO",true));
                //Permiso para editar usuarios
@@ -48,6 +48,8 @@ public final  class Constantes {
                LPERMISOSUPERUSER.add(new Permiso("VPROV",true));
                //Permiso para editar proveedores 
                LPERMISOSUPERUSER.add(new Permiso("EPROV",true));
+               
+               ADMINSUPERUSUARIO.setPermisos(LPERMISOSUPERUSER);
             }
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Usuario logueado">

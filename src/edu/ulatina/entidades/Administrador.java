@@ -47,6 +47,15 @@ public class Administrador extends Usuario{
     public void delPermisos(Permiso permiso){
         permisos.remove(permiso);
     }
-   
+    //Metodo de revision de permisos
+    public boolean checkCredentials(String Permiso){
+       //La vista en 0 indica que solo tiene permiso de ver el modulo
+       //La vista en 1 indica que tiene permiso de edicion en el modulo
+
+        if((this).getPermisos().stream().filter(x-> x.getNombrePermiso().equals(Permiso) && x.getEstado()).count()>0)
+            return true;
+        else
+            return false;
+   }
     
 }
