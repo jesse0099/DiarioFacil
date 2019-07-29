@@ -26,6 +26,9 @@ public class DiarioFacil implements Icrud {
     private  List<Proveedor> proveedores;
    
     public DiarioFacil(){
+        //Recorda que todas las clases deben ser inicializadas(con new),o igualadas a un objeto no nulo para que Java no reviente,de preferencia que 
+        //esta instancia se inicialice aca,en el constructor
+        this.inventario = new Inventario();
         this.clientes = new ArrayList<>();
         this.proveedores = new ArrayList<>();
     }

@@ -56,6 +56,7 @@ public class frmaMenu extends javax.swing.JFrame {
         pnlHomeUI2 = new edu.ulatina.interfaces.pnlHomeUI();
         pnlAdminProducts2 = new edu.ulatina.interfaces.pnlAdminProducts();
         pnlAdminProveedorHome2 = new edu.ulatina.interfaces.pnlAdminProveedorHome();
+        pnlAdminInventario1 = new edu.ulatina.interfaces.pnlAdminInventario();
         jPanel1 = new javax.swing.JPanel();
         btnClose = new rojeru_san.RSButton();
 
@@ -189,9 +190,7 @@ public class frmaMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblUserName)
                 .addGap(73, 73, 73))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanelGradiente1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnAdminInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(btnAdminInventario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         rSPanelGradiente1Layout.setVerticalGroup(
             rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,6 +226,9 @@ public class frmaMenu extends javax.swing.JFrame {
 
         pnlAdminProveedorHome2.setName("pnlAdminProveedorHome1"); // NOI18N
         pnlSlider.add(pnlAdminProveedorHome2, "card4");
+
+        pnlAdminInventario1.setName("pnlAdminInventario2"); // NOI18N
+        pnlSlider.add(pnlAdminInventario1, "card5");
 
         jPanel1.setBackground(new java.awt.Color(0, 112, 192));
 
@@ -329,8 +331,8 @@ public class frmaMenu extends javax.swing.JFrame {
            btnAdminProveedor.setSelected(false); 
            btnHome.setSelected(false);
            btnAdminProduct.setSelected(false);
-           //arreglo que hacer
-           //pnlSlider.setPanelSlider(1, pnlAdminInventario2,RSPanelsSlider.DIRECT.RIGHT);
+          //arreglo que hacer
+          pnlSlider.setPanelSlider(1, pnlAdminInventario1,RSPanelsSlider.DIRECT.RIGHT);
        }
         
     }//GEN-LAST:event_btnAdminInventarioActionPerformed
@@ -378,6 +380,7 @@ public class frmaMenu extends javax.swing.JFrame {
     private rojerusan.RSButtonIconI btnHome;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblUserName;
+    private edu.ulatina.interfaces.pnlAdminInventario pnlAdminInventario1;
     private edu.ulatina.interfaces.pnlAdminProducts pnlAdminProducts2;
     private edu.ulatina.interfaces.pnlAdminProveedorHome pnlAdminProveedorHome2;
     private edu.ulatina.interfaces.pnlHomeUI pnlHomeUI2;
