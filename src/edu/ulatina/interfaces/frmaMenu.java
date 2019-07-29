@@ -7,6 +7,7 @@ package edu.ulatina.interfaces;
 
 import com.sun.awt.AWTUtilities;
 import edu.ulatina.entidades.Constantes;
+import java.awt.Component;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.PanelUI;
 import rojeru_san.RSPanelsSlider;
@@ -16,6 +17,7 @@ import rojeru_san.RSPanelsSlider;
  * @author Nvidi
  */
 public class frmaMenu extends javax.swing.JFrame {
+
 
     /**
      * Creates new form frmaMenu
@@ -49,6 +51,7 @@ public class frmaMenu extends javax.swing.JFrame {
         btnHome = new rojerusan.RSButtonIconI();
         lblUserName = new javax.swing.JLabel();
         btnAdminProveedor = new rojerusan.RSButtonIconI();
+        btnAdminInventario = new javax.swing.JButton();
         pnlSlider = new rojeru_san.RSPanelsSlider();
         pnlHomeUI2 = new edu.ulatina.interfaces.pnlHomeUI();
         pnlAdminProducts2 = new edu.ulatina.interfaces.pnlAdminProducts();
@@ -163,6 +166,13 @@ public class frmaMenu extends javax.swing.JFrame {
             }
         });
 
+        btnAdminInventario.setText("Administrar inventario");
+        btnAdminInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminInventarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout rSPanelGradiente1Layout = new javax.swing.GroupLayout(rSPanelGradiente1);
         rSPanelGradiente1.setLayout(rSPanelGradiente1Layout);
         rSPanelGradiente1Layout.setHorizontalGroup(
@@ -173,12 +183,15 @@ public class frmaMenu extends javax.swing.JFrame {
             .addComponent(rSButtonIconI7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(rSButtonIconI6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnAdminProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rSButtonIconI4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanelGradiente1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblUserName)
                 .addGap(73, 73, 73))
-            .addComponent(btnAdminProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(rSButtonIconI4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanelGradiente1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnAdminInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         rSPanelGradiente1Layout.setVerticalGroup(
             rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,6 +211,8 @@ public class frmaMenu extends javax.swing.JFrame {
                 .addComponent(rSButtonIconI7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(rSButtonIconI4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAdminInventario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rSButtonIconI6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -246,7 +261,7 @@ public class frmaMenu extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(pnlSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +271,7 @@ public class frmaMenu extends javax.swing.JFrame {
                     .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE))
+                .addComponent(pnlSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 712, Short.MAX_VALUE))
         );
 
         pack();
@@ -272,6 +287,7 @@ public class frmaMenu extends javax.swing.JFrame {
            btnAdminProduct.setSelected(true);
            btnHome.setSelected(false);
            btnAdminProveedor.setSelected(false);
+           btnAdminInventario.setSelected(false);
            pnlSlider.setPanelSlider(1, pnlAdminProducts2,RSPanelsSlider.DIRECT.RIGHT);
        }
          //</editor-fold>
@@ -286,6 +302,7 @@ public class frmaMenu extends javax.swing.JFrame {
            btnHome.setSelected(true);
            btnAdminProveedor.setSelected(false);
            btnAdminProduct.setSelected(false);
+           btnAdminInventario.setSelected(false);
            pnlSlider.setPanelSlider(1, pnlHomeUI2,RSPanelsSlider.DIRECT.RIGHT);
        }
     }//GEN-LAST:event_btnHomeActionPerformed
@@ -295,6 +312,7 @@ public class frmaMenu extends javax.swing.JFrame {
            btnAdminProveedor.setSelected(true); 
            btnHome.setSelected(false);
            btnAdminProduct.setSelected(false);
+           btnAdminInventario.setSelected(false);
            pnlSlider.setPanelSlider(1, pnlAdminProveedorHome2,RSPanelsSlider.DIRECT.RIGHT);
        }
     }//GEN-LAST:event_btnAdminProveedorActionPerformed
@@ -304,6 +322,18 @@ public class frmaMenu extends javax.swing.JFrame {
         lblUserName.setText(Constantes.ADMINLOGUEADO.getNombre()+"    "+Constantes.ADMINLOGUEADO.getApellido());
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnAdminInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminInventarioActionPerformed
+        if(!btnAdminInventario.isSelected()){
+           btnAdminInventario.setSelected(true);
+           btnAdminProveedor.setSelected(false); 
+           btnHome.setSelected(false);
+           btnAdminProduct.setSelected(false);
+           //arreglo que hacer
+           //pnlSlider.setPanelSlider(1, pnlAdminInventario2,RSPanelsSlider.DIRECT.RIGHT);
+       }
+        
+    }//GEN-LAST:event_btnAdminInventarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,8 +369,9 @@ public class frmaMenu extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdminInventario;
     private rojerusan.RSButtonIconI btnAdminProduct;
     private rojerusan.RSButtonIconI btnAdminProveedor;
     private rojeru_san.RSButton btnClose;

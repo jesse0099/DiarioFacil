@@ -20,6 +20,8 @@ import static javafx.scene.input.KeyCode.T;
 public class DiarioFacil implements Icrud {
     private static boolean returned = false;
     private  List<Usuario> clientes;
+    private List<Producto> productos;
+    private Inventario inventario;
     
     private  List<Proveedor> proveedores;
    
@@ -62,6 +64,22 @@ public class DiarioFacil implements Icrud {
     
     public void addCliente(Cliente c){
         this.clientes.add(c);
+    }
+    
+    public List<Producto> getProducos(){
+        return inventario.getProductos();
+    }
+    
+    public void setProductos(List<Producto> productos){
+        this.productos = productos;
+    }
+    
+    public void addProducto(Producto producto){
+        this.inventario.addProducto(producto);
+    }
+    
+    public void deleteProducto(int index){
+        this.inventario.delProducto(index);
     }
     
     public boolean addProveedorValidado(Proveedor prov){

@@ -54,4 +54,9 @@ public final  class Constantes {
             public static  Cliente USUARIOLOGUEADO = new Cliente(); 
             public static  Administrador ADMINLOGUEADO = new Administrador(); 
     //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Productos">
+            public final static Producto PRODUCTO = new Producto("A", 1, 12, 2, 3);
+            
+            
+            //</editor-fold>
 }

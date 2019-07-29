@@ -34,8 +34,8 @@ public class Inventario{
         productos.add(producto);
     }
     
-     public void delProducto(Producto producto){
-        productos.remove(producto);
+     public void delProducto(int index){
+        productos.remove(index);
     }
      
     public Producto busqProducto(int codigo){

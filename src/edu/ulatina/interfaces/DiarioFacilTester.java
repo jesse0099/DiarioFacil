@@ -7,7 +7,6 @@ package edu.ulatina.interfaces;
 
 import edu.ulatina.entidades.Constantes;
 import edu.ulatina.entidades.DiarioFacil;
-
 /**
  *
  * @author TEC-HP
@@ -47,6 +46,7 @@ public final class DiarioFacilTester {
                 diarioFacil.addCliente(Constantes.CLIENTEDEFAULT);
                 frmaPrincipal = new frmaPrincipal();
                 frmaPrincipal.setVisible(true);
+                diarioFacil.addProducto(Constantes.PRODUCTO);
             }
         });
     }
