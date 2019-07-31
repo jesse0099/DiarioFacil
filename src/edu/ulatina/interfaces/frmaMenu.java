@@ -23,7 +23,7 @@ public class frmaMenu extends javax.swing.JFrame {
      * Creates new form frmaMenu
      */
     public frmaMenu() {
-    this.setUndecorated(true);
+        this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(this);
         //Pone el background invisible

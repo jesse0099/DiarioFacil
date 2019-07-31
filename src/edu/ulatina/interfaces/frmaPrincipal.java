@@ -17,6 +17,7 @@ import rojeru_san.RSPanelsSlider;
  */
 public class frmaPrincipal extends javax.swing.JFrame {
         frmaMenu men= new frmaMenu();
+        frmaMenuCliente menCliente  = new frmaMenuCliente();
     /**
      * Creates new form frmaPrincipal
      */
@@ -309,6 +310,11 @@ public class frmaPrincipal extends javax.swing.JFrame {
                 this.setVisible(false);
                 //Abrir el admin
                 this.men.setVisible(true);
+            }else {
+                //Esconder login
+                this.setVisible(false);
+                //Abrir el cliente
+                this.menCliente.setVisible(true);
             }
         }
         else{

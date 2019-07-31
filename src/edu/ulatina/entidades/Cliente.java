@@ -14,7 +14,7 @@ import java.util.List;
  * @author Nvidi
  */
 public class Cliente extends Usuario{
-       List<Producto> preferencias;
+    List<Producto> preferencias;
 
     public Cliente(String cedula, String nombre, String apellido, String email, String nombreUsuario, String contrasena, String rol, Date fechaRegistro) {
         super(cedula, nombre, apellido, email, nombreUsuario, contrasena, rol, fechaRegistro);

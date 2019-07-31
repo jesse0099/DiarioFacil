@@ -21,6 +21,7 @@ public class DiarioFacil implements Icrud {
     private static boolean returned = false;
     private  List<Usuario> clientes;
     
+    
     private  List<Proveedor> proveedores;
    
     public DiarioFacil(){
