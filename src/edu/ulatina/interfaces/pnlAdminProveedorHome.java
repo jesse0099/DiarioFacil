@@ -128,7 +128,7 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         rSPanelShadow1.setName("rSPanelShadow1"); // NOI18N
@@ -335,6 +335,11 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
         rSMTextFull1.setFont(new java.awt.Font("Roboto Bold", 1, 12)); // NOI18N
         rSMTextFull1.setName("rSMTextFull1"); // NOI18N
         rSMTextFull1.setPlaceholder("Buscar...");
+        rSMTextFull1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMTextFull1ActionPerformed(evt);
+            }
+        });
         rSMTextFull1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 rSMTextFull1KeyTyped(evt);
@@ -347,7 +352,7 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -503,6 +508,10 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_rSMTextFull1KeyTyped
+
+    private void rSMTextFull1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMTextFull1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSMTextFull1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
