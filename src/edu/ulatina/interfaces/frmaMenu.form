@@ -223,6 +223,9 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonIconI6ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="rojerusan.RSButtonIconI" name="rSButtonIconI4">
           <Properties>
@@ -335,9 +338,6 @@
           </Constraints>
         </Component>
         <Component class="edu.ulatina.interfaces.pnlAdmins" name="pnlAdmins1">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="pnlAdmins" noResource="true"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="card5"/>

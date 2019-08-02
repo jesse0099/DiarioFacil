@@ -135,6 +135,11 @@ public class frmaMenu extends javax.swing.JFrame {
         rSButtonIconI6.setText("Salir");
         rSButtonIconI6.setColorHover(new java.awt.Color(255, 102, 102));
         rSButtonIconI6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rSButtonIconI6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconI6ActionPerformed(evt);
+            }
+        });
 
         rSButtonIconI4.setBorder(null);
         rSButtonIconI4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-price-tag-24.png"))); // NOI18N
@@ -228,8 +233,6 @@ public class frmaMenu extends javax.swing.JFrame {
 
         pnlAdminProveedorHome2.setName("pnlAdminProveedorHome1"); // NOI18N
         pnlSlider.add(pnlAdminProveedorHome2, "card4");
-
-        pnlAdmins1.setName("pnlAdmins"); // NOI18N
         pnlSlider.add(pnlAdmins1, "card5");
 
         jPanel1.setBackground(new java.awt.Color(0, 112, 192));
@@ -335,6 +338,11 @@ public class frmaMenu extends javax.swing.JFrame {
         
      
     }//GEN-LAST:event_btnAdminsActionPerformed
+
+    private void rSButtonIconI6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI6ActionPerformed
+        edu.ulatina.interfaces.DiarioFacilTester.frmaPrincipal.show();
+        this.dispose();
+    }//GEN-LAST:event_rSButtonIconI6ActionPerformed
 
     /**
      * @param args the command line arguments
