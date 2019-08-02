@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class pnlAdmins extends javax.swing.JPanel {
     
-      DiarioFacil df = new DiarioFacil();
+   
 
      DefaultTableModel modelo  = new DefaultTableModel(){
      @Override
@@ -124,6 +124,8 @@ public class pnlAdmins extends javax.swing.JPanel {
         vPROV = new rojerusan.RSSwitch();
         jPanel6 = new javax.swing.JPanel();
         btnAdd = new rojerusan.RSButtonIconI();
+        btnEdit = new rojerusan.RSButtonIconI();
+        btnDelete = new rojerusan.RSButtonIconI();
 
         setName("pnlAdmins"); // NOI18N
 
@@ -458,6 +460,22 @@ public class pnlAdmins extends javax.swing.JPanel {
             }
         });
 
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-edit-24.png"))); // NOI18N
+        btnEdit.setText("Editar");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-delete-24.png"))); // NOI18N
+        btnDelete.setText("Eliminar");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -465,13 +483,20 @@ public class pnlAdmins extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
         );
 
@@ -541,24 +566,32 @@ public class pnlAdmins extends javax.swing.JPanel {
         modelo.addColumn("Contraseña");
         if(cbFiltros.getSelectedItem().toString().equals("cedula")){
             for(Object user : DiarioFacilTester.diarioFacil.read("cedula", txtFiltro.getText(), DiarioFacilTester.diarioFacil.getClientes())){
+                if(user instanceof Administrador){
                 modelo.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getClientes().indexOf((Usuario)user)), ((Usuario)user).getCedula(),((Usuario)user).getNombre(),((Usuario)user).getApellido(),((Usuario)user).getEmail(),((Usuario)user).getNombreUsuario(),((Usuario)user).getContrasena()});
+            }
             }
             this.tblAdmins.setModel(modelo);
             
         }else if (cbFiltros.getSelectedItem().toString().equals("email")){
             for(Object user : DiarioFacilTester.diarioFacil.read("email", txtFiltro.getText(), DiarioFacilTester.diarioFacil.getClientes())){
+                  if(user instanceof Administrador){
                 modelo.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getClientes().indexOf((Usuario)user)), ((Usuario)user).getCedula(),((Usuario)user).getNombre(),((Usuario)user).getApellido(),((Usuario)user).getEmail(),((Usuario)user).getNombreUsuario(),((Usuario)user).getContrasena()});
+            }
             }
           this.tblAdmins.setModel(modelo);
         }else if (cbFiltros.getSelectedItem().toString().equals("usuario")){
             for(Object user : DiarioFacilTester.diarioFacil.read("usuario", txtFiltro.getText(), DiarioFacilTester.diarioFacil.getClientes())){
+                  if(user instanceof Administrador){
                 modelo.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getClientes().indexOf((Usuario)user)), ((Usuario)user).getCedula(),((Usuario)user).getNombre(),((Usuario)user).getApellido(),((Usuario)user).getEmail(),((Usuario)user).getNombreUsuario(),((Usuario)user).getContrasena()});
+            }
             }
           this.tblAdmins.setModel(modelo);
         }else{
              for(Object user : DiarioFacilTester.diarioFacil.read("nombre", txtFiltro.getText(), DiarioFacilTester.diarioFacil.getClientes())){
+                   if(user instanceof Administrador){
              modelo.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getClientes().indexOf((Usuario)user)), ((Usuario)user).getCedula(),((Usuario)user).getNombre(),((Usuario)user).getApellido(),((Usuario)user).getEmail(),((Usuario)user).getNombreUsuario(),((Usuario)user).getContrasena()});
             }
+             }
           this.tblAdmins.setModel(modelo);
         }
     }//GEN-LAST:event_txtFiltroKeyTyped
@@ -681,7 +714,7 @@ public class pnlAdmins extends javax.swing.JPanel {
              user.addPermisos(per);
              }
                 //</editor-fold>           
-             check = df.create(user);
+             check = DiarioFacilTester.diarioFacil.create(user);
              /*Si se llega a agregar el usuario le limpian los campos automaticamente*/
              if(check = true){
                  txtCedula.setText("");
@@ -697,15 +730,7 @@ public class pnlAdmins extends javax.swing.JPanel {
         //</editor-fold>  
         
    //<editor-fold defaultstate="collapsed" desc="Prueba de Contenido" >      
-        /*Pruebas*/  
-        List<Usuario> vistaUsuarios = new ArrayList<>();
-        vistaUsuarios= df.getAdministradores();
-        String out="";
-        for(int i=0;i<vistaUsuarios.size();i++){
-        out+=" Cedula: " +vistaUsuarios.get(i).getCedula() +" Nombre: " +vistaUsuarios.get(i).getNombre();
-        }
-        System.out.println(out);
-        
+      
      //</editor-fold>
         
     }//GEN-LAST:event_btnAddActionPerformed
@@ -726,9 +751,45 @@ public class pnlAdmins extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_tblAdminsMouseClicked
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+           SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+             Date date = new Date(System.currentTimeMillis());  
+        if(tblAdmins.getRowCount()>0){
+            if(tblAdmins.getSelectedRow()>-1){
+                if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtCedula.getText().isEmpty()|| txtUser.getText().isEmpty() || txtEmail.getText().isEmpty() || txtContra.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Todos los campos son requeridos", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+                }else{
+                    //Editar
+                    if(DiarioFacilTester.diarioFacil.edit(tblAdmins.getSelectedRow(), new Administrador(txtCedula.getText(),txtNombre.getText(),txtApellido.getText(),txtEmail.getText(),txtUser.getText(),txtContra.getText(),"Administrador",date))){
+                        load();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Campos con informacion repetida", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+                    }
+                }
+            }
+        }
+
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if(tblAdmins.getRowCount()>0){
+            if(tblAdmins.getSelectedRow()>-1){
+                int respuesta  = JOptionPane.showConfirmDialog(null, "Seguro desea eliminar este proveedor?", "Sys", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+                if(respuesta  == JOptionPane.YES_OPTION){
+                    //Consultar si el proveedor tiene productos registrados en el futuro jaja
+                    DiarioFacilTester.diarioFacil.deleteUser(tblAdmins.getSelectedRow());
+                    load();
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSButtonIconI btnAdd;
+    private rojerusan.RSButtonIconI btnDelete;
+    private rojerusan.RSButtonIconI btnEdit;
     private rojerusan.RSComboMetro cbFiltros;
     private rojerusan.RSSwitch eCOMPRA;
     private rojerusan.RSSwitch ePRODUCTO;

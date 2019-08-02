@@ -90,7 +90,10 @@ public class DiarioFacil implements Icrud {
     public void deleteProveedor(int index){
         this.proveedores.remove(index);
     }
-
+    
+    public void deleteUser(int index){
+        this.clientes.remove(index);
+    }
 
     @Override
     public boolean create(Object newData) {
@@ -177,7 +180,7 @@ public class DiarioFacil implements Icrud {
                 return returned;
             }else{
                 //Si no cae en el catch se que es del tipo Proveedor
-                Usuario user  = (Cliente)data.get(0);
+                Usuario user  = (Administrador)data.get(0);
                 
                  if(user instanceof Administrador){
                 
