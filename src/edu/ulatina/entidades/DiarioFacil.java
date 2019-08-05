@@ -115,7 +115,6 @@ public class DiarioFacil implements Icrud {
             }
         }catch(Exception e){
             niceCasting  = false;
-             JOptionPane.showMessageDialog(null, "Usuario ya existe, verifique la información!");
             System.err.println(""+e.getMessage());
         }
         

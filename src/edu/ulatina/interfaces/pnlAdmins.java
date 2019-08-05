@@ -716,7 +716,7 @@ public class pnlAdmins extends javax.swing.JPanel {
                 //</editor-fold>           
              check = DiarioFacilTester.diarioFacil.create(user);
              /*Si se llega a agregar el usuario le limpian los campos automaticamente*/
-             if(check = true){
+             if(check){
                  txtCedula.setText("");
                  txtNombre.setText("");
                  txtApellido.setText("");
@@ -724,6 +724,8 @@ public class pnlAdmins extends javax.swing.JPanel {
                  txtUser.setText("");
                  txtContra.setText("");
                    load();
+             }else{
+                 JOptionPane.showMessageDialog(null, "Usuario ya existe, verifique la información!");
              }
            
         }
