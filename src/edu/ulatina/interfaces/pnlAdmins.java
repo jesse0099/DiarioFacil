@@ -504,7 +504,7 @@ public class pnlAdmins extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1305, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1194, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,7 +513,7 @@ public class pnlAdmins extends javax.swing.JPanel {
                         .addComponent(cbFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 111, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -541,7 +541,7 @@ public class pnlAdmins extends javax.swing.JPanel {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
+                .addGap(34, 34, 34))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -742,8 +742,10 @@ public class pnlAdmins extends javax.swing.JPanel {
     }//GEN-LAST:event_txtContraActionPerformed
 
     private void tblAdminsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminsMouseClicked
-         if(tblAdmins.getRowCount()>0)
+        String in = null;
+        if(tblAdmins.getRowCount()>0)
             if(tblAdmins.getSelectedRow()>-1){
+                    in= (String) tblAdmins.getValueAt(tblAdmins.getSelectedRow(), 0);
                     txtCedula.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(), 1)));
                     txtNombre.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(), 2)));
                     txtApellido.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(), 3)));
@@ -751,6 +753,8 @@ public class pnlAdmins extends javax.swing.JPanel {
                     txtUser.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(),5)));
                     txtContra.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(),6)));
             }
+        
+         
     }//GEN-LAST:event_tblAdminsMouseClicked
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -771,7 +775,7 @@ public class pnlAdmins extends javax.swing.JPanel {
                 }
             }
         }
-
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
