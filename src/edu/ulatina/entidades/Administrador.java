@@ -31,6 +31,15 @@ public class Administrador extends Usuario{
     public boolean login(String contra,String user){
       return super.login(contra, user);
     }
+    
+    @Override
+    public String toString(){
+        System.out.println(""+this.nombre);
+        for (Permiso p : this.getPermisos()) {
+            System.out.println(""+p.getNombrePermiso()+"    "+p.getEstado());
+        }
+        return "";
+    }
 
     public List<Permiso> getPermisos() {
         return permisos;

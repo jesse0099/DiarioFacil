@@ -22,6 +22,7 @@ public class Cliente extends Usuario{
     }
 
     public Cliente() {
+        
     }
 
     public List<Producto> getPreferencias() {

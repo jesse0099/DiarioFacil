@@ -6,7 +6,13 @@
 package edu.ulatina.interfaces;
 
 import com.sun.awt.AWTUtilities;
+import edu.ulatina.entidades.Cliente;
 import edu.ulatina.entidades.Constantes;
+import edu.ulatina.entidades.DiarioFacil;
+import edu.ulatina.entidades.Usuario;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import rojeru_san.RSPanelsSlider;
@@ -18,6 +24,7 @@ import rojeru_san.RSPanelsSlider;
 public class frmaPrincipal extends javax.swing.JFrame {
         frmaMenu men= new frmaMenu();
         frmaMenuCliente menCliente  = new frmaMenuCliente();
+        DiarioFacil df = new DiarioFacil();
     /**
      * Creates new form frmaPrincipal
      */
@@ -57,11 +64,16 @@ public class frmaPrincipal extends javax.swing.JFrame {
         rSButtonRiple1 = new rojeru_san.RSButtonRiple();
         pnlregister = new javax.swing.JPanel();
         rSButtonRiple2 = new rojeru_san.RSButtonRiple();
-        rSMPassView2 = new rojeru_san.RSMPassView();
-        rSMTextFull3 = new rojeru_san.RSMTextFull();
         jLabel2 = new javax.swing.JLabel();
-        rSMPassView3 = new rojeru_san.RSMPassView();
-        rSMTextFull4 = new rojeru_san.RSMTextFull();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        PanelVergas = new javax.swing.JPanel();
+        txtNombre = new rojeru_san.RSMTextFull();
+        txtApellido = new rojeru_san.RSMTextFull();
+        txtEmail = new rojeru_san.RSMTextFull();
+        txtNewUser = new rojeru_san.RSMTextFull();
+        txtPass = new rojeru_san.RSMTextFull();
+        txtCedula = new rojeru_san.RSMTextFull();
+        txtVeriPass = new rojeru_san.RSMTextFull();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -147,13 +159,13 @@ public class frmaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
                     .addComponent(txtContra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlLoginLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
                 .addComponent(rSButtonRiple1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlLoginLayout.setVerticalGroup(
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,9 +176,9 @@ public class frmaPrincipal extends javax.swing.JFrame {
                 .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(rSButtonRiple1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(26, 26, 26))
         );
 
         pnlSlider.add(pnlLogin, "card2");
@@ -176,39 +188,102 @@ public class frmaPrincipal extends javax.swing.JFrame {
 
         rSButtonRiple2.setText("Registrarme");
         rSButtonRiple2.setColorHover(new java.awt.Color(0, 153, 255));
-
-        rSMPassView2.setModoMaterial(true);
-        rSMPassView2.setPlaceholder("Contraseña");
-
-        rSMTextFull3.setModoMaterial(true);
-        rSMTextFull3.setPlaceholder("Usuario");
+        rSButtonRiple2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonRiple2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 112, 192));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Registrar");
 
-        rSMPassView3.setModoMaterial(true);
-        rSMPassView3.setPlaceholder("Contraseña");
+        PanelVergas.setBackground(new java.awt.Color(255, 255, 255));
 
-        rSMTextFull4.setModoMaterial(true);
-        rSMTextFull4.setPlaceholder("email");
+        txtNombre.setModoMaterial(true);
+        txtNombre.setPlaceholder("Nombre");
+
+        txtApellido.setModoMaterial(true);
+        txtApellido.setPlaceholder("Apellidos");
+
+        txtEmail.setModoMaterial(true);
+        txtEmail.setPlaceholder("Email");
+
+        txtNewUser.setModoMaterial(true);
+        txtNewUser.setPlaceholder("Usuario");
+
+        txtPass.setModoMaterial(true);
+        txtPass.setPlaceholder("Contraseña");
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
+
+        txtCedula.setDisabledTextColor(new java.awt.Color(255, 0, 0));
+        txtCedula.setModoMaterial(true);
+        txtCedula.setPlaceholder("Cédula");
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaActionPerformed(evt);
+            }
+        });
+
+        txtVeriPass.setModoMaterial(true);
+        txtVeriPass.setPlaceholder("Verificar Contraseña");
+        txtVeriPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVeriPassActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelVergasLayout = new javax.swing.GroupLayout(PanelVergas);
+        PanelVergas.setLayout(PanelVergasLayout);
+        PanelVergasLayout.setHorizontalGroup(
+            PanelVergasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+            .addComponent(txtNewUser, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+            .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+            .addComponent(txtVeriPass, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+            .addComponent(txtCedula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+        );
+        PanelVergasLayout.setVerticalGroup(
+            PanelVergasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelVergasLayout.createSequentialGroup()
+                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtVeriPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jScrollPane1.setViewportView(PanelVergas);
 
         javax.swing.GroupLayout pnlregisterLayout = new javax.swing.GroupLayout(pnlregister);
         pnlregister.setLayout(pnlregisterLayout);
         pnlregisterLayout.setHorizontalGroup(
             pnlregisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlregisterLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(pnlregisterLayout.createSequentialGroup()
                 .addGroup(pnlregisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rSMTextFull3, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-                    .addComponent(rSMPassView2, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-                    .addComponent(rSMPassView3, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-                    .addComponent(rSMTextFull4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
+                    .addGroup(pnlregisterLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(pnlregisterLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(56, 56, 56)
                 .addComponent(rSButtonRiple2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -217,17 +292,11 @@ public class frmaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlregisterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(33, 33, 33)
-                .addComponent(rSMTextFull3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rSMPassView3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rSMPassView2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rSMTextFull4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonRiple2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         pnlSlider.add(pnlregister, "card3");
@@ -244,14 +313,14 @@ public class frmaPrincipal extends javax.swing.JFrame {
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 446, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 444, Short.MAX_VALUE)
                         .addComponent(pnlSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(802, Short.MAX_VALUE)))
+                    .addContainerGap(800, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,6 +379,7 @@ public class frmaPrincipal extends javax.swing.JFrame {
                 this.setVisible(false);
                 //Abrir el admin
                 this.men.setVisible(true);
+                Constantes.ADMINLOGUEADO.toString();
             }else {
                 //Esconder login
                 this.setVisible(false);
@@ -322,6 +392,44 @@ public class frmaPrincipal extends javax.swing.JFrame {
         }
            
     }//GEN-LAST:event_rSButtonRiple1ActionPerformed
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPassActionPerformed
+
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
+
+    private void txtVeriPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVeriPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVeriPassActionPerformed
+
+    private void rSButtonRiple2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple2ActionPerformed
+   //<editor-fold defaultstate="collapsed" desc=" Variables AK7 ">
+   String cedula = this.txtCedula.getText();
+   String nombre = this.txtNombre.getText();
+   String apellido = this.txtApellido.getText();
+   String email = this.txtEmail.getText();
+   String user = this.txtNewUser.getText();
+   String pass1= this.txtPass.getText();
+   String pass2= this.txtVeriPass.getText();
+   boolean check=false;
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+    Date date = new Date(System.currentTimeMillis());  
+    
+     //</editor-fold>
+   
+   //<editor-fold defaultstate="collapsed" desc=" Funcion ak7 ">
+   
+   if(pass1.equals(pass2)){
+   Cliente newuser = new Cliente(cedula,nombre,apellido,email,user, pass1,"Cliente",date);
+   df.create(newuser);
+   }else{
+      JOptionPane.showMessageDialog(null, "La contraseña no coincide!");
+   }
+    //</editor-fold>
+    }//GEN-LAST:event_rSButtonRiple2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,6 +467,7 @@ public class frmaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelVergas;
     private rojeru_san.RSButton btnClose;
     private rojeru_san.RSButtonRiple btnLogin;
     private rojeru_san.RSButtonRiple btnRegister;
@@ -366,18 +475,22 @@ public class frmaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlLogin;
     private rojeru_san.RSPanelsSlider pnlSlider;
     private javax.swing.JPanel pnlregister;
     private rojeru_san.RSButtonRiple rSButtonRiple1;
     private rojeru_san.RSButtonRiple rSButtonRiple2;
-    private rojeru_san.RSMPassView rSMPassView2;
-    private rojeru_san.RSMPassView rSMPassView3;
-    private rojeru_san.RSMTextFull rSMTextFull3;
-    private rojeru_san.RSMTextFull rSMTextFull4;
     private rojeru_san.RSPanelShadow rSPanelShadow1;
     private rojeru_san.RSPanelShadow rSPanelShadow3;
+    private rojeru_san.RSMTextFull txtApellido;
+    private rojeru_san.RSMTextFull txtCedula;
     private rojeru_san.RSMPassView txtContra;
+    private rojeru_san.RSMTextFull txtEmail;
+    private rojeru_san.RSMTextFull txtNewUser;
+    private rojeru_san.RSMTextFull txtNombre;
+    private rojeru_san.RSMTextFull txtPass;
     private rojeru_san.RSMTextFull txtUser;
+    private rojeru_san.RSMTextFull txtVeriPass;
     // End of variables declaration//GEN-END:variables
 }

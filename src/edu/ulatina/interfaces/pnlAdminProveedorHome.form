@@ -7,6 +7,10 @@
       <Dimension value="[957, 800]"/>
     </Property>
   </Properties>
+  <Events>
+    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="formFocusGained"/>
+    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="formMouseEntered"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
@@ -46,7 +50,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel2" alignment="0" pref="1002" max="32767" attributes="0"/>
+              <Component id="jPanel2" alignment="0" pref="1006" max="32767" attributes="0"/>
               <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -56,7 +60,7 @@
                           <Component id="cbFiltros" min="-2" pref="228" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="rSMTextFull1" min="-2" pref="727" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -203,6 +207,9 @@
                 </Property>
                 <Property name="name" type="java.lang.String" value="rSPanelGradiente1" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rSPanelGradiente1MouseEntered"/>
+              </Events>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -465,6 +472,7 @@
             <Property name="placeholder" type="java.lang.String" value="Buscar..."/>
           </Properties>
           <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMTextFull1ActionPerformed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="rSMTextFull1KeyTyped"/>
           </Events>
         </Component>

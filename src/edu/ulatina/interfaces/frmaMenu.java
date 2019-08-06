@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package edu.ulatina.interfaces;
-
+import edu.ulatina.interfaces.pnlAdmins;
 import com.sun.awt.AWTUtilities;
 import edu.ulatina.entidades.Constantes;
 import javax.swing.ImageIcon;
@@ -51,10 +51,12 @@ public class frmaMenu extends javax.swing.JFrame {
         btnHome = new rojerusan.RSButtonIconI();
         lblUserName = new javax.swing.JLabel();
         btnAdminProveedor = new rojerusan.RSButtonIconI();
+        btnAdmins = new rojerusan.RSButtonIconI();
         pnlSlider = new rojeru_san.RSPanelsSlider();
         pnlHomeUI2 = new edu.ulatina.interfaces.pnlHomeUI();
         pnlAdminProducts2 = new edu.ulatina.interfaces.pnlAdminProductsCategories();
         pnlAdminProveedorHome2 = new edu.ulatina.interfaces.pnlAdminProveedorHome();
+        pnlAdmins1 = new edu.ulatina.interfaces.pnlAdmins();
         jPanel1 = new javax.swing.JPanel();
         btnClose = new rojeru_san.RSButton();
 
@@ -139,6 +141,11 @@ public class frmaMenu extends javax.swing.JFrame {
         rSButtonIconI6.setText("Salir");
         rSButtonIconI6.setColorHover(new java.awt.Color(255, 102, 102));
         rSButtonIconI6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rSButtonIconI6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconI6ActionPerformed(evt);
+            }
+        });
 
         rSButtonIconI4.setBorder(null);
         rSButtonIconI4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-price-tag-24.png"))); // NOI18N
@@ -175,6 +182,15 @@ public class frmaMenu extends javax.swing.JFrame {
             }
         });
 
+        btnAdmins.setBorder(null);
+        btnAdmins.setText("Administradores");
+        btnAdmins.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnAdmins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout rSPanelGradiente1Layout = new javax.swing.GroupLayout(rSPanelGradiente1);
         rSPanelGradiente1.setLayout(rSPanelGradiente1Layout);
         rSPanelGradiente1Layout.setHorizontalGroup(
@@ -191,6 +207,7 @@ public class frmaMenu extends javax.swing.JFrame {
                 .addGap(73, 73, 73))
             .addComponent(btnAdminProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(rSButtonIconI4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnAdmins, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         rSPanelGradiente1Layout.setVerticalGroup(
             rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,8 +225,10 @@ public class frmaMenu extends javax.swing.JFrame {
                 .addComponent(btnAdminProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(rSButtonIconI7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rSButtonIconI4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAdmins, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rSButtonIconI6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -224,6 +243,7 @@ public class frmaMenu extends javax.swing.JFrame {
 
         pnlAdminProveedorHome2.setName("pnlAdminProveedorHome1"); // NOI18N
         pnlSlider.add(pnlAdminProveedorHome2, "card4");
+        pnlSlider.add(pnlAdmins1, "card5");
 
         jPanel1.setBackground(new java.awt.Color(0, 112, 192));
 
@@ -284,8 +304,10 @@ public class frmaMenu extends javax.swing.JFrame {
             if(!btnAdminProduct.isSelected()){
                btnAdminProduct.setSelected(true);
                btnHome.setSelected(false);
+               btnAdmins.setSelected(false);
                btnAdminProveedor.setSelected(false);
                pnlSlider.setPanelSlider(1, pnlAdminProducts2,RSPanelsSlider.DIRECT.RIGHT);
+               pnlAdminProducts2.checkEdit();
             }
         }else{
             JOptionPane.showMessageDialog(null, "No tiene acceso al modulo", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png")); 
@@ -309,6 +331,7 @@ public class frmaMenu extends javax.swing.JFrame {
 
         if(!btnHome.isSelected()){
            btnHome.setSelected(true);
+           btnAdmins.setSelected(false);
            btnAdminProveedor.setSelected(false);
            btnAdminProduct.setSelected(false);
            pnlSlider.setPanelSlider(1, pnlHomeUI2,RSPanelsSlider.DIRECT.RIGHT);
@@ -321,14 +344,17 @@ public class frmaMenu extends javax.swing.JFrame {
            //Permiso de entrada concedido
            if(!btnAdminProveedor.isSelected()){
                 btnAdminProveedor.setSelected(true); 
+                btnAdmins.setSelected(false);
                 btnHome.setSelected(false);
                 btnAdminProduct.setSelected(false);
                 pnlSlider.setPanelSlider(1, pnlAdminProveedorHome2,RSPanelsSlider.DIRECT.RIGHT);
+                pnlAdminProveedorHome2.checkEdit();
            }
        }else{
             JOptionPane.showMessageDialog(null, "No tiene acceso al modulo", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));  
        }
        //</editor-fold>
+        
     }//GEN-LAST:event_btnAdminProveedorActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -356,6 +382,28 @@ public class frmaMenu extends javax.swing.JFrame {
             } 
         //</editor-fold>
     }//GEN-LAST:event_rSButtonIconI4ActionPerformed
+    private void btnAdminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminsActionPerformed
+       //<editor-fold defaultstate="collapsed" desc="Revision de permiso de entrada al modulo de administracion de administradores">
+        if(Constantes.ADMINLOGUEADO.checkCredentials("VUSUARIO")){
+            if(!btnAdmins.isSelected()){
+               btnAdmins.setSelected(true);
+               btnAdminProveedor.setSelected(false);
+               btnAdminProduct.setSelected(false);
+               pnlSlider.setPanelSlider(1, pnlAdmins1,RSPanelsSlider.DIRECT.RIGHT);
+               pnlAdmins1.checkEdit();
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No tiene acceso al modulo", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+        }
+      //</editor-fold>
+        
+     
+    }//GEN-LAST:event_btnAdminsActionPerformed
+
+    private void rSButtonIconI6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI6ActionPerformed
+        edu.ulatina.interfaces.DiarioFacilTester.frmaPrincipal.show();
+        this.dispose();
+    }//GEN-LAST:event_rSButtonIconI6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,12 +443,14 @@ public class frmaMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSButtonIconI btnAdminProduct;
     private rojerusan.RSButtonIconI btnAdminProveedor;
+    private rojerusan.RSButtonIconI btnAdmins;
     private rojeru_san.RSButton btnClose;
     private rojerusan.RSButtonIconI btnHome;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblUserName;
     private edu.ulatina.interfaces.pnlAdminProductsCategories pnlAdminProducts2;
     private edu.ulatina.interfaces.pnlAdminProveedorHome pnlAdminProveedorHome2;
+    private edu.ulatina.interfaces.pnlAdmins pnlAdmins1;
     private edu.ulatina.interfaces.pnlHomeUI pnlHomeUI2;
     private rojeru_san.RSPanelsSlider pnlSlider;
     private rojerusan.RSButtonIconI rSButtonIconI3;

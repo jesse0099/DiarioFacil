@@ -44,10 +44,14 @@ public class pnlAdminProductsCategories extends javax.swing.JPanel {
         //</editor-fold>
     }
     
-    private void checkEdit(){
-        if(!Constantes.ADMINLOGUEADO.checkCredentials("EPRODUCTO")){
-            btnAdd.setEnabled(false);
-        }
+    public void checkEdit(){
+       if(Constantes.ADMINLOGUEADO.getApellido()!=null){
+            if(!Constantes.ADMINLOGUEADO.checkCredentials("EPRODUCTO")){
+                btnAdd.setEnabled(false);
+            }else{
+                btnAdd.setEnabled(true);
+            }
+       }
     }
     private void initDataTable(){
         model.addColumn("Categoria");
@@ -113,7 +117,7 @@ public class pnlAdminProductsCategories extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         rSTableMetro1 = new rojerusan.RSTableMetro();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBox.light"));
         setName("Form"); // NOI18N
         setPreferredSize(new java.awt.Dimension(957, 800));
         setVerifyInputWhenFocusTarget(false);
@@ -583,10 +587,10 @@ public class pnlAdminProductsCategories extends javax.swing.JPanel {
             rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rSPanelGradiente1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rSMTextFull2, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSMTextFull1, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rSMTextFull1, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                    .addComponent(rSMTextFull2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         rSPanelGradiente1Layout.setVerticalGroup(
@@ -629,9 +633,7 @@ public class pnlAdminProductsCategories extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 52, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -644,11 +646,11 @@ public class pnlAdminProductsCategories extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addComponent(rSPanelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(rSPanelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(rSPanelShadow3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rSPanelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(rSPanelShadow4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(rSPanelShadow5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -668,7 +670,7 @@ public class pnlAdminProductsCategories extends javax.swing.JPanel {
                 .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlAdminProductsLayout = new javax.swing.GroupLayout(pnlAdminProducts);
@@ -676,7 +678,7 @@ public class pnlAdminProductsCategories extends javax.swing.JPanel {
         pnlAdminProductsLayout.setHorizontalGroup(
             pnlAdminProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 957, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 959, Short.MAX_VALUE)
         );
         pnlAdminProductsLayout.setVerticalGroup(
             pnlAdminProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

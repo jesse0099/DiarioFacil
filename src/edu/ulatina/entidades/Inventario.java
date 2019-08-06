@@ -13,36 +13,21 @@ import java.util.List;
  * @author Daniel
  */
 public class Inventario{
-    private List<Producto> productos;
+    private List<Item> productos;  
     
-
-    public Inventario() {
-        
-        productos = new ArrayList<>();
+    public Inventario(){
+        this.productos = new ArrayList<>();
+    };
+    
+    public Inventario(List<Item> productos){
+        this.productos = productos;
     }
-
-    public List<Producto> getProductos() {
+    
+    public List<Item> getProductos() {
         return productos;
     }
 
-    public void setProductos(List<Producto> productos) {
+    public void setProductos(List<Item> productos) {
         this.productos = productos;
     }
-
-    
-    public void addProducto(Producto producto){
-        productos.add(producto);
-    }
-    
-     public void delProducto(Producto producto){
-        productos.remove(producto);
-    }
-     
-    public Producto busqProducto(int codigo){
-  
-       return productos.get(codigo-1);
-        
-    }
-    
-  
 }

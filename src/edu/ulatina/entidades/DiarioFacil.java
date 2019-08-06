@@ -12,6 +12,7 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javafx.scene.input.KeyCode.T;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +24,7 @@ public class DiarioFacil implements Icrud {
     
     
     private  List<Proveedor> proveedores;
+    private Object Administrador;
    
     public DiarioFacil(){
         this.clientes = new ArrayList<>();
@@ -78,6 +80,7 @@ public class DiarioFacil implements Icrud {
     public boolean login(String user,String contra){
         this.clientes.stream().filter(x-> x.nombreUsuario.equals(user) && x.contrasena.equals(contra)).forEach((Usuario action) -> {
             if(action instanceof Administrador){
+                ((Administrador) action).toString();
                 Constantes.ADMINLOGUEADO =(Administrador)action;
             }else{
                 Constantes.USUARIOLOGUEADO =(Cliente)action;
@@ -89,20 +92,34 @@ public class DiarioFacil implements Icrud {
     public void deleteProveedor(int index){
         this.proveedores.remove(index);
     }
-
+    
+    public void deleteUser(int index){
+        this.clientes.remove(index);
+    }
 
     @Override
     public boolean create(Object newData) {
         boolean niceCasting  = true;
         //Crear usuario
         try{
-            Usuario us = (Usuario)newData;
+     /**/       Usuario us = (Usuario)newData;
+            if(this.clientes.stream().filter(x->x.getCedula().equals(us.getCedula()) || x.getEmail().equals(us.getEmail()) || x.getNombreUsuario().equals(us.getNombreUsuario())).count()==0){
+            
+            if(us instanceof Cliente){
             this.clientes.add(us);
+              JOptionPane.showMessageDialog(null, "User creado");
+            }else if(us instanceof Administrador){
+              this.clientes.add(us);
+                JOptionPane.showMessageDialog(null, "Admin creado");
+            }
+            
             return true;
+            }
         }catch(Exception e){
             niceCasting  = false;
             System.err.println(""+e.getMessage());
         }
+        
         //Crear proveedor
         try{
             Proveedor prov  = (Proveedor)newData;
@@ -129,6 +146,7 @@ public class DiarioFacil implements Icrud {
             }else{
                 //Si no cae en el catch se que es del tipo Proveedor
                 Proveedor prov  = (Proveedor)data.get(0);
+                
                 if(parameter.equals("empresa")){
                     this.proveedores.stream().filter((Proveedor prove) -> prove.getEmpresa().contains(value)).forEach((Proveedor add)->{
                         returned.add(add);
@@ -155,6 +173,51 @@ public class DiarioFacil implements Icrud {
         }catch(Exception ex){
             System.err.println(""+ex.getMessage());
         }
+        
+        /* Admin*/
+        
+           try{
+            if(data.size()==0){
+                return returned;
+            }else{
+                //Si no cae en el catch se que es del tipo Proveedor
+                Usuario user  = (Administrador)data.get(0);
+                
+                 if(user instanceof Administrador){
+                
+                if(parameter.equals("cedula")){
+                    this.clientes.stream().filter((Usuario x) -> x.getCedula().contains(value)).forEach((Usuario add)->{
+                        returned.add(add);
+                    });
+                   return returned;
+                   
+                }else if (parameter.equals("email")){
+                    this.clientes.stream().filter((Usuario x)-> x.getEmail().contains(value)).forEach((Usuario add)->{
+                        returned.add(add);
+                    });
+                    return returned;
+                    
+                }else if(parameter.equals("usuario")){
+                    this.clientes.stream().filter((Usuario x)-> x.getNombreUsuario().contains(value)).forEach((Usuario add)->{
+                        returned.add(add);
+                    });
+                    return returned;
+                    
+                }else if(parameter.equals("nombre")){
+                    this.clientes.stream().filter((Usuario x)-> x.getNombre().contains(value)).forEach((Usuario add)->{
+                        returned.add(add);
+                    });
+                    return returned;
+                }
+                
+            }/*Filtros para Clientes*/
+            }
+        }catch(Exception ex){
+            System.err.println(""+ex.getMessage());
+        }
+        
+        
+        
         return returned;
     }
     //Creo que funciona bien uwu 
@@ -165,27 +228,31 @@ public class DiarioFacil implements Icrud {
        //Edit Usuario uwu
        try{
             if((Usuario)newData instanceof  Cliente){
-                //<editor-fold defaultstate="collapsed" desc="Edicion de usuarios(Cliente)">
-                    Usuario us  = (Usuario)newData;
-                    List<Usuario> tempUserData = new ArrayList<>();
-                    for (int i = 0; i < this.clientes.size(); i++) {
+                /*Si es cliente*/
+                return true;
+            }else{
+                Administrador admin = (Administrador)newData;
+                List<Usuario> tempData = new ArrayList<>();
+                
+                 for (int i = 0; i < this.clientes.size(); i++) {
+                     if(this.clientes instanceof Administrador)
                         if(!(i==index))
-                            tempUserData.add(this.clientes.get(i));
-                    }
-                    //Chequeo de repetidos recorriendo la lista excepto al objeto que se desea modificar
-                    for(Usuario u : tempUserData){
-                        if(us.getNombre().equals(u.getNombre()) || us.getCedula().equals(u.getCedula()) || us.getApellido().equals(u.getApellido())|| us.getEmail().equals(u.getEmail()) || us.getNombreUsuario().equals(u.getNombreUsuario())){                           infoRepetead=true;
-                           break;
-                        }
-                    }
-                    if(infoRepetead){
-                        //Retorno false porque hay informacion importante repetida
-                        return false;
-                    }else{
-                        return true;
-                    }
-                //</editor-fold>
-
+                            tempData.add(this.clientes.get(i));
+                 }   
+                     //Chequeando repetidos
+                 for(Usuario a  : tempData){
+                     if(admin.getCedula().equals(a.getCedula()) || admin.getNombre().equals(a.getNombre()) || admin.getApellido().equals(a.getCedula())|| admin.getEmail().equals(a.getEmail()) ||  admin.getNombreUsuario().equals(a.getNombreUsuario()) || admin.getContrasena().equals(a.getContrasena())){
+                         infoRepetead = true;
+                     }
+                 }
+                 if(infoRepetead){
+                     //Fallo por repeticion de informacion
+                     return false;
+                 }else{
+                     //Actualizar
+                     this.clientes.set(index, admin);
+                     return true;
+                 }
             }
        }catch(Exception e){
            //Fallo por casteo erroneo
@@ -216,11 +283,15 @@ public class DiarioFacil implements Icrud {
                      return true;
                  }
 
-            }  
+            }
        }catch(Exception e){
            //Fallo por casteo erroneo
            niceCasting = false;
        }
+       
+       
+       
+       
        return niceCasting;
     }
 

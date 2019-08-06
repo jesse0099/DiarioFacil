@@ -3,7 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+      <Color blue="e3" green="e3" id="CheckBox.light" palette="3" red="e3" type="palette"/>
     </Property>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -68,7 +68,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-              <Component id="jPanel3" alignment="0" pref="957" max="32767" attributes="0"/>
+              <Component id="jPanel3" alignment="0" pref="959" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -162,13 +162,13 @@
                           <Component id="jPanel1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="rSPanelShadow1" min="-2" pref="175" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Component id="rSPanelShadow3" min="-2" pref="175" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="rSPanelShadow2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="32767" attributes="0"/>
                               <Component id="rSPanelShadow4" min="-2" pref="175" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Component id="rSPanelShadow5" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="rSPanelGradiente1" alignment="0" max="32767" attributes="0"/>
@@ -191,7 +191,7 @@
                       <Component id="rSPanelGradiente1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="37" max="32767" attributes="0"/>
+                      <EmptySpace pref="171" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -884,10 +884,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rSMTextFull2" min="-2" pref="729" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="btnAdd" min="-2" pref="212" max="-2" attributes="0"/>
-                              <Component id="rSMTextFull1" min="-2" pref="731" max="-2" attributes="0"/>
+                              <Component id="rSMTextFull1" alignment="0" pref="878" max="32767" attributes="0"/>
+                              <Component id="rSMTextFull2" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -962,10 +962,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane1" min="-2" pref="271" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="52" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane1" min="-2" pref="189" max="-2" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>

@@ -99,7 +99,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="btnRegister" min="-2" pref="147" max="-2" attributes="0"/>
-                              <EmptySpace pref="446" max="32767" attributes="0"/>
+                              <EmptySpace pref="444" max="32767" attributes="0"/>
                               <Component id="pnlSlider" min="-2" pref="337" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -109,7 +109,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnLogin" min="-2" pref="148" max="-2" attributes="0"/>
-                          <EmptySpace pref="802" max="32767" attributes="0"/>
+                          <EmptySpace pref="800" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -216,15 +216,15 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtUser" pref="317" max="32767" attributes="0"/>
+                                  <Component id="txtUser" pref="313" max="32767" attributes="0"/>
                                   <Component id="txtContra" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="rSButtonRiple1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <Component id="rSButtonRiple1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -237,9 +237,9 @@
                               <Component id="txtUser" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="txtContra" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="110" max="32767" attributes="0"/>
+                              <EmptySpace pref="102" max="32767" attributes="0"/>
                               <Component id="rSButtonRiple1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -298,19 +298,19 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="rSMTextFull3" alignment="0" pref="317" max="32767" attributes="0"/>
-                                  <Component id="rSMPassView2" alignment="0" pref="317" max="32767" attributes="0"/>
-                                  <Component id="rSMPassView3" alignment="0" pref="317" max="32767" attributes="0"/>
-                                  <Component id="rSMTextFull4" alignment="1" pref="317" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" min="-2" pref="276" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Component id="rSButtonRiple2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -321,17 +321,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="rSMTextFull3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="rSMPassView3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="rSMPassView2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="rSMTextFull4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="rSButtonRiple2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="23" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -344,18 +338,9 @@
                           <Color blue="ff" green="99" red="0" type="rgb"/>
                         </Property>
                       </Properties>
-                    </Component>
-                    <Component class="rojeru_san.RSMPassView" name="rSMPassView2">
-                      <Properties>
-                        <Property name="modoMaterial" type="boolean" value="true"/>
-                        <Property name="placeholder" type="java.lang.String" value="Contrase&#xf1;a"/>
-                      </Properties>
-                    </Component>
-                    <Component class="rojeru_san.RSMTextFull" name="rSMTextFull3">
-                      <Properties>
-                        <Property name="modoMaterial" type="boolean" value="true"/>
-                        <Property name="placeholder" type="java.lang.String" value="Usuario"/>
-                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonRiple2ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel2">
                       <Properties>
@@ -369,18 +354,108 @@
                         <Property name="text" type="java.lang.String" value="Registrar"/>
                       </Properties>
                     </Component>
-                    <Component class="rojeru_san.RSMPassView" name="rSMPassView3">
-                      <Properties>
-                        <Property name="modoMaterial" type="boolean" value="true"/>
-                        <Property name="placeholder" type="java.lang.String" value="Contrase&#xf1;a"/>
-                      </Properties>
-                    </Component>
-                    <Component class="rojeru_san.RSMTextFull" name="rSMTextFull4">
-                      <Properties>
-                        <Property name="modoMaterial" type="boolean" value="true"/>
-                        <Property name="placeholder" type="java.lang.String" value="email"/>
-                      </Properties>
-                    </Component>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="PanelVergas">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtApellido" pref="323" max="32767" attributes="0"/>
+                                  <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtEmail" alignment="1" pref="323" max="32767" attributes="0"/>
+                                  <Component id="txtNewUser" alignment="0" pref="323" max="32767" attributes="0"/>
+                                  <Component id="txtPass" alignment="0" pref="323" max="32767" attributes="0"/>
+                                  <Component id="txtVeriPass" alignment="0" pref="323" max="32767" attributes="0"/>
+                                  <Component id="txtCedula" alignment="1" pref="323" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtCedula" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtNombre" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtApellido" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtNewUser" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtPass" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtVeriPass" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="rojeru_san.RSMTextFull" name="txtNombre">
+                              <Properties>
+                                <Property name="modoMaterial" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="Nombre"/>
+                              </Properties>
+                            </Component>
+                            <Component class="rojeru_san.RSMTextFull" name="txtApellido">
+                              <Properties>
+                                <Property name="modoMaterial" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="Apellidos"/>
+                              </Properties>
+                            </Component>
+                            <Component class="rojeru_san.RSMTextFull" name="txtEmail">
+                              <Properties>
+                                <Property name="modoMaterial" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="Email"/>
+                              </Properties>
+                            </Component>
+                            <Component class="rojeru_san.RSMTextFull" name="txtNewUser">
+                              <Properties>
+                                <Property name="modoMaterial" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="Usuario"/>
+                              </Properties>
+                            </Component>
+                            <Component class="rojeru_san.RSMTextFull" name="txtPass">
+                              <Properties>
+                                <Property name="modoMaterial" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="Contrase&#xf1;a"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPassActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="rojeru_san.RSMTextFull" name="txtCedula">
+                              <Properties>
+                                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="0" green="0" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="modoMaterial" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="C&#xe9;dula"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCedulaActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="rojeru_san.RSMTextFull" name="txtVeriPass">
+                              <Properties>
+                                <Property name="modoMaterial" type="boolean" value="true"/>
+                                <Property name="placeholder" type="java.lang.String" value="Verificar Contrase&#xf1;a"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtVeriPassActionPerformed"/>
+                              </Events>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
               </SubComponents>

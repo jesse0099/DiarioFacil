@@ -12,7 +12,6 @@ package edu.ulatina.entidades;
 public class Categoria {
     private String categoria;
     private String descripcion;
-    private int x;
     //Descripcion de algo importante que quiero pushear 
     public Categoria(String categoria, String descripcion) {
         this.categoria = categoria;
