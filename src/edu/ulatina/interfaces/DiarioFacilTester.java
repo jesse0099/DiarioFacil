@@ -42,9 +42,11 @@ public final class DiarioFacilTester {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Constantes.loadCredentialsSa();
-                diarioFacil.addAdministrador(Constantes.ADMINSUPERUSUARIO);
-                diarioFacil.addProveedor(Constantes.DEFAULTPROV);
-                diarioFacil.addCliente(Constantes.CLIENTEDEFAULT);
+                Constantes.loadInventory();
+                //diarioFacil.
+                diarioFacil.create(Constantes.ADMINSUPERUSUARIO);
+                diarioFacil.create(Constantes.DEFAULTPROV);
+                diarioFacil.create(Constantes.CLIENTEDEFAULT);
                 frmaPrincipal = new frmaPrincipal();
                 frmaPrincipal.setVisible(true);
             }

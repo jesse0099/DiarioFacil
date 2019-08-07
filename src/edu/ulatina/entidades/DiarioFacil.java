@@ -12,7 +12,6 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javafx.scene.input.KeyCode.T;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,15 +19,27 @@ import javax.swing.JOptionPane;
  */
 public class DiarioFacil implements Icrud {
     private static boolean returned = false;
+    
+    
     private  List<Usuario> clientes;
-    
-    
     private  List<Proveedor> proveedores;
-    private Object Administrador;
+    private List<Categoria> inventario;
    
     public DiarioFacil(){
         this.clientes = new ArrayList<>();
         this.proveedores = new ArrayList<>();
+        this.inventario = new ArrayList<>();
+    }
+    
+    public List<Producto> getProductos(){
+       List<Categoria> iterator = this.inventario;
+       List<Producto> returnedList  = new ArrayList<>();
+       iterator.stream().forEach((Categoria x)->{
+           x.getProductos().stream().forEach((Producto y)->{
+               returnedList.add(y);
+           });
+       });
+       return returnedList;
     }
     
     public List<Usuario> getClientes() {
@@ -47,10 +58,6 @@ public class DiarioFacil implements Icrud {
         this.proveedores = proveedores;
     }
     
-    public void addProveedor(Proveedor proveedor){
-        this.proveedores.add(proveedor);
-    }
-
     public List<Usuario> getAdministradores() {
         return clientes;
     }
@@ -58,25 +65,7 @@ public class DiarioFacil implements Icrud {
     public void setAdministradores(List<Usuario> administradores) {
         this.clientes = administradores;
     }
-    
-    public void addAdministrador(Administrador admin){
-        this.clientes.add(admin);
-    }
-    
-    public void addCliente(Cliente c){
-        this.clientes.add(c);
-    }
-    
-    public boolean addProveedorValidado(Proveedor prov){
-        boolean returned = false;
-            if(this.proveedores.stream().filter(x->x.getNombre().equals(prov.getNombre()) || x.getApellido().equals(prov.getApellido())|| x.getCedula().equals(prov.getCedula())|| x.getEmail().equals(prov.getEmail())).count()==0)
-            {
-                this.proveedores.add(prov);
-                returned = true;
-            }      
-        return returned;
-    }
-    
+
     public boolean login(String user,String contra){
         this.clientes.stream().filter(x-> x.nombreUsuario.equals(user) && x.contrasena.equals(contra)).forEach((Usuario action) -> {
             if(action instanceof Administrador){
@@ -107,10 +96,10 @@ public class DiarioFacil implements Icrud {
             
             if(us instanceof Cliente){
             this.clientes.add(us);
-              JOptionPane.showMessageDialog(null, "User creado");
+              //JOptionPane.showMessageDialog(null, "User creado");
             }else if(us instanceof Administrador){
               this.clientes.add(us);
-                JOptionPane.showMessageDialog(null, "Admin creado");
+               // JOptionPane.showMessageDialog(null, "Admin creado");
             }
             
             return true;
@@ -315,6 +304,8 @@ public class DiarioFacil implements Icrud {
        }catch(Exception e){
            niceCasting  = false;
        }
+       
+       //Borrar un producto 
        return niceCasting;
     }
 }

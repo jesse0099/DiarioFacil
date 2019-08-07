@@ -24,6 +24,8 @@ public class Producto {
         this.existencias = existencias;
         this.existenciaMin = existenciaMin;
     }
+    
+    public Producto(){};
 
     public String getNombre() {
         return nombre;
