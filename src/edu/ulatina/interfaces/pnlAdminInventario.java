@@ -5,8 +5,11 @@
  */
 package edu.ulatina.interfaces;
 
+import edu.ulatina.entidades.Categoria;
+import edu.ulatina.entidades.Constantes;
 import javax.swing.table.DefaultTableModel;
 import edu.ulatina.entidades.Producto;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -20,7 +23,6 @@ public class pnlAdminInventario extends javax.swing.JPanel {
     //Limpia todos los text fields
     public void Clear(){
         txtNombre.setText(null);
-        //txtCodigo.setText(null);
         txtPrecio.setText(null);
         txtExistencias.setText(null);
         txtExistenciaMin.setText(null);
@@ -32,6 +34,7 @@ public class pnlAdminInventario extends javax.swing.JPanel {
         model = (DefaultTableModel) tableProductos.getModel();
         initInventario();
         initFiltros();
+        loadCategories();
         
     }
     
@@ -40,9 +43,29 @@ public class pnlAdminInventario extends javax.swing.JPanel {
         cbFiltros.addItem("Codigo");
         cbFiltros.addItem("Nombre");
         cbFiltros.addItem("Precio");
-        cbFiltros.addItem("Existencias");
+        cbFiltros.addItem("Categoria");
     }
     
+    private void loadCategories(){
+        cbCategorias.removeAllItems();
+        DiarioFacilTester.diarioFacil.getCategoria().stream().forEach(x->{
+            cbCategorias.addItem(x.getCategoria());
+        });
+    }
+    public void checkEdit(){
+        //Revision de permisos de edicion
+        if(Constantes.ADMINLOGUEADO.getApellido()!=null){
+            if(!Constantes.ADMINLOGUEADO.checkCredentials("EPRODUCTO")){
+               btnAdd.setEnabled(false);
+               btnEdit.setEnabled(false);
+               btnEli.setEnabled(false);
+            }else{
+               btnAdd.setEnabled(true);
+               btnEdit.setEnabled(true);
+               btnEli.setEnabled(true);
+            } 
+        }
+    }
     public void initInventario(){
         model  = new DefaultTableModel(){
             @Override
@@ -56,9 +79,10 @@ public class pnlAdminInventario extends javax.swing.JPanel {
         model.addColumn("Precio");
         model.addColumn("Existencias");
         model.addColumn("Existencia Mínima");
+        model.addColumn("Categoria");
         //Llena la tabla con constantes
         for(Producto prod: DiarioFacilTester.diarioFacil.getProductos()){
-          model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf(prod)), prod.getNombre(), Double.toString(prod.getPrecio()), Integer.toString(prod.getExistencias()), Integer.toString(prod.getExistenciaMin())});
+          model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf(prod)), prod.getNombre(), Double.toString(prod.getPrecio()), Integer.toString(prod.getExistencias()), Integer.toString(prod.getExistenciaMin()),DiarioFacilTester.diarioFacil.getCategoria(prod.getNombre())});
         }
         tableProductos.setModel(model);
     }
@@ -71,29 +95,31 @@ public class pnlAdminInventario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel6 = new javax.swing.JLabel();
         btnEdit = new javax.swing.JButton();
-        txtExistenciaMin = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
-        txtExistencias = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableProductos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnEli = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         rSMTextFull1 = new rojeru_san.RSMTextFull();
         cbFiltros = new rojerusan.RSComboMetro();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableProductos = new rojerusan.RSTableMetro();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        cbCategorias = new rojerusan.RSComboMetro();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtNombre = new rojeru_san.RSMTextFull();
+        txtPrecio = new rojeru_san.RSMTextFull();
+        txtExistenciaMin = new rojeru_san.RSMTextFull();
+        txtExistencias = new rojeru_san.RSMTextFull();
 
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(957, 800));
 
-        jLabel6.setText("Existencia Mínima:");
-
+        btnEdit.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnEdit.setText("Editar");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +127,7 @@ public class pnlAdminInventario extends javax.swing.JPanel {
             }
         });
 
+        btnAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAdd.setText("Agregar");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +135,7 @@ public class pnlAdminInventario extends javax.swing.JPanel {
             }
         });
 
+        btnLimpiar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,44 +143,16 @@ public class pnlAdminInventario extends javax.swing.JPanel {
             }
         });
 
-        tableProductos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Nombre", "Precio", "Existencias", "Existencia Mínima"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tableProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableProductosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tableProductos);
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Productos");
 
+        btnEli.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnEli.setText("Eliminar");
         btnEli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("Nombre del Producto:");
-
-        jLabel4.setText("Precio:");
-
-        jLabel5.setText("Existencias:");
 
         rSMTextFull1.setFont(new java.awt.Font("Roboto Bold", 1, 12)); // NOI18N
         rSMTextFull1.setPlaceholder("Buscar...");
@@ -165,95 +165,152 @@ public class pnlAdminInventario extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 rSMTextFull1KeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                rSMTextFull1KeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 rSMTextFull1KeyTyped(evt);
             }
         });
+
+        tableProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tableProductos.setFuenteFilas(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tableProductos.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tableProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProductosMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableProductos);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Precio:");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Nombre del producto:");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Nombre del producto:");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Categoria:");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Existencias:");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("Existencias minimas:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(cbFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rSMTextFull1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(85, 85, 85))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(116, 116, 116)
-                                    .addComponent(btnEli, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(22, 22, 22)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cbFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(50, 50, 50)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(111, 111, 111)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(94, 94, 94)
-                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtExistenciaMin, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                                    .addComponent(txtExistencias))))))
-                .addContainerGap())
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rSMTextFull1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEli, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)))
+                .addGap(0, 10, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(344, 344, 344)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtExistencias, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                    .addComponent(txtExistenciaMin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rSMTextFull1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtExistencias, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtExistenciaMin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cbCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12))
+                            .addComponent(txtExistencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel11)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtExistenciaMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel13)))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(104, 104, 104)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEli, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -264,7 +321,11 @@ public class pnlAdminInventario extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Todos los campos son requeridos", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
                 }else{
                     //Editar
-                    if(DiarioFacilTester.diarioFacil.edit(tableProductos.getSelectedRow(), new Producto(txtNombre.getText(),tableProductos.getSelectedRow()+1, Double.parseDouble(txtPrecio.getText()), Integer.parseInt(txtExistencias.getText()), Integer.parseInt(txtExistenciaMin.getText())))){
+                    Categoria dummyCat = DiarioFacilTester.diarioFacil.getCategoriaUnica(cbCategorias.getSelectedItem().toString());
+                    dummyCat.setDescripcion(tableProductos.getValueAt(tableProductos.getSelectedRow(),1).toString());
+                    dummyCat.create(new Producto(txtNombre.getText(),tableProductos.getRowCount()+1,Double.parseDouble(txtPrecio.getText()),Integer.parseInt(txtExistencias.getText()),Integer.parseInt(txtExistenciaMin.getText())));
+                    int indexBorrado = DiarioFacilTester.diarioFacil.indexInternoProducto(tableProductos.getValueAt(tableProductos.getSelectedRow(), 1).toString(),(tableProductos.getValueAt(tableProductos.getSelectedRow(), 5)).toString());
+                    if(DiarioFacilTester.diarioFacil.edit(indexBorrado,dummyCat)){
                         initInventario();
                     }else{
                         JOptionPane.showMessageDialog(null, "Campos con informacion repetida", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
@@ -281,7 +342,9 @@ public class pnlAdminInventario extends javax.swing.JPanel {
           }
           else{
             //Agregar 
-            if(DiarioFacilTester.diarioFacil.create(new Producto(txtNombre.getText(),tableProductos.getRowCount()+1,Double.parseDouble(txtPrecio.getText()),Integer.parseInt(txtExistencias.getText()),Integer.parseInt(txtExistenciaMin.getText())))){
+            Categoria dummyCat = DiarioFacilTester.diarioFacil.getCategoriaUnica(cbCategorias.getSelectedItem().toString());
+            dummyCat.create(new Producto(txtNombre.getText(),tableProductos.getRowCount()+1,Double.parseDouble(txtPrecio.getText()),Integer.parseInt(txtExistencias.getText()),Integer.parseInt(txtExistenciaMin.getText())));
+            if(DiarioFacilTester.diarioFacil.create(dummyCat)){
                 //Mensaje de agregado correctamente
                 model.insertRow(model.getRowCount(), new Object[] {tableProductos.getRowCount()+1, txtNombre.getText(), txtPrecio.getText(), txtExistencias.getText(), txtExistenciaMin.getText()});
                 initInventario();
@@ -306,24 +369,13 @@ public class pnlAdminInventario extends javax.swing.JPanel {
         Clear();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
-        //Muestra los datos de la fila seleccionada
-        if(tableProductos.getRowCount()>0)
-        if(tableProductos.getSelectedRow()>-1){
-            //txtCodigo.setText(String.valueOf(tableProductos.getValueAt(tableProductos.getSelectedRow(), 0)));
-            txtNombre.setText(String.valueOf(tableProductos.getValueAt(tableProductos.getSelectedRow(), 1)));
-            txtPrecio.setText(String.valueOf(tableProductos.getValueAt(tableProductos.getSelectedRow(), 2)));
-            txtExistencias.setText(String.valueOf(tableProductos.getValueAt(tableProductos.getSelectedRow(), 3)));
-            txtExistenciaMin.setText(String.valueOf(tableProductos.getValueAt(tableProductos.getSelectedRow(), 4)));
-        }
-    }//GEN-LAST:event_tableProductosMouseClicked
-
     private void btnEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliActionPerformed
         if(tableProductos.getRowCount()>0){
             if(tableProductos.getSelectedRow()>-1){
                 int respuesta  = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar este producto?", "Sys", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
                 if(respuesta  == JOptionPane.YES_OPTION){
-                    DiarioFacilTester.diarioFacil.delete(tableProductos.getSelectedRow(),new Producto());
+                    int indexBorrado = DiarioFacilTester.diarioFacil.indexInternoProducto(tableProductos.getValueAt(tableProductos.getSelectedRow(), 1).toString(),(tableProductos.getValueAt(tableProductos.getSelectedRow(), 5)).toString());
+                    DiarioFacilTester.diarioFacil.delete(indexBorrado,new Categoria(tableProductos.getValueAt(tableProductos.getSelectedRow(), 5).toString(),""));
                     initInventario();
                 }
             }
@@ -341,11 +393,32 @@ public class pnlAdminInventario extends javax.swing.JPanel {
     }//GEN-LAST:event_rSMTextFull1KeyPressed
 
     private void rSMTextFull1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMTextFull1ActionPerformed
-        // TODO add your handling code here:
+        if(rSMTextFull1.getText().isEmpty()){
+            model  = new DefaultTableModel(){
+                @Override
+                public boolean isCellEditable(int row,int column){
+                    return false;
+                }
+            };
+            model.addColumn("Codigo");
+            model.addColumn("Nombre");
+            model.addColumn("Precio");
+            model.addColumn("Existencias");
+            model.addColumn("Existencia Mínima");
+            model.addColumn("Categoria");
+            for(Object prod : DiarioFacilTester.diarioFacil.getProductos()){
+                model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin()),DiarioFacilTester.diarioFacil.getCategoria(((Producto)prod).getNombre())});
+            }
+            tableProductos.setModel(model);
+        }
     }//GEN-LAST:event_rSMTextFull1ActionPerformed
 
     private void rSMTextFull1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rSMTextFull1KeyTyped
-              model  = new DefaultTableModel(){
+
+    }//GEN-LAST:event_rSMTextFull1KeyTyped
+
+    private void rSMTextFull1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rSMTextFull1KeyReleased
+        model  = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row,int column){
                 return false;
@@ -356,28 +429,58 @@ public class pnlAdminInventario extends javax.swing.JPanel {
         model.addColumn("Precio");
         model.addColumn("Existencias");
         model.addColumn("Existencia Mínima");
+        model.addColumn("Categoria");
         if(cbFiltros.getSelectedItem().toString().equals("Codigo")){         
-            for(Object prod : DiarioFacilTester.diarioFacil.read("codigo", rSMTextFull1.getText(), DiarioFacilTester.diarioFacil.getProductos())){
-              model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin())});
+            if(rSMTextFull1.getText().isEmpty()){
+                for(Object prod : DiarioFacilTester.diarioFacil.getProductos()){
+                  model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin()),DiarioFacilTester.diarioFacil.getCategoria(((Producto)prod).getNombre())});
+                }
+            }else{
+                for(Object prod : DiarioFacilTester.diarioFacil.read("codigo", rSMTextFull1.getText(), DiarioFacilTester.diarioFacil.getInventario())){
+                  model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin()),DiarioFacilTester.diarioFacil.getCategoria(((Producto)prod).getNombre())});
+                }
+                tableProductos.setModel(model);
             }
-            tableProductos.setModel(model);
         }else if (cbFiltros.getSelectedItem().toString().equals("Existencias")){
-            for(Object prod : DiarioFacilTester.diarioFacil.read("existencias", rSMTextFull1.getText(), DiarioFacilTester.diarioFacil.getProductos())){
-              model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin())});
+            if(rSMTextFull1.getText().isEmpty()){
+                for(Object prod : DiarioFacilTester.diarioFacil.getProductos()){
+                  model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin()),DiarioFacilTester.diarioFacil.getCategoria(((Producto)prod).getNombre())});
+                }
+            }else{
+                for(Object prod : DiarioFacilTester.diarioFacil.read("existencias", rSMTextFull1.getText(), DiarioFacilTester.diarioFacil.getInventario())){
+                  model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin()),DiarioFacilTester.diarioFacil.getCategoria(((Producto)prod).getNombre())});
+                }
             }
             tableProductos.setModel(model);
         }else if(cbFiltros.getSelectedItem().toString().equals("Precio")){
-            for(Object prod : DiarioFacilTester.diarioFacil.read("precio", rSMTextFull1.getText(), DiarioFacilTester.diarioFacil.getProductos())){
-              model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin())});
+            if(rSMTextFull1.getText().isEmpty()){
+                for(Object prod : DiarioFacilTester.diarioFacil.getProductos()){
+                  model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin()),DiarioFacilTester.diarioFacil.getCategoria(((Producto)prod).getNombre())});
+                }
+            }else{
+                for(Object prod : DiarioFacilTester.diarioFacil.read("precio", rSMTextFull1.getText(), DiarioFacilTester.diarioFacil.getInventario())){
+                  model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin()),DiarioFacilTester.diarioFacil.getCategoria(((Producto)prod).getNombre())});
+                }
             }
             tableProductos.setModel(model); 
         }else{
-            for(Object prod : DiarioFacilTester.diarioFacil.read("nombre", rSMTextFull1.getText(), DiarioFacilTester.diarioFacil.getProductos())){
-              model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin())});
+            for(Object prod : DiarioFacilTester.diarioFacil.read("nombre", rSMTextFull1.getText(), DiarioFacilTester.diarioFacil.getInventario())){
+              model.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getProductos().indexOf((Producto)prod)), ((Producto)prod).getNombre(),Double.toString(((Producto)prod).getPrecio()),Integer.toString(((Producto)prod).getExistencias()),Integer.toString(((Producto)prod).getExistenciaMin()),DiarioFacilTester.diarioFacil.getCategoria(((Producto)prod).getNombre())});
             }
             tableProductos.setModel(model); 
         }
-    }//GEN-LAST:event_rSMTextFull1KeyTyped
+    }//GEN-LAST:event_rSMTextFull1KeyReleased
+
+    private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
+        //Muestra los datos de la fila seleccionada
+        if(tableProductos.getRowCount()>0)
+        if(tableProductos.getSelectedRow()>-1){
+            txtNombre.setText(String.valueOf(tableProductos.getValueAt(tableProductos.getSelectedRow(), 1)));
+            txtPrecio.setText(String.valueOf(tableProductos.getValueAt(tableProductos.getSelectedRow(), 2)));
+            txtExistencias.setText(String.valueOf(tableProductos.getValueAt(tableProductos.getSelectedRow(), 3)));
+            txtExistenciaMin.setText(String.valueOf(tableProductos.getValueAt(tableProductos.getSelectedRow(), 4)));
+        }
+    }//GEN-LAST:event_tableProductosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -385,18 +488,21 @@ public class pnlAdminInventario extends javax.swing.JPanel {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnEli;
     private javax.swing.JButton btnLimpiar;
+    private rojerusan.RSComboMetro cbCategorias;
     private rojerusan.RSComboMetro cbFiltros;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane2;
     private rojeru_san.RSMTextFull rSMTextFull1;
-    private javax.swing.JTable tableProductos;
-    private javax.swing.JTextField txtExistenciaMin;
-    private javax.swing.JTextField txtExistencias;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPrecio;
+    private rojerusan.RSTableMetro tableProductos;
+    private rojeru_san.RSMTextFull txtExistenciaMin;
+    private rojeru_san.RSMTextFull txtExistencias;
+    private rojeru_san.RSMTextFull txtNombre;
+    private rojeru_san.RSMTextFull txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

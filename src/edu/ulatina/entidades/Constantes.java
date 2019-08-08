@@ -32,7 +32,7 @@ public final  class Constantes {
                //Permiso para ver administrador de productos
                LPERMISOSUPERUSER.add(new Permiso("VPRODUCTO",true));
                //Permiso para editar en el administrador de productos
-               LPERMISOSUPERUSER.add(new Permiso("EPRODUCTO",false));
+               LPERMISOSUPERUSER.add(new Permiso("EPRODUCTO",true));
                //Permiso para ver usuarios
                LPERMISOSUPERUSER.add(new Permiso("VUSUARIO",true));
                //Permiso para editar usuarios
@@ -62,9 +62,9 @@ public final  class Constantes {
             //Productos para un par de categorias
             public static void loadInventory(){
                 CATEGORIAS.get(0).create(new Producto("A",0,10.0,10,10));
-                CATEGORIAS.get(0).create(new Producto("A1",0,10.0,30,10));
-                CATEGORIAS.get(1).create(new Producto("B",0,10.0,30,10));
-                CATEGORIAS.get(2).create(new Producto("C",0,10.0,30,10));
+                CATEGORIAS.get(0).create(new Producto("A1",1,10.0,30,10));
+                CATEGORIAS.get(1).create(new Producto("B",2,10.0,30,10));
+                CATEGORIAS.get(2).create(new Producto("C",3,10.0,30,10));
             }
     //</editor-fold>
 }

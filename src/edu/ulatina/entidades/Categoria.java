@@ -23,7 +23,9 @@ public class Categoria implements Icrud{
         this.descripcion = descripcion;
         this.productos = new ArrayList<>();
     }
-
+    
+    public Categoria(){};
+    
     public List<Producto> getProductos() {
         return productos;
     }
@@ -47,7 +49,8 @@ public class Categoria implements Icrud{
     @Override
     public boolean create(Object newData) {
         try{
-            this.productos.add((Producto)newData);
+            Producto temp = ((Producto)newData);
+            this.productos.add(temp);
             return true; 
         }catch(Exception e){
              System.err.println(""+e.getMessage());
@@ -62,14 +65,28 @@ public class Categoria implements Icrud{
 
     @Override
     public boolean edit(int index, Object newData) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       List<Producto> dummyList = new ArrayList<>();
+       for(Producto p: this.productos){
+           if(this.productos.indexOf(p)!=index){
+               dummyList.add(p);
+           }
+       }
+       if(dummyList.stream().filter(x->x.getNombre().equals(((Producto)newData).getNombre())).count()==0){
+           this.productos.set(index, (Producto)newData);
+           return true;
+       }else{
+           return false;
+       }
     }
 
     @Override
     public boolean delete(int index, Object data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.productos.remove(index);
+        return true;
     }
-    
-    
+    //Clear completo de la lista de productos
+    public void clearProductos(){
+        this.productos = new ArrayList<>();
+    }
     
 }

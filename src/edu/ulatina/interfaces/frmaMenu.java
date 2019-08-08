@@ -439,8 +439,9 @@ public class frmaMenu extends javax.swing.JFrame {
                btnAdminCategoria.setSelected(false);
                btnHome.setSelected(false);
                pnlSlider.setPanelSlider(1,pnlAdminInventario1 ,RSPanelsSlider.DIRECT.RIGHT);
+               pnlAdminInventario1.checkEdit();
             }else{
-                
+                JOptionPane.showMessageDialog(null, "No tiene acceso al modulo", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
             }
         //</editor-fold>
     }//GEN-LAST:event_btnAdministrarProductosActionPerformed
