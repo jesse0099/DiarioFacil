@@ -6,12 +6,15 @@
 package edu.ulatina.interfaces;
 
 
+import edu.ulatina.entidades.Constantes;
 import edu.ulatina.entidades.Proveedor;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +35,43 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
         initComponents();
         initProveedores();
         initFiltros();
+        checkEdit();
+        //<editor-fold defaultstate="collapsed" desc="Agregar listener a un panel para saber si la visibilidad cambio">
+        jPanel1.addAncestorListener ( new AncestorListener ()
+        {
+        public void ancestorAdded ( AncestorEvent event )
+        {
+            //Revisa si el componente fue agregado a un contenedor visible y a su vez es visible
+            checkEdit();
+        }
+
+        public void ancestorRemoved ( AncestorEvent event )
+        {
+            //Revisar si el contenedor ha sido removido
+        }
+
+        public void ancestorMoved ( AncestorEvent event )
+        {
+            //Revisar si el contenedor ha sido agregado a algun sitio
+        }
+        } );
+    //</editor-fold>
+        
+    }
+    
+    public void checkEdit(){
+        //Revision de permisos de edicion
+        if(Constantes.ADMINLOGUEADO.getApellido()!=null){
+            if(!Constantes.ADMINLOGUEADO.checkCredentials("EPROV")){
+               btnAdd.setEnabled(false);
+               btnEdit.setEnabled(false);
+               btnDelete.setEnabled(false);
+            }else{
+               btnAdd.setEnabled(true);
+               btnEdit.setEnabled(true);
+               btnDelete.setEnabled(true);
+            } 
+        }
     }
     
     private void initFiltros(){
@@ -100,6 +140,16 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
 
         setName("Form"); // NOI18N
         setPreferredSize(new java.awt.Dimension(957, 800));
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setName("jPanel1"); // NOI18N
@@ -128,7 +178,7 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         rSPanelShadow1.setName("rSPanelShadow1"); // NOI18N
@@ -161,6 +211,11 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
         rSPanelGradiente1.setColorPrimario(new java.awt.Color(255, 255, 255));
         rSPanelGradiente1.setColorSecundario(new java.awt.Color(204, 204, 204));
         rSPanelGradiente1.setName("rSPanelGradiente1"); // NOI18N
+        rSPanelGradiente1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                rSPanelGradiente1MouseEntered(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Nombre de Empresa:");
@@ -362,7 +417,7 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
                         .addComponent(cbFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(rSMTextFull1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 13, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -408,10 +463,7 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
                     }
                 }
             }
-        }
-        
-        
-        
+        }  
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -451,8 +503,7 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
                     txtCedula.setText(String.valueOf(jtbProveedores.getValueAt(jtbProveedores.getSelectedRow(), 3)));
                     txtEmpresa.setText(String.valueOf(jtbProveedores.getValueAt(jtbProveedores.getSelectedRow(), 4)));
                     tXtCorreo.setText(String.valueOf(jtbProveedores.getValueAt(jtbProveedores.getSelectedRow(), 5)));
-                    txtNumeroContacto.setText(String.valueOf(jtbProveedores.getValueAt(jtbProveedores.getSelectedRow(), 6)));
-                    
+                    txtNumeroContacto.setText(String.valueOf(jtbProveedores.getValueAt(jtbProveedores.getSelectedRow(), 6)));   
             }
             
     }//GEN-LAST:event_jtbProveedoresMouseClicked
@@ -510,8 +561,20 @@ public class pnlAdminProveedorHome extends javax.swing.JPanel {
     }//GEN-LAST:event_rSMTextFull1KeyTyped
 
     private void rSMTextFull1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMTextFull1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_rSMTextFull1ActionPerformed
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+
+    }//GEN-LAST:event_formMouseEntered
+
+    private void rSPanelGradiente1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSPanelGradiente1MouseEntered
+
+    }//GEN-LAST:event_rSPanelGradiente1MouseEntered
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+
+    }//GEN-LAST:event_formFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

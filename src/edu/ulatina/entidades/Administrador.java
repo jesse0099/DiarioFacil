@@ -31,6 +31,15 @@ public class Administrador extends Usuario{
     public boolean login(String contra,String user){
       return super.login(contra, user);
     }
+    
+    @Override
+    public String toString(){
+        System.out.println(""+this.nombre);
+        for (Permiso p : this.getPermisos()) {
+            System.out.println(""+p.getNombrePermiso()+"    "+p.getEstado());
+        }
+        return "";
+    }
 
     public List<Permiso> getPermisos() {
         return permisos;
@@ -47,6 +56,15 @@ public class Administrador extends Usuario{
     public void delPermisos(Permiso permiso){
         permisos.remove(permiso);
     }
-   
+    //Metodo de revision de permisos
+    public boolean checkCredentials(String Permiso){
+       //La vista en 0 indica que solo tiene permiso de ver el modulo
+       //La vista en 1 indica que tiene permiso de edicion en el modulo
+
+        if((this).getPermisos().stream().filter(x-> x.getNombrePermiso().equals(Permiso) && x.getEstado()).count()>0)
+            return true;
+        else
+            return false;
+   }
     
 }

@@ -6,6 +6,7 @@
 package edu.ulatina.interfaces;
 
 import edu.ulatina.entidades.Administrador;
+import edu.ulatina.entidades.Constantes;
 import edu.ulatina.entidades.DiarioFacil;
 import edu.ulatina.entidades.Permiso;
 import edu.ulatina.entidades.Usuario;
@@ -81,6 +82,7 @@ public class pnlAdmins extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rSSwitchBeanInfo1 = new rojerusan.RSSwitchBeanInfo();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAdmins = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -169,7 +171,7 @@ public class pnlAdmins extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         txtFiltro.setFont(new java.awt.Font("Roboto Bold", 1, 12)); // NOI18N
@@ -255,29 +257,29 @@ public class pnlAdmins extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(150, 150, 150)
-                                .addComponent(jLabel8))
+                        .addGap(150, 150, 150)
+                        .addComponent(jLabel8)
+                        .addContainerGap(164, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
-                                .addGap(89, 89, 89)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(82, 82, 82)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(27, 27, 27))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -328,6 +330,16 @@ public class pnlAdmins extends javax.swing.JPanel {
 
         jLabel15.setText("Proveedores");
 
+        ePRODUCTO.setActivado(false);
+
+        eUSUARIO.setActivado(false);
+
+        eCOMPRA.setActivado(false);
+
+        ePROMO.setActivado(false);
+
+        ePROV.setActivado(false);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -357,6 +369,16 @@ public class pnlAdmins extends javax.swing.JPanel {
                 .addComponent(ePROV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        vPRODUCTO.setActivado(false);
+
+        vUSUARIO.setActivado(false);
+
+        vCOMPRA.setActivado(false);
+
+        vPROMO.setActivado(false);
+
+        vPROV.setActivado(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -481,13 +503,13 @@ public class pnlAdmins extends javax.swing.JPanel {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(73, 73, 73)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(64, 64, 64))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,16 +526,10 @@ public class pnlAdmins extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1194, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -521,9 +537,13 @@ public class pnlAdmins extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)))))
-                .addGap(249, 249, 249))
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(cbFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -548,7 +568,79 @@ public class pnlAdmins extends javax.swing.JPanel {
     private void txtFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFiltroActionPerformed
-
+    
+    public void checkEdit(){
+        //Chequeando permisos de edicion 
+        if(Constantes.ADMINLOGUEADO.getApellido()!=null){
+            if(!Constantes.ADMINLOGUEADO.checkCredentials("EUSUARIO")){
+                //Permisos no concedidos
+                btnAdd.setEnabled(false);
+                btnDelete.setEnabled(false);
+                btnEdit.setEnabled(false);
+            }else{
+                btnAdd.setEnabled(true);
+                btnDelete.setEnabled(true);
+                btnEdit.setEnabled(true);
+            }
+        }
+    }
+    private void checkPermisos(){
+        Administrador temp = (Administrador)(DiarioFacilTester.diarioFacil.getClientes().get(Integer.parseInt(tblAdmins.getValueAt(tblAdmins.getSelectedRow(), 0).toString())));
+                    for (int i=0;i<temp.getPermisos().size();i++) {
+                        if(i==0){
+                            if(temp.getPermisos().get(i).getEstado())
+                                vPRODUCTO.setActivado(true);
+                            else
+                                vPRODUCTO.setActivado(false);
+                        }else if(i==1){
+                            if(temp.getPermisos().get(i).getEstado())
+                                ePRODUCTO.setActivado(true);
+                            else
+                                ePRODUCTO.setActivado(false);
+                        }else if(i==2){
+                            if(temp.getPermisos().get(i).getEstado())
+                                vUSUARIO.setActivado(true);
+                            else
+                                vUSUARIO.setActivado(false);
+                        }else if(i==3){
+                            if(temp.getPermisos().get(i).getEstado())
+                                eUSUARIO.setActivado(true);
+                            else
+                                eUSUARIO.setActivado(false);  
+                        }else if(i==4){
+                            if(temp.getPermisos().get(i).getEstado())
+                                vCOMPRA.setActivado(true);
+                            else
+                                vCOMPRA.setActivado(false);
+                        }else if(i==5){
+                            if(temp.getPermisos().get(i).getEstado())
+                                eCOMPRA.setActivado(true);
+                            else
+                                eCOMPRA.setActivado(false);
+                        }else if(i==6){
+                            if(temp.getPermisos().get(i).getEstado())
+                                vPROMO.setActivado(true);
+                            else
+                                vPROMO.setActivado(false);
+                        }else if(i==7){
+                            if(temp.getPermisos().get(i).getEstado())
+                                ePROMO.setActivado(true);
+                            else
+                                ePROMO.setActivado(false);
+                        }else if(i==8){
+                            if(temp.getPermisos().get(i).getEstado())
+                                vPROV.setActivado(true);
+                            else
+                                vPROV.setActivado(false);
+                        }else{
+                            if(temp.getPermisos().get(i).getEstado())
+                                ePROV.setActivado(true);
+                            else
+                                ePROV.setActivado(false);
+                        }
+                    }
+    }
+     
     private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
         // TODO add your handling code here:
         modelo  = new DefaultTableModel(){
@@ -752,6 +844,9 @@ public class pnlAdmins extends javax.swing.JPanel {
                     txtEmail.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(), 4)));
                     txtUser.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(),5)));
                     txtContra.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(),6)));
+                    //Permisos del seleccionado
+                    checkPermisos();
+                    this.repaint();
             }
         
          
@@ -759,7 +854,7 @@ public class pnlAdmins extends javax.swing.JPanel {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-           SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
              Date date = new Date(System.currentTimeMillis());  
         if(tblAdmins.getRowCount()>0){
             if(tblAdmins.getSelectedRow()>-1){
@@ -767,7 +862,65 @@ public class pnlAdmins extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Todos los campos son requeridos", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
                 }else{
                     //Editar
-                    if(DiarioFacilTester.diarioFacil.edit(tblAdmins.getSelectedRow(), new Administrador(txtCedula.getText(),txtNombre.getText(),txtApellido.getText(),txtEmail.getText(),txtUser.getText(),txtContra.getText(),"Administrador",date))){
+                    //<editor-fold defaultstate="collapsed" desc="Coleccion de permisos en base a los botones">
+                    List<Permiso>  temp = Constantes.LPERMISOSUPERUSER;
+                    for (int i = 0; i < temp.size(); i++) {
+                        if(i==0){
+                            if(vPRODUCTO.isActivado())
+                                temp.get(i).setEstado(true);
+                            else
+                                temp.get(i).setEstado(false);
+                        }else if(i==1){
+                            if(ePRODUCTO.isActivado())
+                                temp.get(i).setEstado(true);
+                            else
+                                temp.get(i).setEstado(false);
+                        }else if(i==2){
+                            if(vUSUARIO.isActivado())
+                                temp.get(i).setEstado(true);
+                            else
+                                temp.get(i).setEstado(false);
+                        }else if(i==3){
+                            if(eUSUARIO.isActivado())
+                                temp.get(i).setEstado(true);
+                            else
+                                temp.get(i).setEstado(false);  
+                        }else if(i==4){
+                            if(vCOMPRA.isActivado())
+                                temp.get(i).setEstado(true);
+                            else
+                                temp.get(i).setEstado(false);
+                        }else if(i==5){
+                            if(eCOMPRA.isActivado())
+                                temp.get(i).setEstado(true);
+                            else
+                                temp.get(i).setEstado(false);
+                        }else if(i==6){
+                            if(vPROMO.isActivado())
+                                temp.get(i).setEstado(true);
+                            else
+                                temp.get(i).setEstado(false);
+                        }else if(i==7){
+                            if(ePROMO.isActivado())
+                                temp.get(i).setEstado(true);
+                            else
+                                temp.get(i).setEstado(false);
+                        }else if(i==8){
+                            if(vPROV.isActivado())
+                                temp.get(i).setEstado(true);
+                            else
+                                temp.get(i).setEstado(false);
+                        }else{
+                            if(ePROV.isActivado())
+                                temp.get(i).setEstado(true);
+                            else
+                                temp.get(i).setEstado(false);
+                        }
+                    }
+                    //</editor-fold>
+                    Administrador dummy = new Administrador(txtCedula.getText(),txtNombre.getText(),txtApellido.getText(),txtEmail.getText(),txtUser.getText(),txtContra.getText(),"Administrador",date);
+                    dummy.setPermisos(temp);
+                    if(DiarioFacilTester.diarioFacil.edit(tblAdmins.getSelectedRow(),dummy )){
                         load();
                     }else{
                         JOptionPane.showMessageDialog(null, "Campos con informacion repetida", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
@@ -779,6 +932,7 @@ public class pnlAdmins extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
         if(tblAdmins.getRowCount()>0){
             if(tblAdmins.getSelectedRow()>-1){
                 int respuesta  = JOptionPane.showConfirmDialog(null, "Seguro desea eliminar este proveedor?", "Sys", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
@@ -825,6 +979,7 @@ public class pnlAdmins extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private rojerusan.RSSwitchBeanInfo rSSwitchBeanInfo1;
     private javax.swing.JTable tblAdmins;
     private rojeru_san.RSMTextFull txtApellido;
     private rojeru_san.RSMTextFull txtCedula;

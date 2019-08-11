@@ -8,6 +8,7 @@ package edu.ulatina.entidades;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -48,10 +49,22 @@ public final  class Constantes {
                LPERMISOSUPERUSER.add(new Permiso("VPROV",true));
                //Permiso para editar proveedores 
                LPERMISOSUPERUSER.add(new Permiso("EPROV",true));
+               
+               ADMINSUPERUSUARIO.setPermisos(LPERMISOSUPERUSER);
             }
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Usuario logueado">
             public static  Cliente USUARIOLOGUEADO = new Cliente(); 
             public static  Administrador ADMINLOGUEADO = new Administrador(); 
+    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Categorias por defecto">
+            public static final List<Categoria> CATEGORIAS = Arrays.asList(new Categoria[]{new Categoria("Lacteos","Productos derivados de la leche"),new Categoria("Carnes","carnes crudas"),new Categoria("Panaderia","Panaderia"),new Categoria("Bebidas","refrigerados liquidos"),new Categoria("Embutidos","embutidos LMAO")});
+            //Productos para un par de categorias
+            public static void loadInventory(){
+                CATEGORIAS.get(0).create(new Producto("A",0,10.0,10,10));
+                CATEGORIAS.get(0).create(new Producto("A1",1,10.0,30,10));
+                CATEGORIAS.get(1).create(new Producto("B",2,10.0,30,10));
+                CATEGORIAS.get(2).create(new Producto("C",3,10.0,30,10));
+            }
     //</editor-fold>
 }

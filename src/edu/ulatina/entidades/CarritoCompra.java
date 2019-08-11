@@ -7,8 +7,9 @@ package edu.ulatina.entidades;
 
 /**
  *
- * @author TEC-HP
+ * @author Nvidi
  */
-public class EntidadPrueba {
+public class CarritoCompra {
+    private Cliente cliente;
     
 }

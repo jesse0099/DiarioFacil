@@ -29,7 +29,7 @@ public class Permiso {
         this.nombrePermiso = nombrePermiso;
     }
 
-    public boolean isEstado() {
+    public boolean getEstado() {
         return estado;
     }
 

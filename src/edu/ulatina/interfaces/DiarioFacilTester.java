@@ -5,6 +5,7 @@
  */
 package edu.ulatina.interfaces;
 
+import edu.ulatina.entidades.Categoria;
 import edu.ulatina.entidades.Constantes;
 import edu.ulatina.entidades.DiarioFacil;
 
@@ -42,9 +43,13 @@ public final class DiarioFacilTester {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Constantes.loadCredentialsSa();
-                diarioFacil.addAdministrador(Constantes.ADMINSUPERUSUARIO);
-                diarioFacil.addProveedor(Constantes.DEFAULTPROV);
-                diarioFacil.addCliente(Constantes.CLIENTEDEFAULT);
+                Constantes.loadInventory();
+                for(Categoria c: Constantes.CATEGORIAS){
+                    diarioFacil.addCategoria(c);
+                }
+                diarioFacil.create(Constantes.ADMINSUPERUSUARIO);
+                diarioFacil.create(Constantes.DEFAULTPROV);
+                diarioFacil.create(Constantes.CLIENTEDEFAULT);
                 frmaPrincipal = new frmaPrincipal();
                 frmaPrincipal.setVisible(true);
             }
