@@ -854,8 +854,8 @@ public class pnlAdmins extends javax.swing.JPanel {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-             Date date = new Date(System.currentTimeMillis());  
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+        Date date = new Date(System.currentTimeMillis());  
         if(tblAdmins.getRowCount()>0){
             if(tblAdmins.getSelectedRow()>-1){
                 if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtCedula.getText().isEmpty()|| txtUser.getText().isEmpty() || txtEmail.getText().isEmpty() || txtContra.getText().isEmpty()){
@@ -920,7 +920,7 @@ public class pnlAdmins extends javax.swing.JPanel {
                     //</editor-fold>
                     Administrador dummy = new Administrador(txtCedula.getText(),txtNombre.getText(),txtApellido.getText(),txtEmail.getText(),txtUser.getText(),txtContra.getText(),"Administrador",date);
                     dummy.setPermisos(temp);
-                    if(DiarioFacilTester.diarioFacil.edit(tblAdmins.getSelectedRow(),dummy )){
+                    if(DiarioFacilTester.diarioFacil.edit(Integer.parseInt(tblAdmins.getValueAt(tblAdmins.getSelectedRow(),0).toString()),dummy )){
                         load();
                     }else{
                         JOptionPane.showMessageDialog(null, "Campos con informacion repetida", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
@@ -935,10 +935,11 @@ public class pnlAdmins extends javax.swing.JPanel {
 
         if(tblAdmins.getRowCount()>0){
             if(tblAdmins.getSelectedRow()>-1){
+                   String index = (String)  tblAdmins.getValueAt( tblAdmins.getSelectedRow(), 0);
                 int respuesta  = JOptionPane.showConfirmDialog(null, "Seguro desea eliminar este proveedor?", "Sys", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
                 if(respuesta  == JOptionPane.YES_OPTION){
                     //Consultar si el proveedor tiene productos registrados en el futuro jaja
-                    DiarioFacilTester.diarioFacil.deleteUser(tblAdmins.getSelectedRow());
+                    DiarioFacilTester.diarioFacil.deleteUser(Integer.parseInt(index));
                     load();
                 }
             }

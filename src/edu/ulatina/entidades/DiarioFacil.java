@@ -273,6 +273,51 @@ public class DiarioFacil implements Icrud {
         }catch(Exception ex){
             System.err.println(""+ex.getMessage());
         }
+           
+       /*-------------------------------*/
+           
+                    try{
+            if(data.size()==0){
+                return returned;
+            }else{
+                //Si no cae en el catch se que es del tipo Proveedor
+                Usuario user  = (Cliente)data.get(0);
+                
+                 if(user instanceof Cliente){
+                
+                if(parameter.equals("cedula")){
+                    this.clientes.stream().filter((Usuario x) -> x.getCedula().contains(value)).forEach((Usuario add)->{
+                        returned.add(add);
+                    });
+                   return returned;
+                   
+                }else if (parameter.equals("email")){
+                    this.clientes.stream().filter((Usuario x)-> x.getEmail().contains(value)).forEach((Usuario add)->{
+                        returned.add(add);
+                    });
+                    return returned;
+                    
+                }else if(parameter.equals("usuario")){
+                    this.clientes.stream().filter((Usuario x)-> x.getNombreUsuario().contains(value)).forEach((Usuario add)->{
+                        returned.add(add);
+                    });
+                    return returned;
+                    
+                }else if(parameter.equals("nombre")){
+                    this.clientes.stream().filter((Usuario x)-> x.getNombre().contains(value)).forEach((Usuario add)->{
+                        returned.add(add);
+                    });
+                    return returned;
+                }
+                
+            }/*Filtros para Clientes*/
+            }
+        }catch(Exception ex){
+            System.err.println(""+ex.getMessage());
+        }
+           
+       /*-----------------------------*/
+       
         
         //Filtros de productos
                 //Productos
@@ -325,8 +370,31 @@ public class DiarioFacil implements Icrud {
        //<editor-fold defaultstate="collapsed" desc="Edicion de usuario">
        try{
             if((Usuario)newData instanceof  Cliente){
-                /*Si es cliente*/
-                return true;
+              /**/
+                Cliente client = (Cliente)newData;
+                List<Usuario> tempData = new ArrayList<>();
+                
+                 for (int i = 0; i < this.clientes.size(); i++) {
+                     if(this.clientes instanceof Cliente)
+                        if(!(i==index))
+                            tempData.add(this.clientes.get(i));
+                 }   
+                     //Chequeando repetidos
+                 for(Usuario a  : tempData){
+                     if(client.getCedula().equals(a.getCedula()) || client.getNombre().equals(a.getNombre()) || client.getApellido().equals(a.getCedula())|| client.getEmail().equals(a.getEmail()) ||  client.getNombreUsuario().equals(a.getNombreUsuario()) || client.getContrasena().equals(a.getContrasena())){
+                         infoRepetead = true;
+                     }
+                 }
+                 if(infoRepetead){
+                     //Fallo por repeticion de informacion
+                     return false;
+                 }else{
+                     //Actualizar
+                     this.clientes.set(index, client);
+                     return true;
+                 }
+                
+               
             }else{
                 Administrador admin = (Administrador)newData;
                 List<Usuario> tempData = new ArrayList<>();

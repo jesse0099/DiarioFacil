@@ -24,7 +24,6 @@ import rojeru_san.RSPanelsSlider;
 public class frmaPrincipal extends javax.swing.JFrame {
         frmaMenu men= new frmaMenu();
         frmaMenuCliente menCliente  = new frmaMenuCliente();
-        DiarioFacil df = new DiarioFacil();
     /**
      * Creates new form frmaPrincipal
      */
@@ -424,7 +423,9 @@ public class frmaPrincipal extends javax.swing.JFrame {
    
    if(pass1.equals(pass2)){
    Cliente newuser = new Cliente(cedula,nombre,apellido,email,user, pass1,"Cliente",date);
-   df.create(newuser);
+   DiarioFacilTester.diarioFacil.create(newuser);
+   
+   JOptionPane.showMessageDialog(null, "Usuario creado!");
    }else{
       JOptionPane.showMessageDialog(null, "La contraseña no coincide!");
    }

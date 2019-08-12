@@ -18,7 +18,7 @@ import java.util.List;
  */
 public final  class Constantes {
     //<editor-fold defaultstate="collapsed" desc ="Cliente por defecto">
-        public static final Cliente CLIENTEDEFAULT= new Cliente("001-241099-1082x","Jese","Chavez","jesechavez009@gmail.com","jeseCliente","12345","Administrador",Date.from(Instant.now()));
+        public static final Cliente CLIENTEDEFAULT= new Cliente("1","Jese","Chavez","1@gmail.com","jeseCliente","12345","Administrador",Date.from(Instant.now()));
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Proveedor por defecto">
         public static final Proveedor DEFAULTPROV = new Proveedor("Coca-cola","90892833","48393889X","Daniel","Apellido","daniel@gmail.com"); 

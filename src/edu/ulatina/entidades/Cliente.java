@@ -15,19 +15,30 @@ import java.util.List;
  */
 public class Cliente extends Usuario{
     private List<Producto> preferencias;
+    
 
     public boolean isActivo() {
         return activo;
     }
+    
     private boolean activo;
 
     public Cliente(String cedula, String nombre, String apellido, String email, String nombreUsuario, String contrasena, String rol, Date fechaRegistro) {
         super(cedula, nombre, apellido, email, nombreUsuario, contrasena, rol, fechaRegistro);
          preferencias=new ArrayList<>();
+         activo = true;
     }
 
     public Cliente() {
         
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    public boolean getActivo(){
+        return this.activo;
     }
 
     public List<Producto> getPreferencias() {

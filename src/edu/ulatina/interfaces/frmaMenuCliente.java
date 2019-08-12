@@ -114,7 +114,7 @@ public class frmaMenuCliente extends javax.swing.JFrame {
             rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rSPanelGradiente1Layout.createSequentialGroup()
                 .addComponent(rSPanelImage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 397, Short.MAX_VALUE))
+                .addGap(0, 445, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(0, 112, 192));
