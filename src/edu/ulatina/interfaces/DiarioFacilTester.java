@@ -50,6 +50,13 @@ public final class DiarioFacilTester {
                 diarioFacil.create(Constantes.ADMINSUPERUSUARIO);
                 diarioFacil.create(Constantes.DEFAULTPROV);
                 diarioFacil.create(Constantes.CLIENTEDEFAULT);
+                diarioFacil.create(Constantes.productoCarrito);
+                diarioFacil.create(Constantes.carritoprueba);
+                diarioFacil.create(Constantes.compraprueba);
+                
+                
+                
+                
                 frmaPrincipal = new frmaPrincipal();
                 frmaPrincipal.setVisible(true);
             }

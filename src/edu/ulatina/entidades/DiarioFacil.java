@@ -26,7 +26,7 @@ public class DiarioFacil implements Icrud {
     private  List<Usuario> clientes;
     private  List<Proveedor> proveedores;
     private List<Categoria> inventario;
-    private List<CarritoCompra> carritos;
+    private List<CarritoCompras> carritos;
     private List<Compra> compras;
    
     public DiarioFacil(){
@@ -105,11 +105,11 @@ public class DiarioFacil implements Icrud {
         this.inventario.add(cat);
     }
 
-    public List<CarritoCompra> getCarritos() {
+    public List<CarritoCompras> getCarritos() {
         return carritos;
     }
 
-    public void setCarritos(List<CarritoCompra> carritos) {
+    public void setCarritos(List<CarritoCompras> carritos) {
         this.carritos = carritos;
     }
 
@@ -122,7 +122,7 @@ public class DiarioFacil implements Icrud {
     }
     
     
-    public void addCarrito(CarritoCompra cr){
+    public void addCarrito(CarritoCompras cr){
         this.carritos.add(cr);
     }
     
@@ -188,7 +188,7 @@ public class DiarioFacil implements Icrud {
             System.err.println(""+e.getMessage());
         }
         //</editor-fold>
-        //<editor-fold defaultstate="collapsed" desc="Crear producto o una categoria">
+       //<editor-fold defaultstate="collapsed" desc="Crear producto o una categoria">
             try{
                 Categoria cat = (Categoria)newData;
                 //Si el objeto trae atado un producto se creara uno
@@ -225,6 +225,40 @@ public class DiarioFacil implements Icrud {
                 e.printStackTrace();
             }
         //</editor-fold>
+            
+         /**/
+         //<editor-fold defaultstate="collapsed" desc="Crear un Carrito">
+          try{
+            CarritoCompras carrito = (CarritoCompras)newData;
+            /*Falta crear una condicion para agregar*/
+           this.carritos.add(carrito);
+            
+            return true;
+            
+        }catch(Exception e){
+            niceCasting  = false;
+            System.err.println(""+e.getMessage());
+        }
+            
+            
+         //</editor-fold>
+         //<editor-fold defaultstate="collapsed" desc="Crear una compra">
+          try{
+            Compra compra = (Compra)newData;
+            /*Falta crear una condicion para agregar*/
+           this.compras.add(compra);
+            
+            return true;
+            
+        }catch(Exception e){
+            niceCasting  = false;
+            System.err.println(""+e.getMessage());
+        }
+            
+            
+         //</editor-fold>   
+         /**/
+            
         return niceCasting;
     }
 

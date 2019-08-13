@@ -16,11 +16,12 @@ import java.util.List;
 public class CarritoCompras {
     
     private int idCarrito;
+    private Cliente client;
     private List<Producto> Productos =new ArrayList<>();
     private List<Integer> cantidad = new ArrayList<>();
     private Date fechaAgregada;
 
-    public CarritoCompras(int idCarrito, Date fechaAgregada) {
+    public CarritoCompras(int idCarrito,Cliente client ,Date fechaAgregada) {
         this.idCarrito = idCarrito;
         this.fechaAgregada = fechaAgregada;
     }
@@ -29,6 +30,15 @@ public class CarritoCompras {
         return idCarrito;
     }
 
+    public Cliente getClient() {
+        return client;
+    }
+
+    public void setClient(Cliente client) {
+        this.client = client;
+    }
+
+    
     public void setIdCarrito(int idCarrito) {
         this.idCarrito = idCarrito;
     }
