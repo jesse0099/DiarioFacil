@@ -16,9 +16,42 @@ import java.util.List;
 public class CarritoCompras {
     
     private int idCarrito;
-    private List<Producto> Productos =new ArrayList<>();
-    private List<Integer> cantidad = new ArrayList<>();
+    private String nombreCarrito;
+
+    public String getNombreCarrito() {
+        return nombreCarrito;
+    }
+
+    public void setNombreCarrito(String nombreCarrito) {
+        this.nombreCarrito = nombreCarrito;
+    }
+
+    public List<Item> getProductos() {
+        return Productos;
+    }
+
+    public void setProductos(List<Item> Productos) {
+        this.Productos = Productos;
+    }
+    private List<Item> Productos =new ArrayList<>();
     private Date fechaAgregada;
+    private Cliente cliente;
+    
+    public CarritoCompras(Date fechaAgregado,Cliente cliente,String nombreCarrito,int IdCarrito){
+        this.Productos = new ArrayList<>();
+        this.fechaAgregada = fechaAgregado;
+        this.cliente = cliente;
+        this.nombreCarrito = nombreCarrito;
+        this.idCarrito = IdCarrito;
+    }
+    
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public CarritoCompras(int idCarrito, Date fechaAgregada) {
         this.idCarrito = idCarrito;
@@ -33,22 +66,6 @@ public class CarritoCompras {
         this.idCarrito = idCarrito;
     }
 
-    public List<Producto> getProductos() {
-        return Productos;
-    }
-
-    public void setProductos(List<Producto> Productos) {
-        this.Productos = Productos;
-    }
-
-    public List<Integer> getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(List<Integer> cantidad) {
-        this.cantidad = cantidad;
-    }
-
     public Date getFechaAgregada() {
         return fechaAgregada;
     }
@@ -57,28 +74,8 @@ public class CarritoCompras {
         this.fechaAgregada = fechaAgregada;
     }
     
-    public void addProducto(Producto producto){
-         Productos.add(producto);
-    }
-    
-    public void addCantidad(int Cantidad){
-        cantidad.add(Cantidad);
-    }
-    
     public void delProducto(Producto producto){
          Productos.remove(producto);
     }
-    
-    public void delCantidad(int Cantidad){
-         cantidad.remove(Cantidad);
-    }
-    
-    
-    public void editCantidad(Integer pos, int cant){
-        cantidad.set(pos, cant);
-    }
-    
-    
-    
-    
+
 }

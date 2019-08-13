@@ -5,6 +5,8 @@
  */
 package edu.ulatina.interfaces;
 
+import edu.ulatina.entidades.CarritoCompras;
+import edu.ulatina.entidades.Constantes;
 import edu.ulatina.entidades.Promocion;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,9 +20,18 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JSpinner.DefaultEditor;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
+import rojeru_san.RSButtonRiple;
+import rojerusan.RSComboMetro;
 
 /**
  *
@@ -63,9 +74,35 @@ public class pnlPromociones extends javax.swing.JPanel {
                 public void actionPerformed(ActionEvent e) {
                         Object source = e.getSource();
                         if (source instanceof JButton) {
+                            //Creando controles para el JOptionPane
+                            SpinnerNumberModel model1 = new SpinnerNumberModel(1.0, 1.0, 100.0, 1.0);
+                            RSComboMetro   comboCarritos = new RSComboMetro();
+                            JSpinner spin  = new JSpinner(model1);
+                            //Deshabilitando la escritura en el spinner
+                            ((DefaultEditor) spin.getEditor()).getTextField().setEditable(false);
+                            JLabel cantidad= new JLabel("Cantidad :");
+                            RSButtonRiple button = new RSButtonRiple();
+                            button.setText("Aceptar");
+                            //Cargar el carrito
+                            for(CarritoCompras car : DiarioFacilTester.diarioFacil.carritosCompra(Constantes.USUARIOLOGUEADO)){
+                                comboCarritos.addItem(car.getNombreCarrito());
+                            }
+                            //Obteniendo codigo de la promocion
                             JButton btn = (JButton)source;
                             String butSrcTxt = btn.getText();
-                            JOptionPane.showMessageDialog(null, butSrcTxt);
+                            //Coleccion de controles
+                            JComponent[]   componentes  = new JComponent[]{
+                                comboCarritos,
+                                cantidad,
+                                spin
+                            } ;
+                            if(comboCarritos.getItemCount()>0){
+                                 JOptionPane.showMessageDialog(null, componentes,"Seleccione a que carrito desea agregar" ,JOptionPane.QUESTION_MESSAGE,new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-shopping-cart-promotion-24.png"));
+                            }else{
+                                //No hay carritos
+                                JOptionPane.showMessageDialog(null,"No tiene ningun carrito creado,cree uno!","Sys",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+                            }
+                           
                         }
                 }
             });

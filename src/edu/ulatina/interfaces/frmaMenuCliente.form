@@ -44,11 +44,11 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jPanel1" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnClose" min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="rSPanelsSlider1" pref="910" max="32767" attributes="0"/>
+                  <Component id="rSPanelsSlider1" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -62,7 +62,7 @@
                   <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="rSPanelsSlider1" pref="652" max="32767" attributes="0"/>
+              <Component id="rSPanelsSlider1" pref="666" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -231,7 +231,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="920" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -275,6 +275,26 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="card3"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="edu.ulatina.interfaces.pnlInventarioCliente" name="pnlInventarioCliente1">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="pnlInventarioCliente" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="card4"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="edu.ulatina.interfaces.pnlCarritos" name="pnlCarritos1">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="pnlCarritos" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="card5"/>
             </Constraint>
           </Constraints>
         </Component>

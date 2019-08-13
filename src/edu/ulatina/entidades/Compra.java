@@ -15,10 +15,10 @@ public class Compra {
     
   private  Cliente cliente;
    private int idCompra;
-   private CarritoCompra carritoComprado;
+   private CarritoCompras carritoComprado;
    private Date fechacompra;
 
-    public Compra(Cliente cliente, int idCompra, CarritoCompra carritoComprado, Date fechacompra) {
+    public Compra(Cliente cliente, int idCompra, CarritoCompras carritoComprado, Date fechacompra) {
         this.cliente = cliente;
         this.idCompra = idCompra;
         this.carritoComprado = carritoComprado;
@@ -41,11 +41,11 @@ public class Compra {
         this.idCompra = idCompra;
     }
 
-    public CarritoCompra getCarritoComprado() {
+    public CarritoCompras getCarritoComprado() {
         return carritoComprado;
     }
 
-    public void setCarritoComprado(CarritoCompra carritoComprado) {
+    public void setCarritoComprado(CarritoCompras carritoComprado) {
         this.carritoComprado = carritoComprado;
     }
 

@@ -26,7 +26,7 @@ public class DiarioFacil implements Icrud {
     private  List<Usuario> clientes;
     private  List<Proveedor> proveedores;
     private List<Categoria> inventario;
-    private List<CarritoCompra> carritos;
+    private List<CarritoCompras> carritos;
     private List<Compra> compras;
     private List<Promocion>  promociones;
    
@@ -63,7 +63,35 @@ public class DiarioFacil implements Icrud {
     
     
    //<editor-fold defaultstate="collapsed" desc="Otros metodos">
-        
+        public List<CarritoCompras> carritosCompra(Cliente cliente){
+            List<CarritoCompras> returned = new ArrayList<>();
+            for(CarritoCompras car : this.carritos){
+                if(cliente.getCedula().equals(car.getCliente().getCedula())){
+                    returned.add(car);
+                }
+            }
+            return returned;
+        }
+    
+    
+        public boolean clienteCarritoRepetido(CarritoCompras nuevoCarrito){
+            for (CarritoCompras carr : this.carritos) {
+                if(carr.getCliente().getCedula().equals(nuevoCarrito.getCliente().getCedula())){
+                    if(carr.getNombreCarrito().equals(nuevoCarrito.getNombreCarrito())){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        public boolean clienteCarritos(Cliente c){
+            if(this.carritos.stream().filter(x-> x.getCliente().getCedula().equals(c.getCedula())).count()>0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    
         public int indexCategoria(String categoria){
             int index=-1;
             for(Categoria c : this.inventario){
@@ -150,6 +178,17 @@ public class DiarioFacil implements Icrud {
             return false;
      }
      
+     //Traer la info del carrito seleccionado
+     public List<CarritoCompras> carritoSeleccionado(String nombreCarrito,Cliente cliente){
+         List<CarritoCompras> returned = new ArrayList<>();
+         for(CarritoCompras car : this.carritos){
+             if(car.getCliente().getCedula().equals(cliente.getCedula()) && car.getNombreCarrito().equals(nombreCarrito)){
+                    returned.add(car);   
+             }
+         }
+         return returned;
+     }
+     
     //</editor-fold>
 
     
@@ -192,11 +231,11 @@ public class DiarioFacil implements Icrud {
         this.inventario.add(cat);
     }
 
-    public List<CarritoCompra> getCarritos() {
+    public List<CarritoCompras> getCarritos() {
         return carritos;
     }
 
-    public void setCarritos(List<CarritoCompra> carritos) {
+    public void setCarritos(List<CarritoCompras> carritos) {
         this.carritos = carritos;
     }
 
@@ -209,7 +248,7 @@ public class DiarioFacil implements Icrud {
     }
     
     
-    public void addCarrito(CarritoCompra cr){
+    public void addCarrito(CarritoCompras cr){
         this.carritos.add(cr);
     }
     
@@ -303,7 +342,19 @@ public class DiarioFacil implements Icrud {
             }catch(Exception e){
                 niceCasting=false;
                 System.err.println(""+e.getMessage());
-                e.printStackTrace();
+            }
+        //</editor-fold>
+       //<editor-fold defaultstate="collapsed" desc="Crear un carrito vacio">
+            try{
+                CarritoCompras carrito = (CarritoCompras)newData;
+                if(this.clienteCarritoRepetido(carrito)){
+                    return false;
+                }else{
+                    this.carritos.add(carrito);
+                    return true;
+                }
+            }catch(Exception e){
+                System.err.println(""+e.getMessage());
             }
         //</editor-fold>
         return niceCasting;
@@ -618,7 +669,7 @@ public class DiarioFacil implements Icrud {
     @Override
     public boolean delete(int index,Object data) {
        boolean niceCasting  = true; 
-       //Intentar borrar proveedor
+       //<editor-fold defaultstate="collapsed" desc="Borrar proveedor">
        try{
            Proveedor p  = (Proveedor)data;
            this.proveedores.remove(index);
@@ -627,7 +678,8 @@ public class DiarioFacil implements Icrud {
            //Nada xd
            niceCasting = false;
        }
-       //Borrar un usuario
+       //</editor-fold>
+       //<editor-fold defaultstate="collapsed" desc="Borrar un usuario">
        try{
            Usuario us  = (Usuario)data;
            this.clientes.remove(index);
@@ -635,8 +687,8 @@ public class DiarioFacil implements Icrud {
        }catch(Exception e){
            niceCasting  = false;
        }
-       
-       //Borrar un producto 
+       //</editor-fold>
+       //<editor-fold defaultstate="collapsed" desc="Borrar un producto o una categoria">
        try{
            //Decidir si borrar un producto o una categoria
            Categoria cta  = (Categoria)data;
@@ -668,6 +720,7 @@ public class DiarioFacil implements Icrud {
        }catch(Exception e){
            niceCasting  = false;
        }
+       //</editor-fold>
        return niceCasting;
     }
     

@@ -12,12 +12,22 @@ package edu.ulatina.entidades;
 public class Item {
     private Producto producto;
     private int cantidad;
+    private int consecutivo;
     
     public Item(){};
     
-    public Item(int cantidad,Producto producto){
+    public Item(int cantidad,Producto producto,int consecutivo){
         this.producto = producto;
         this.cantidad = cantidad;
+        this.consecutivo = consecutivo;
+    }
+
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+
+    public void setConsecutivo(int consecutivo) {
+        this.consecutivo = consecutivo;
     }
     
     public Producto getProducto() {
