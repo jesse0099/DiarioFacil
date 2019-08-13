@@ -485,7 +485,7 @@ public class frmaMenu extends javax.swing.JFrame {
                pnlSlider.setPanelSlider(1, pnlAdminClientes1,RSPanelsSlider.DIRECT.RIGHT);
                this.pnlAdminClientes1.refresh();
                
-             /* pnlAdminClientes1.checkEdit();*/
+              pnlAdminClientes1.checkEdit();
             }
         }else{
             JOptionPane.showMessageDialog(null, "No tiene acceso al modulo", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));

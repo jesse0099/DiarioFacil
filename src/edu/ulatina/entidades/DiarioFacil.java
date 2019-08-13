@@ -26,11 +26,15 @@ public class DiarioFacil implements Icrud {
     private  List<Usuario> clientes;
     private  List<Proveedor> proveedores;
     private List<Categoria> inventario;
+    private List<CarritoCompra> carritos;
+    private List<Compra> compras;
    
     public DiarioFacil(){
         this.clientes = new ArrayList<>();
         this.proveedores = new ArrayList<>();
         this.inventario = new ArrayList<>();
+        this.carritos = new ArrayList<>();
+        this.compras = new ArrayList<>();
     }
     
     public void setCategorias(ArrayList<Categoria> categor){
@@ -44,6 +48,9 @@ public class DiarioFacil implements Icrud {
     public List<Categoria> getInventario(){
         return this.inventario;
     }
+    
+    
+    
     
     public List<Producto> getProductos(){
        List<Categoria> iterator = this.inventario;
@@ -97,6 +104,33 @@ public class DiarioFacil implements Icrud {
     public void addCategoria(Categoria cat){
         this.inventario.add(cat);
     }
+
+    public List<CarritoCompra> getCarritos() {
+        return carritos;
+    }
+
+    public void setCarritos(List<CarritoCompra> carritos) {
+        this.carritos = carritos;
+    }
+
+    public List<Compra> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
+    }
+    
+    
+    public void addCarrito(CarritoCompra cr){
+        this.carritos.add(cr);
+    }
+    
+    public void addCompra(Compra compra){
+        this.compras.add(compra);
+    }
+    
+    
     public boolean login(String user,String contra){
         this.clientes.stream().filter(x-> x.nombreUsuario.equals(user) && x.contrasena.equals(contra)).forEach((Usuario action) -> {
             if(action instanceof Administrador){

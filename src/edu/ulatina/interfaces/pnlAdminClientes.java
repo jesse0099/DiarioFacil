@@ -568,4 +568,8 @@ public class pnlAdminClientes extends javax.swing.JPanel {
     private rojeru_san.RSMTextFull txtNombre;
     private rojeru_san.RSMTextFull txtUser;
     // End of variables declaration//GEN-END:variables
+
+    void checkEdit() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
