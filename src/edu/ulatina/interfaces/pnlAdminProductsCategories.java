@@ -29,6 +29,11 @@ public class pnlAdminProductsCategories extends javax.swing.JPanel {
         initPanelInfo();
     }
     
+    public void reload(){
+        initDataTable();
+        initPanelInfo();
+    }
+    
     public void initPanelInfo(){
         for(Categoria cat : DiarioFacilTester.diarioFacil.getCategoria()){
             if(DiarioFacilTester.diarioFacil.getCategoria().indexOf(cat)==0){
@@ -801,15 +806,45 @@ public class pnlAdminProductsCategories extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        if(rSTableMetro1.getRowCount()>0){
+            if(rSTableMetro1.getSelectedRow()>-1){
+                int respuesta  = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta categoria?", "Sys", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+                if(respuesta  == JOptionPane.YES_OPTION){
+                    if(DiarioFacilTester.diarioFacil.delete(-1,new Categoria(rSTableMetro1.getValueAt(rSTableMetro1.getSelectedRow(), 0).toString(),""))){
+                        initDataTable();
+                        initPanelInfo();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "No fue posible eliminar la categoria", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
+        if(rSTableMetro1.getRowCount()>0){
+            if(rSTableMetro1.getSelectedRow()>-1){
+                if(txtCategoria.getText().isEmpty() || txtDescripcion.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Todos los campos son requeridos", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+                }else{
+                    //Editar
+                    DiarioFacilTester.diarioFacil.getInventario();
+                    int index = DiarioFacilTester.diarioFacil.indexCategoria(rSTableMetro1.getValueAt(rSTableMetro1.getSelectedRow(),0).toString());
+                    if(DiarioFacilTester.diarioFacil.edit(index,new Categoria(txtCategoria.getText(),txtDescripcion.getText()))){
+                        initDataTable();
+                        initPanelInfo();
+                    }else{
+                         JOptionPane.showMessageDialog(null, "La edicion no fue posible", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+                    }
+                }
+            }
+        }  
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
-        // TODO add your handling code here:
+        txtCategoria.setText("");
+        txtDescripcion.setText("");
     }//GEN-LAST:event_btnCleanActionPerformed
 
 

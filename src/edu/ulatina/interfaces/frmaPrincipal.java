@@ -24,7 +24,6 @@ import rojeru_san.RSPanelsSlider;
 public class frmaPrincipal extends javax.swing.JFrame {
         frmaMenu men= new frmaMenu();
         frmaMenuCliente menCliente  = new frmaMenuCliente();
-        DiarioFacil df = new DiarioFacil();
     /**
      * Creates new form frmaPrincipal
      */
@@ -407,14 +406,14 @@ public class frmaPrincipal extends javax.swing.JFrame {
 
     private void rSButtonRiple2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple2ActionPerformed
    //<editor-fold defaultstate="collapsed" desc=" Variables AK7 ">
-   String cedula = this.txtCedula.getText();
-   String nombre = this.txtNombre.getText();
-   String apellido = this.txtApellido.getText();
-   String email = this.txtEmail.getText();
-   String user = this.txtNewUser.getText();
-   String pass1= this.txtPass.getText();
-   String pass2= this.txtVeriPass.getText();
-   boolean check=false;
+    String cedula = this.txtCedula.getText();
+    String nombre = this.txtNombre.getText();
+    String apellido = this.txtApellido.getText();
+    String email = this.txtEmail.getText();
+    String user = this.txtNewUser.getText();
+    String pass1= this.txtPass.getText();
+    String pass2= this.txtVeriPass.getText();
+    boolean check=false;
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
     Date date = new Date(System.currentTimeMillis());  
     
@@ -423,8 +422,13 @@ public class frmaPrincipal extends javax.swing.JFrame {
    //<editor-fold defaultstate="collapsed" desc=" Funcion ak7 ">
    
    if(pass1.equals(pass2)){
-   Cliente newuser = new Cliente(cedula,nombre,apellido,email,user, pass1,"Cliente",date);
-   df.create(newuser);
+        Cliente newuser = new Cliente(cedula,nombre,apellido,email,user, pass1,"Cliente",date);
+        DiarioFacilTester.diarioFacil.create(newuser);
+        for(Usuario ud: DiarioFacilTester.diarioFacil.getClientes()){
+            if(ud instanceof Cliente){
+                System.out.println(""+ud.getNombreUsuario());
+            }
+        }
    }else{
       JOptionPane.showMessageDialog(null, "La contraseña no coincide!");
    }

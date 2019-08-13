@@ -45,33 +45,110 @@ public class DiarioFacil implements Icrud {
         return this.inventario;
     }
     
-    public List<Producto> getProductos(){
-       List<Categoria> iterator = this.inventario;
-       List<Producto> returnedList  = new ArrayList<>();
-       iterator.stream().forEach((Categoria x)->{
-           x.getProductos().stream().forEach((Producto y)->{
-               returnedList.add(y);
-           });
-       });
-       return returnedList;
-    }
+   //<editor-fold defaultstate="collapsed" desc="Otros metodos">
+        
+        public int indexCategoria(String categoria){
+            int index=-1;
+            for(Categoria c : this.inventario){
+                if(c.getCategoria().equals(categoria)){
+                    index= this.inventario.indexOf(c);
+                }
+            }
+            return index;
+        }
     
-    public boolean productoExist(String nombre){
-        returned=false;
-       List<Categoria> iterator = this.inventario;
-       iterator.stream().forEach((Categoria x)->{
-           x.getProductos().stream().forEach((Producto y)->{
-               if(y.getNombre().equals(nombre)){
-                   returned=true;
-               }
-           });
-       });
-       return returned;
-    }
+        public List<Producto> getProductos(){
+        List<Categoria> iterator = this.inventario;
+        List<Producto> returnedList  = new ArrayList<>();
+        iterator.stream().forEach((Categoria x)->{
+            x.getProductos().stream().forEach((Producto y)->{
+                returnedList.add(y);
+            });
+        });
+        return returnedList;
+     }
+
+     public boolean productoExist(String nombre){
+         returned=false;
+        List<Categoria> iterator = this.inventario;
+        iterator.stream().forEach((Categoria x)->{
+            x.getProductos().stream().forEach((Producto y)->{
+                if(y.getNombre().equals(nombre)){
+                    returned=true;
+                }
+            });
+        });
+        return returned;
+     }
+     //Obtiene la categoria por el nombre de un producto
+     public String getCategoria(String nombreProducto){
+         returnedString="";
+         inventario.stream().forEach((Categoria x)->{
+             x.getProductos().stream().forEach((Producto p)->{
+                 if(p.getNombre().equals(nombreProducto)){
+                    returnedString = x.getCategoria();
+                 }
+             });
+         });
+         return returnedString;
+     }
+
+     //Una copia de la categoria sin productos
+     public Categoria getCategoriaUnica(String nombreCategoria){
+         Categoria returnedCat=null;
+         for(Categoria cat : this.inventario){
+             if(cat.getCategoria().equals(nombreCategoria)){
+                 returnedCat = new Categoria(cat.getCategoria(),"");
+                 break;
+             }
+         }
+         return returnedCat;
+     }
+
+     //El indice de un producto en la categoria
+     public int indexInternoProducto(String producto,String categoria){
+         for (int i = 0; i < this.inventario.size(); i++) {
+             if(this.inventario.get(i).getCategoria().equals(categoria)){
+                 for (int j = 0; j < this.inventario.get(i).getProductos().size(); j++) {
+                     if(this.inventario.get(i).getProductos().get(j).getNombre().equals(producto)){
+                         return  j;
+                     }
+                 }
+             }
+         }
+         return -1;
+     }
+     //Revisa repeticiones para el metodo de editar categorias
+     public boolean categoriaRepetidaEdit(int index,String nuevaCat){
+            List<Categoria> listRevision = new ArrayList<>();
+            for (Categoria cat : this.inventario) {
+                listRevision.add(cat);
+            }
+            listRevision.remove(index);
+            for(Categoria c : listRevision){
+                if(c.getCategoria().equals(nuevaCat)){
+                    return true;
+                }
+            }
+            return false;
+     }
+     
+    //</editor-fold>
+
     
     
     public List<Usuario> getClientes() {
         return clientes;
+    }
+    
+    public List<Cliente> getClientes(int x){
+        List<Cliente> temp = new ArrayList<>();
+        for (Usuario c :  this.clientes) {
+            if(c instanceof  Cliente){
+                temp.add((Cliente)c);
+            }
+        }
+        return temp;
     }
 
     public void setClientes(List<Usuario> clientes) {
@@ -97,6 +174,7 @@ public class DiarioFacil implements Icrud {
     public void addCategoria(Categoria cat){
         this.inventario.add(cat);
     }
+    
     public boolean login(String user,String contra){
         this.clientes.stream().filter(x-> x.nombreUsuario.equals(user) && x.contrasena.equals(contra)).forEach((Usuario action) -> {
             if(action instanceof Administrador){
@@ -124,16 +202,10 @@ public class DiarioFacil implements Icrud {
         try{
             Usuario us = (Usuario)newData;
             if(this.clientes.stream().filter(x->x.getCedula().equals(us.getCedula()) || x.getEmail().equals(us.getEmail()) || x.getNombreUsuario().equals(us.getNombreUsuario())).count()==0){
-            
-            if(us instanceof Cliente){
-            this.clientes.add(us);
-              //JOptionPane.showMessageDialog(null, "User creado");
-            }else if(us instanceof Administrador){
-              this.clientes.add(us);
-               // JOptionPane.showMessageDialog(null, "Admin creado");
-            }
-            
-            return true;
+                this.clientes.add(us);
+                return true;
+            }else{
+                return false;
             }
         }catch(Exception e){
             niceCasting  = false;
@@ -154,7 +226,7 @@ public class DiarioFacil implements Icrud {
             System.err.println(""+e.getMessage());
         }
         //</editor-fold>
-        //<editor-fold defaultstate="collapsed" desc="Crear producto o una categoria">
+       //<editor-fold defaultstate="collapsed" desc="Crear producto o una categoria">
             try{
                 Categoria cat = (Categoria)newData;
                 //Si el objeto trae atado un producto se creara uno
@@ -392,12 +464,13 @@ public class DiarioFacil implements Icrud {
             //Esta categoria va a tener un producto con la informacion para editar
             //cat representa la nueva categoria del producto si es que se ha realizado un cambio en esta
             Categoria cat = (Categoria)newData;
+            if(cat.getProductos().size()>0){
             //Encontrando la categoria que hace referencia a que el producto tenia anteriormente
-            for(Categoria cta: this.inventario){
-                for(Producto pro: cta.getProductos()){
-                    if((cta.getProductos().size()-1)>=index){
-                        if(pro.getNombre().equals(cat.getDescripcion())){
-                            //Chequear si se hizo un cambio de categoria
+                for(Categoria cta: this.inventario){
+                    for(Producto pro: cta.getProductos()){
+                        if((cta.getProductos().size()-1)>=index){
+                            if(pro.getNombre().equals(cat.getDescripcion())){
+                                //Chequear si se hizo un cambio de categoria
                                 Categoria respaldoCat = this.getCategoriaUnica(cta.getCategoria());
                                 Producto respaldo =this.inventario.get(this.inventario.indexOf(cta)).getProductos().get(index);
                                 respaldoCat.create(respaldo);
@@ -408,8 +481,20 @@ public class DiarioFacil implements Icrud {
                                     this.create(respaldoCat);
                                     return false;
                                 }
-                        }    
+                            }    
+                        }
                     }
+                }   
+            }else{
+                //Edicion de una categoria
+                if(categoriaRepetidaEdit(index, cat.getCategoria())){
+                    return false;
+                }else{
+                    for(Producto p : this.inventario.get(index).getProductos()){
+                        cat.create(p);
+                    }
+                    this.inventario.set(index, cat);
+                    return true;
                 }
             }
         }catch(Exception e){
@@ -442,65 +527,43 @@ public class DiarioFacil implements Icrud {
        
        //Borrar un producto 
        try{
+           //Decidir si borrar un producto o una categoria
            Categoria cta  = (Categoria)data;
-           for (Categoria cat : this.inventario) {
-               if(cat.getCategoria().equals(cta.getCategoria())){
-                   for (Producto proc: cat.getProductos()) {
-                       if(cat.getProductos().indexOf(proc)==index){
-                           //Borrado del producto
-                           this.inventario.get(this.inventario.indexOf(cat)).delete(index, data);
-                       }
+           if(index>-1){
+                for (Categoria cat : this.inventario) {
+                    if(cat.getCategoria().equals(cta.getCategoria())){
+                        for (Producto proc: cat.getProductos()) {
+                            if(cat.getProductos().indexOf(proc)==index){
+                                //Borrado del producto
+                                this.inventario.get(this.inventario.indexOf(cat)).delete(index, data);
+                                return true;
+                            }
+                        }
+                    }
+                }
+           }else{
+               //Borrado de una categoria
+                for (Categoria cat : this.inventario) {
+                   if(cat.getCategoria().equals(cta.getCategoria())){
+                        if(cat.getProductos().size()>0){
+                            return false;
+                        }else{
+                            this.inventario.remove(this.inventario.indexOf(cat));
+                            return true;   
+                        }
                    }
                }
            }
-           return true;
        }catch(Exception e){
            niceCasting  = false;
        }
        return niceCasting;
     }
     
-    //Obtiene la categoria por el nombre de un producto
-    public String getCategoria(String nombreProducto){
-        returnedString="";
-        inventario.stream().forEach((Categoria x)->{
-            x.getProductos().stream().forEach((Producto p)->{
-                if(p.getNombre().equals(nombreProducto)){
-                   returnedString = x.getCategoria();
-                }
-            });
-        });
-        return returnedString;
-    }
+
     //Listado de las categorias
     public List<Categoria>  getCategoria(){
         return this.inventario;
-    }
-    
-    //Una copia de la categoria sin productos
-    public Categoria getCategoriaUnica(String nombreCategoria){
-        Categoria returnedCat=null;
-        for(Categoria cat : this.inventario){
-            if(cat.getCategoria().equals(nombreCategoria)){
-                returnedCat = new Categoria(cat.getCategoria(),"");
-                break;
-            }
-        }
-        return returnedCat;
-    }
-    
-    //El indice de un producto en la categoria
-    public int indexInternoProducto(String producto,String categoria){
-        for (int i = 0; i < this.inventario.size(); i++) {
-            if(this.inventario.get(i).getCategoria().equals(categoria)){
-                for (int j = 0; j < this.inventario.get(i).getProductos().size(); j++) {
-                    if(this.inventario.get(i).getProductos().get(j).getNombre().equals(producto)){
-                        return  j;
-                    }
-                }
-            }
-        }
-        return -1;
     }
     
 }

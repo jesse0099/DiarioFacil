@@ -47,9 +47,9 @@ public final class DiarioFacilTester {
                 for(Categoria c: Constantes.CATEGORIAS){
                     diarioFacil.addCategoria(c);
                 }
+                diarioFacil.create(Constantes.CLIENTEDEFAULT);
                 diarioFacil.create(Constantes.ADMINSUPERUSUARIO);
                 diarioFacil.create(Constantes.DEFAULTPROV);
-                diarioFacil.create(Constantes.CLIENTEDEFAULT);
                 frmaPrincipal = new frmaPrincipal();
                 frmaPrincipal.setVisible(true);
             }

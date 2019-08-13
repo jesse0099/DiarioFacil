@@ -66,6 +66,13 @@ public class pnlAdminInventario extends javax.swing.JPanel {
             } 
         }
     }
+    
+    public void reload(){
+        initFiltros();
+        initInventario();
+        loadCategories();
+    }
+    
     public void initInventario(){
         model  = new DefaultTableModel(){
             @Override
