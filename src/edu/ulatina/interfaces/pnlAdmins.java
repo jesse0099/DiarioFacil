@@ -561,7 +561,7 @@ public class pnlAdmins extends javax.swing.JPanel {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
+                .addGap(34, 34, 34))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -834,8 +834,10 @@ public class pnlAdmins extends javax.swing.JPanel {
     }//GEN-LAST:event_txtContraActionPerformed
 
     private void tblAdminsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminsMouseClicked
-         if(tblAdmins.getRowCount()>0)
+        String in = null;
+        if(tblAdmins.getRowCount()>0)
             if(tblAdmins.getSelectedRow()>-1){
+                    in= (String) tblAdmins.getValueAt(tblAdmins.getSelectedRow(), 0);
                     txtCedula.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(), 1)));
                     txtNombre.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(), 2)));
                     txtApellido.setText(String.valueOf(tblAdmins.getValueAt(tblAdmins.getSelectedRow(), 3)));
@@ -846,12 +848,14 @@ public class pnlAdmins extends javax.swing.JPanel {
                     checkPermisos();
                     this.repaint();
             }
+        
+         
     }//GEN-LAST:event_tblAdminsMouseClicked
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-             Date date = new Date(System.currentTimeMillis());  
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+        Date date = new Date(System.currentTimeMillis());  
         if(tblAdmins.getRowCount()>0){
             if(tblAdmins.getSelectedRow()>-1){
                 if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtCedula.getText().isEmpty()|| txtUser.getText().isEmpty() || txtEmail.getText().isEmpty() || txtContra.getText().isEmpty()){
@@ -916,7 +920,7 @@ public class pnlAdmins extends javax.swing.JPanel {
                     //</editor-fold>
                     Administrador dummy = new Administrador(txtCedula.getText(),txtNombre.getText(),txtApellido.getText(),txtEmail.getText(),txtUser.getText(),txtContra.getText(),"Administrador",date);
                     dummy.setPermisos(temp);
-                    if(DiarioFacilTester.diarioFacil.edit(tblAdmins.getSelectedRow(),dummy )){
+                    if(DiarioFacilTester.diarioFacil.edit(Integer.parseInt(tblAdmins.getValueAt(tblAdmins.getSelectedRow(),0).toString()),dummy )){
                         load();
                     }else{
                         JOptionPane.showMessageDialog(null, "Campos con informacion repetida", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
@@ -924,17 +928,18 @@ public class pnlAdmins extends javax.swing.JPanel {
                 }
             }
         }
-
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
         if(tblAdmins.getRowCount()>0){
             if(tblAdmins.getSelectedRow()>-1){
+                   String index = (String)  tblAdmins.getValueAt( tblAdmins.getSelectedRow(), 0);
                 int respuesta  = JOptionPane.showConfirmDialog(null, "Seguro desea eliminar este proveedor?", "Sys", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
                 if(respuesta  == JOptionPane.YES_OPTION){
                     //Consultar si el proveedor tiene productos registrados en el futuro jaja
-                    DiarioFacilTester.diarioFacil.deleteUser(tblAdmins.getSelectedRow());
+                    DiarioFacilTester.diarioFacil.deleteUser(Integer.parseInt(index));
                     load();
                 }
             }

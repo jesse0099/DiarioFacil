@@ -422,13 +422,10 @@ public class frmaPrincipal extends javax.swing.JFrame {
    //<editor-fold defaultstate="collapsed" desc=" Funcion ak7 ">
    
    if(pass1.equals(pass2)){
-        Cliente newuser = new Cliente(cedula,nombre,apellido,email,user, pass1,"Cliente",date);
-        DiarioFacilTester.diarioFacil.create(newuser);
-        for(Usuario ud: DiarioFacilTester.diarioFacil.getClientes()){
-            if(ud instanceof Cliente){
-                System.out.println(""+ud.getNombreUsuario());
-            }
-        }
+   Cliente newuser = new Cliente(cedula,nombre,apellido,email,user, pass1,"Cliente",date);
+   DiarioFacilTester.diarioFacil.create(newuser);
+   
+   JOptionPane.showMessageDialog(null, "Usuario creado!");
    }else{
       JOptionPane.showMessageDialog(null, "La contraseña no coincide!");
    }

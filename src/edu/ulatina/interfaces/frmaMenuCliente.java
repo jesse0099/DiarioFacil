@@ -56,6 +56,8 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         rSPanelCircleImage1 = new rojerusan.RSPanelCircleImage();
         rSButtonIconI6 = new rojerusan.RSButtonIconI();
         rSButtonIconI4 = new rojerusan.RSButtonIconI();
+        rSButtonIconI5 = new rojerusan.RSButtonIconI();
+        rSButtonIconI7 = new rojerusan.RSButtonIconI();
         jPanel1 = new javax.swing.JPanel();
         btnClose = new rojeru_san.RSButton();
         rSPanelsSlider1 = new rojeru_san.RSPanelsSlider();
@@ -121,11 +123,31 @@ public class frmaMenuCliente extends javax.swing.JFrame {
 
         rSButtonIconI4.setBorder(null);
         rSButtonIconI4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-price-tag-24.png"))); // NOI18N
-        rSButtonIconI4.setText("Promociones y paquetes");
+        rSButtonIconI4.setText("Promociones ");
         rSButtonIconI4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         rSButtonIconI4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonIconI4ActionPerformed(evt);
+            }
+        });
+
+        rSButtonIconI5.setBorder(null);
+        rSButtonIconI5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-mobile-order-24.png"))); // NOI18N
+        rSButtonIconI5.setText("Carrito");
+        rSButtonIconI5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rSButtonIconI5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconI5ActionPerformed(evt);
+            }
+        });
+
+        rSButtonIconI7.setBorder(null);
+        rSButtonIconI7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-sell-24.png"))); // NOI18N
+        rSButtonIconI7.setText("Productos");
+        rSButtonIconI7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rSButtonIconI7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconI7ActionPerformed(evt);
             }
         });
 
@@ -139,6 +161,8 @@ public class frmaMenuCliente extends javax.swing.JFrame {
                 .addContainerGap())
             .addComponent(rSButtonIconI6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(rSButtonIconI4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rSButtonIconI5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rSButtonIconI7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         rSPanelGradiente1Layout.setVerticalGroup(
             rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,6 +170,10 @@ public class frmaMenuCliente extends javax.swing.JFrame {
                 .addComponent(rSPanelImage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rSButtonIconI4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rSButtonIconI5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rSButtonIconI7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rSButtonIconI6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -199,7 +227,7 @@ public class frmaMenuCliente extends javax.swing.JFrame {
                     .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSPanelsSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE))
+                .addComponent(rSPanelsSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, Short.MAX_VALUE))
         );
 
         pack();
@@ -227,6 +255,14 @@ public class frmaMenuCliente extends javax.swing.JFrame {
             this.rSPanelsSlider1.setPanelSlider(1,pnlPromociones1,RSPanelsSlider.DIRECT.RIGHT);
         //</editor-fold>
     }//GEN-LAST:event_rSButtonIconI4ActionPerformed
+
+    private void rSButtonIconI5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonIconI5ActionPerformed
+
+    private void rSButtonIconI7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonIconI7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,7 +305,9 @@ public class frmaMenuCliente extends javax.swing.JFrame {
     private edu.ulatina.interfaces.pnlHomeUI pnlHomeUI1;
     private edu.ulatina.interfaces.pnlPromociones pnlPromociones1;
     private rojerusan.RSButtonIconI rSButtonIconI4;
+    private rojerusan.RSButtonIconI rSButtonIconI5;
     private rojerusan.RSButtonIconI rSButtonIconI6;
+    private rojerusan.RSButtonIconI rSButtonIconI7;
     private rojerusan.RSPanelCircleImage rSPanelCircleImage1;
     private rspanelgradiente.RSPanelGradiente rSPanelGradiente1;
     private rojerusan.RSPanelImage rSPanelImage2;

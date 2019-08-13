@@ -5,6 +5,7 @@
  */
 package edu.ulatina.interfaces;
 
+import edu.ulatina.entidades.Promocion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -32,20 +33,30 @@ public class pnlPromociones extends javax.swing.JPanel {
      */
     public pnlPromociones() {
         initComponents();
+        loadPanels();
+    }
+    
+    
+    public void loadPanels(){
         JPanel pan;
         JLabel lab;
         JLabel prod;
         JLabel icon;
+        JLabel icon2;
+        JLabel precioOriginal;
         JButton comprar;
         GridLayout lay   = new GridLayout(100,2,20,20);
         jPanel1.setLayout(lay);
-        for (int i = 0; i <40; i++) {
+        for (Promocion p : DiarioFacilTester.diarioFacil.getPromociones()) {
             pan = new JPanel(new BorderLayout());
-            lab = new JLabel("Producto");
-            prod = new JLabel("Precio promocional : "+"23.4");
-            comprar = new JButton("Comprar :"+i);
+            lab = new JLabel(p.getNombre());
+            prod = new JLabel("Precio promocional : "+p.getPrecioPromocional() + "  Precio original : " +p.getPrecio());
+            comprar = new JButton("Agregar al carrito :" +DiarioFacilTester.diarioFacil.getPromociones().indexOf(p));
             icon = new JLabel();
+            icon2 = new JLabel();
+            precioOriginal = new JLabel("Precio original : "+p.getPrecio());
             icon.setIcon(new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-price-tag-24.png"));
+            icon2.setIcon(new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-shopping-cart-promotion-24.png"));
             
             comprar.addActionListener(new ActionListener() {
                 @Override
@@ -58,25 +69,30 @@ public class pnlPromociones extends javax.swing.JPanel {
                         }
                 }
             });
-            prod.setFont(new Font("TimesRoman", Font.PLAIN, 12));
-            lab.setFont(new Font("TimesRoman", Font.PLAIN, 15));
-            comprar.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+            
+            comprar.setIcon(icon2.getIcon());
+            
+            precioOriginal.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+            prod.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+            lab.setFont(new Font("TimesRoman", Font.PLAIN, 16));
+            comprar.setFont(new Font("TimesRoman", Font.PLAIN, 16));
             lab.setForeground(Color.WHITE);
             prod.setForeground(Color.WHITE);
+            precioOriginal.setForeground(Color.WHITE);
             
             pan.add(icon,BorderLayout.WEST);
             pan.add(comprar,BorderLayout.PAGE_END);
             pan.add(lab,BorderLayout.PAGE_START);
             pan.add(prod,BorderLayout.CENTER);
             
+            
             pan.setPreferredSize(new Dimension(300, 100));
             pan.setBackground(Color.DARK_GRAY);
             jPanel1.add(pan);
         }
-        lay.setRows(40/2);
+        lay.setRows(DiarioFacilTester.diarioFacil.getPromociones().size()/2);
         jPanel1.setLayout(lay);
         jPanel1.repaint();
-
     }
 
 

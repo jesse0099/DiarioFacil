@@ -6,6 +6,8 @@
 package edu.ulatina.entidades;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +20,7 @@ import java.util.List;
  */
 public final  class Constantes {
     //<editor-fold defaultstate="collapsed" desc ="Cliente por defecto">
-        public static final Cliente CLIENTEDEFAULT= new Cliente("001-241099-1082x1","Jese1","Chavez1","jesechavez0091@gmail.com","jeseCliente","12345","Administrador",Date.from(Instant.now()));
+        public static final Cliente CLIENTEDEFAULT= new Cliente("1","Jese","Chavez","1@gmail.com","jeseCliente","12345","Administrador",Date.from(Instant.now()));
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Proveedor por defecto">
         public static final Proveedor DEFAULTPROV = new Proveedor("Coca-cola","90892833","48393889X","Daniel","Apellido","daniel@gmail.com"); 
@@ -65,6 +67,16 @@ public final  class Constantes {
                 CATEGORIAS.get(0).create(new Producto("A1",1,10.0,30,10));
                 CATEGORIAS.get(1).create(new Producto("B",2,10.0,30,10));
                 CATEGORIAS.get(2).create(new Producto("C",3,10.0,30,10));
+            }
+    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Promociones">
+            public static final List<Promocion> PROMODEFAULT = new ArrayList<>();
+            public static void loadPromociones() throws ParseException{
+                SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");  
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("12/8/2019"),true,"Producto A",0,10.0,10,10));
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("13/8/2019"),true,"Producto B",0,10.0,10,10));
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("14/8/2019"),true,"Producto C",0,10.0,10,10));
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("15/8/2019"),true,"Producto D",0,10.0,10,10));
             }
     //</editor-fold>
 }

@@ -8,6 +8,11 @@ package edu.ulatina.interfaces;
 import edu.ulatina.entidades.Categoria;
 import edu.ulatina.entidades.Constantes;
 import edu.ulatina.entidades.DiarioFacil;
+import edu.ulatina.entidades.Promocion;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,9 +49,15 @@ public final class DiarioFacilTester {
             public void run() {
                 Constantes.loadCredentialsSa();
                 Constantes.loadInventory();
+                try {
+                    Constantes.loadPromociones();
+                } catch (ParseException ex) {
+                    System.err.println(""+ex.getMessage());
+                }
                 for(Categoria c: Constantes.CATEGORIAS){
                     diarioFacil.addCategoria(c);
                 }
+                diarioFacil.addPromos((ArrayList<Promocion>) Constantes.PROMODEFAULT);
                 diarioFacil.create(Constantes.CLIENTEDEFAULT);
                 diarioFacil.create(Constantes.ADMINSUPERUSUARIO);
                 diarioFacil.create(Constantes.DEFAULTPROV);
