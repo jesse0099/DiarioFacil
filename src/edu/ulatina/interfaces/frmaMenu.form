@@ -90,7 +90,6 @@
               <Component id="rSButtonIconI4" alignment="0" max="32767" attributes="0"/>
               <Component id="btnAdmins" alignment="0" max="32767" attributes="0"/>
               <Component id="btnAdministrarProductos" alignment="0" max="32767" attributes="0"/>
-              <Component id="btnClient" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -115,8 +114,6 @@
                   <Component id="btnAdministrarProductos" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnAdmins" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnClient" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="rSButtonIconI6" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
@@ -318,22 +315,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdministrarProductosActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="rojerusan.RSButtonIconI" name="btnClient">
-          <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/edu/ulatina/interfaces/cliente.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Clientes"/>
-            <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="name" type="java.lang.String" value="btnClient" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClientActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
