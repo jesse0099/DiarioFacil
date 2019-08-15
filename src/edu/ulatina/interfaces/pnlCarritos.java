@@ -10,11 +10,16 @@ import edu.ulatina.entidades.Constantes;
 import edu.ulatina.entidades.Item;
 import edu.ulatina.entidades.Promocion;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.TableView.TableRow;
 
 /**
  *
@@ -34,11 +39,25 @@ public class pnlCarritos extends javax.swing.JPanel {
         initComponents();
     }
     
+    private Double calcSubTotal(){
+       Double returned =0.00;
+       for(int i=0;i<tblCarrito.getRowCount();i++){
+           returned = returned+ Double.parseDouble(tblCarrito.getValueAt(i,5).toString());
+       }
+       return returned;
+    }
+    
     public void loadCombo(){
         cbCarritos.removeAllItems();
         for(CarritoCompras car : DiarioFacilTester.diarioFacil.carritosCompra(Constantes.USUARIOLOGUEADO)){
             cbCarritos.addItem(car.getNombreCarrito());
         }
+    }
+    
+    public void cleanScreen(){
+        lblCarritoNombre.setText("Nombre carrito");
+        lblSubtotal.setText("000000");
+        lblTotal.setText("00000");
     }
     
     public void loadTable(List<CarritoCompras> carritoSeleccionado){
@@ -54,16 +73,22 @@ public class pnlCarritos extends javax.swing.JPanel {
         model.addColumn("Precio unidad");
         model.addColumn("Comprado en promocion");
         model.addColumn("Sub total");
-        for(Item i: carritoSeleccionado.get(0).getProductos()){
-            if(i.getProducto() instanceof  Promocion){
-                model.addRow(new Object[]{i.getConsecutivo(),i.getProducto().getNombre(),i.getCantidad(),i.getProducto().getPrecio(),true,((Promocion)(i.getProducto())).getPrecioPromocional()*i.getCantidad()});
-            }else{
-                model.addRow(new Object[]{i.getConsecutivo(),i.getProducto().getNombre(),i.getCantidad(),i.getProducto().getPrecio(),false,i.getCantidad()*i.getProducto().getPrecio()}); 
-            }
-        } 
-       
         tblCarrito.setModel(model);
-
+        try{
+            for(Item i: carritoSeleccionado.get(0).getProductos()){
+                if(i.getProducto() instanceof  Promocion){
+                    model.addRow(new Object[]{i.getConsecutivo(),i.getProducto().getNombre(),i.getCantidad(),((Promocion)(i.getProducto())).getPrecioPromocional(),true,((Promocion)(i.getProducto())).getPrecioPromocional()*i.getCantidad()});
+                }else{
+                    model.addRow(new Object[]{i.getConsecutivo(),i.getProducto().getNombre(),i.getCantidad(),i.getProducto().getPrecio(),false,i.getCantidad()*i.getProducto().getPrecio()}); 
+                }
+            } 
+       
+            tblCarrito.setModel(model);
+            lblSubtotal.setText(calcSubTotal().toString());
+            lblTotal.setText(String.valueOf(calcSubTotal()+(calcSubTotal()*0.13)));   
+        }catch(Exception e){
+            System.err.println(""+e.getMessage());
+        }
     }
 
     /**
@@ -80,7 +105,7 @@ public class pnlCarritos extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         cbCarritos = new rojerusan.RSComboMetro();
-        rSMTextFull1 = new rojeru_san.RSMTextFull();
+        txtBuscarCarrito = new rojeru_san.RSMTextFull();
         rSButtonRiple1 = new rojeru_san.RSButtonRiple();
         txtNewCarrito = new rojeru_san.RSMTextFull();
         rSButtonRiple2 = new rojeru_san.RSButtonRiple();
@@ -88,13 +113,14 @@ public class pnlCarritos extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCarrito = new rojerusan.RSTableMetro();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
         btnDelete = new rojerusan.RSButtonIconI();
         btnEdit = new rojerusan.RSButtonIconI();
         btnClean = new rojerusan.RSButtonIconI();
         btnClean1 = new rojerusan.RSButtonIconI();
-        jLabel6 = new javax.swing.JLabel();
+        lblSubtotal = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        btnClean2 = new rojerusan.RSButtonIconI();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -125,7 +151,7 @@ public class pnlCarritos extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Carrito : ");
 
         cbCarritos.addItemListener(new java.awt.event.ItemListener() {
@@ -134,9 +160,19 @@ public class pnlCarritos extends javax.swing.JPanel {
             }
         });
 
-        rSMTextFull1.setPlaceholder("Producto...");
+        txtBuscarCarrito.setPlaceholder("Producto...");
+        txtBuscarCarrito.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarCarritoKeyTyped(evt);
+            }
+        });
 
         rSButtonRiple1.setText("Buscar en el carrito ");
+        rSButtonRiple1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonRiple1ActionPerformed(evt);
+            }
+        });
 
         txtNewCarrito.setPlaceholder("Nombre del nuevo carrito...");
 
@@ -168,9 +204,9 @@ public class pnlCarritos extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Costo total del carrito : ");
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("000000");
+        lblTotal.setBackground(new java.awt.Color(255, 255, 255));
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTotal.setText("000000");
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-delete-24.png"))); // NOI18N
         btnDelete.setText("Eliminar del carrito");
@@ -204,13 +240,21 @@ public class pnlCarritos extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("000000");
+        lblSubtotal.setBackground(new java.awt.Color(255, 255, 255));
+        lblSubtotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblSubtotal.setText("000000");
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Sub total : ");
+
+        btnClean2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-delete-bin-24.png"))); // NOI18N
+        btnClean2.setText("Eliminar carrito");
+        btnClean2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClean2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -235,29 +279,34 @@ public class pnlCarritos extends javax.swing.JPanel {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(rSButtonRiple2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(rSMTextFull1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtBuscarCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(rSButtonRiple1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                            .addComponent(lblCarritoNombre)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblCarritoNombre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnClean2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(22, 22, 22)
-                                        .addComponent(btnClean, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 12, Short.MAX_VALUE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblTotal))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(btnClean1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(53, 53, 53)
+                                        .addComponent(lblSubtotal)
+                                        .addGap(35, 35, 35))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(btnClean, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnClean1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
@@ -275,18 +324,21 @@ public class pnlCarritos extends javax.swing.JPanel {
                 .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rSButtonRiple1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSMTextFull1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBuscarCarrito, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lblCarritoNombre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 24, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCarritoNombre)
+                    .addComponent(btnClean2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 23, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
-                        .addComponent(jLabel6)))
+                        .addComponent(lblSubtotal))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(lblTotal)))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,15 +365,56 @@ public class pnlCarritos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-
+        if(tblCarrito.getRowCount()>0){
+            if(tblCarrito.getSelectedRow()>-1){
+                //Metodo de eliminado
+                int resultado =JOptionPane.showConfirmDialog(null, "Realmente desea eliminar este item?", "Sys", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-warning-shield-24.png"));
+                if(resultado ==JOptionPane.YES_OPTION){
+                    //Eliminar
+                    if(DiarioFacilTester.diarioFacil.deleteItemCarrito(Integer.parseInt(tblCarrito.getValueAt(tblCarrito.getSelectedRow(), 0).toString()),lblCarritoNombre.getText(),Constantes.USUARIOLOGUEADO)){
+                        loadTable(DiarioFacilTester.diarioFacil.carritoSeleccionado(cbCarritos.getSelectedItem().toString(),Constantes.USUARIOLOGUEADO));
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Ocurrio un error,no pudo eliminarse el item","Sys",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-
+        if(tblCarrito.getRowCount()>0){
+            if(tblCarrito.getSelectedRow()>-1){
+                int resultado =JOptionPane.showConfirmDialog(null, "Realmente desea editar este item?", "Sys", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-warning-shield-24.png"));
+                if(resultado == JOptionPane.YES_OPTION){
+                    //Editar
+                    int nuevaCantidad=-1;
+                    int resultadoEdicion=-1;
+                    SpinnerNumberModel modelNumber = new SpinnerNumberModel(1.0, 1.0, 100.0, 1.0);
+                    JSpinner sp  = new JSpinner(modelNumber);
+                    ((JSpinner.DefaultEditor) sp.getEditor()).getTextField().setEditable(false);
+                    resultadoEdicion= JOptionPane.showConfirmDialog(null, sp, "Selecciona la nueva cantidad", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-warning-shield-24.png"));
+                    if(resultadoEdicion == JOptionPane.YES_OPTION){
+                        nuevaCantidad= (int)Math.round(Double.parseDouble(sp.getValue().toString()));
+                        if(DiarioFacilTester.diarioFacil.editItemCarrito(Integer.parseInt(tblCarrito.getValueAt(tblCarrito.getSelectedRow(), 0).toString()),lblCarritoNombre.getText(),Constantes.USUARIOLOGUEADO,tblCarrito.getValueAt(tblCarrito.getSelectedRow(), 1).toString(), nuevaCantidad,(boolean)tblCarrito.getValueAt(tblCarrito.getSelectedRow(), 4))){
+                            loadTable(DiarioFacilTester.diarioFacil.carritoSeleccionado(cbCarritos.getSelectedItem().toString(),Constantes.USUARIOLOGUEADO));
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Ocurrio un error,no pudo editarse el item","Sys",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+                        }   
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
-
+        //Limpiar carrito
+        if(cbCarritos.getSelectedIndex()>-1){
+          int resultado =JOptionPane.showConfirmDialog(null, "Realmente desea limpiar el carrito?", "Sys", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-warning-shield-24.png"));  
+          if(resultado==JOptionPane.YES_OPTION){
+              DiarioFacilTester.diarioFacil.cleanCarrito(cbCarritos.getSelectedItem().toString(),Constantes.USUARIOLOGUEADO);
+              loadTable(DiarioFacilTester.diarioFacil.carritoSeleccionado(cbCarritos.getSelectedItem().toString(),Constantes.USUARIOLOGUEADO));
+          }
+        }
     }//GEN-LAST:event_btnCleanActionPerformed
 
     private void btnClean1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClean1ActionPerformed
@@ -352,30 +445,75 @@ public class pnlCarritos extends javax.swing.JPanel {
         if(cbCarritos.getItemCount()>0){
             lblCarritoNombre.setText(cbCarritos.getSelectedItem().toString());
             loadTable(DiarioFacilTester.diarioFacil.carritoSeleccionado(cbCarritos.getSelectedItem().toString(),Constantes.USUARIOLOGUEADO));
+            tblCarrito.setModel(model);
         }
     }//GEN-LAST:event_cbCarritosItemStateChanged
+
+    private void btnClean2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClean2ActionPerformed
+        // TODO add your handling code here:
+        if(cbCarritos.getItemCount()>0){
+          if(cbCarritos.getSelectedIndex()>-1){
+              DiarioFacilTester.diarioFacil.delete(-1, new CarritoCompras(Date.from(Instant.now()),Constantes.USUARIOLOGUEADO,cbCarritos.getSelectedItem().toString(),-1));
+              //Cargar combo
+              loadCombo();
+              if(cbCarritos.getItemCount()==0){
+                DefaultTableModel  model = new DefaultTableModel(){
+                    @Override
+                    public boolean isCellEditable(int row,int column){
+                        return false;
+                    }
+                };
+                model.addColumn("Consecutivo");
+                model.addColumn("Producto");
+                model.addColumn("Cantidad");
+                model.addColumn("Precio unidad");
+                model.addColumn("Comprado en promocion");
+                model.addColumn("Sub total");
+                tblCarrito.setModel(model);
+                lblCarritoNombre.setText("Nombre carrito");
+                lblSubtotal.setText("000000");
+                lblTotal.setText("000000");
+              }
+          }
+        }
+    }//GEN-LAST:event_btnClean2ActionPerformed
+
+    private void rSButtonRiple1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonRiple1ActionPerformed
+
+    private void txtBuscarCarritoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCarritoKeyTyped
+        // TODO add your handling code here:
+        List<CarritoCompras> dummy = new ArrayList<>();
+        CarritoCompras car  = new CarritoCompras();
+        car.setCliente(Constantes.USUARIOLOGUEADO);
+        car.setProductos(DiarioFacilTester.diarioFacil.searchCarrito(txtBuscarCarrito.getText(),lblCarritoNombre.getText(), Constantes.USUARIOLOGUEADO));
+        dummy.add(car);
+        loadTable(dummy);
+    }//GEN-LAST:event_txtBuscarCarritoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSButtonIconI btnClean;
     private rojerusan.RSButtonIconI btnClean1;
+    private rojerusan.RSButtonIconI btnClean2;
     private rojerusan.RSButtonIconI btnDelete;
     private rojerusan.RSButtonIconI btnEdit;
     private rojerusan.RSComboMetro cbCarritos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCarritoNombre;
+    private javax.swing.JLabel lblSubtotal;
+    private javax.swing.JLabel lblTotal;
     private rojeru_san.RSButtonRiple rSButtonRiple1;
     private rojeru_san.RSButtonRiple rSButtonRiple2;
-    private rojeru_san.RSMTextFull rSMTextFull1;
     private rojerusan.RSTableMetro tblCarrito;
+    private rojeru_san.RSMTextFull txtBuscarCarrito;
     private rojeru_san.RSMTextFull txtNewCarrito;
     // End of variables declaration//GEN-END:variables
 }

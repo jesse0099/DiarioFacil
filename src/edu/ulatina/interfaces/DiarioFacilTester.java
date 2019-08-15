@@ -59,6 +59,7 @@ public final class DiarioFacilTester {
                 }
                 diarioFacil.addPromos((ArrayList<Promocion>) Constantes.PROMODEFAULT);
                 diarioFacil.create(Constantes.CLIENTEDEFAULT);
+                diarioFacil.create(Constantes.CLIENTEDEFAULT2);
                 diarioFacil.create(Constantes.ADMINSUPERUSUARIO);
                 diarioFacil.create(Constantes.DEFAULTPROV);
                 frmaPrincipal = new frmaPrincipal();

@@ -6,7 +6,9 @@
 package edu.ulatina.entidades;
 
 import java.lang.reflect.Field;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
@@ -19,7 +21,7 @@ import static javafx.scene.input.KeyCode.T;
  * @author TEC-HP
  */
 public class DiarioFacil implements Icrud {
-    private static boolean returned = false;
+    private static boolean returnedX = false;
     private static String returnedString;
     
     
@@ -63,6 +65,133 @@ public class DiarioFacil implements Icrud {
     
     
    //<editor-fold defaultstate="collapsed" desc="Otros metodos">
+        public List<Producto> searchProductos(String value){
+            List<Producto> returned = new ArrayList<>();
+            for(Categoria ca: this.inventario){
+                ca.getProductos().stream().filter((p) -> (p.getExistencias()>0)).filter((p) -> (p.getNombre().contains(value))).forEachOrdered((p) -> {
+                    returned.add(p);
+                });
+            }
+            return returned;
+        }
+    
+        public List<Item> searchCarrito(String value,String carrito,Cliente c){
+            List<Item> returned = new ArrayList<>();
+            for(CarritoCompras comp : this.carritos){
+                if(comp.getNombreCarrito().equals(carrito) && comp.getCliente().getCedula().equals(c.getCedula())){
+                    comp.getProductos().stream().filter((ite) -> (ite.getProducto().getNombre().contains(value))).forEachOrdered((ite) -> {
+                        returned.add(ite);
+                    });
+                }
+            }
+            return returned;
+        }
+   
+        public List<Producto> getProductosFiltrados(){
+            List<Producto> returned = new ArrayList<>();
+            for(Categoria ca: this.inventario){
+                for(Producto p :  ca.getProductos()){
+                    if(p.getExistencias()>0){
+                        returned.add(p);
+                    }
+                }
+            }
+            return returned;
+        }    
+        
+        public boolean agregarPromocionAlCarrito(Promocion promoOriginal,int cantidad,Cliente cliente,String nombreCarro){
+            //Buscar el carrito
+            for(CarritoCompras car : this.carritos){
+                if(car.getNombreCarrito().equals(nombreCarro) && car.getCliente().getCedula().equals(cliente.getCedula())){
+                  this.carritos.get(this.carritos.indexOf(car)).create(new Item(cantidad,promoOriginal,-1));
+                  return true;
+                }
+            }
+            return false;
+        }
+     
+        public boolean agregarProductoAlCarrito(Producto productoOr,int cantidad,Cliente cliente,String nombreCarro){
+            //Buscar el carrito
+            for(CarritoCompras car : this.carritos){
+                if(car.getNombreCarrito().equals(nombreCarro) && car.getCliente().getCedula().equals(cliente.getCedula())){
+                  this.carritos.get(this.carritos.indexOf(car)).create(new Item(cantidad,productoOr,-1));
+                  return true;
+                }
+            }
+            return false;
+        }
+        
+        public Promocion getPromocionByName(String name){
+            for(Promocion pro: this.promociones){
+                if(pro.getNombre().equals(name)){
+                    return pro;
+                }
+            }
+            return null;
+        }
+        
+        public Producto getProductoByName(String name){
+            for(Categoria ca: this.inventario){
+                for(Producto pro : ca.getProductos()){
+                    if(pro.getNombre().equals(name)){
+                        return pro;
+                    }
+                }
+            }
+            return null;
+        }
+        
+        public List<Promocion>  getPromocionesFiltradas(){
+            List<Promocion> returned = new ArrayList<>();
+            for(Promocion promo :  this.promociones){
+                 if(promo.getFechaVencimiento().before(Date.from(Instant.now())) || !promo.isEstado() || !stockDisponible(promo)){
+                     //Do nothing
+                 }else{
+                     returned.add(promo);
+                 }
+            }
+            return returned;
+        }
+        public List<Promocion>  searchPromociones(String value){
+            List<Promocion> returned = new ArrayList<>();
+            for(Promocion promo :  this.promociones){
+                 if(promo.getFechaVencimiento().before(Date.from(Instant.now())) || !promo.isEstado() || !stockDisponible(promo)){
+                     //Do nothing
+                 }else{
+                     if(promo.getNombre().contains(value)){
+                        returned.add(promo);
+                     }
+                 }
+            }
+            return returned;
+        }
+        
+        public boolean stockDisponible(Producto p){
+            for(Categoria cat  : this.inventario){
+                for(Producto pro : cat.getProductos()){
+                    if(p.getNombre().equals(pro.getNombre())){
+                        if(pro.getExistencias()>0){
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        
+        public int stockDisponibleCompra(String nombreProducto,int cantidadSolicitada){
+            int disponibilidadFinal=-4;
+            for(Categoria cat  : this.inventario){
+                for(Producto pro : cat.getProductos()){
+                    if(nombreProducto.equals(pro.getNombre())){
+                        disponibilidadFinal = pro.getExistencias()-cantidadSolicitada;
+                    }
+                }
+            }
+            return disponibilidadFinal;
+        }
+    
+
         public List<CarritoCompras> carritosCompra(Cliente cliente){
             List<CarritoCompras> returned = new ArrayList<>();
             for(CarritoCompras car : this.carritos){
@@ -114,16 +243,16 @@ public class DiarioFacil implements Icrud {
      }
 
      public boolean productoExist(String nombre){
-         returned=false;
+         returnedX=false;
         List<Categoria> iterator = this.inventario;
         iterator.stream().forEach((Categoria x)->{
             x.getProductos().stream().forEach((Producto y)->{
                 if(y.getNombre().equals(nombre)){
-                    returned=true;
+                    returnedX=true;
                 }
             });
         });
-        return returned;
+        return returnedX;
      }
      //Obtiene la categoria por el nombre de un producto
      public String getCategoria(String nombreProducto){
@@ -189,6 +318,49 @@ public class DiarioFacil implements Icrud {
          return returned;
      }
      
+     //Eliminar producto de un carrito
+     public boolean deleteItemCarrito(int index,String nombreCarrito,Cliente c){
+         for(CarritoCompras iterator : this.carritos){
+             if(iterator.getNombreCarrito().equals(nombreCarrito) && iterator.getCliente().getCedula().equals(c.getCedula())){
+                 if(this.carritos.get(this.carritos.indexOf(iterator)).delete(index, new Object())){
+                    return true;   
+                 }else{
+                    return false; 
+                 }
+             }
+         }
+         return false;
+     }
+     //Editar la cantidad de un producto en un carrito
+     public boolean editItemCarrito(int index,String nombreCarrito,Cliente c,String producto,int nuevaCantidad,boolean promo){
+         for(CarritoCompras iterator: this.carritos){
+             if(iterator.getNombreCarrito().equals(nombreCarrito) && iterator.getCliente().getCedula().equals(c.getCedula())){
+                 if(promo){
+                    if(this.carritos.get(this.carritos.indexOf(iterator)).edit(index,new Item(nuevaCantidad,getPromocionByName(producto),-1))){
+                       return true;
+                    }else{
+                       return false; 
+                    }
+                 }else{
+                    if(this.carritos.get(this.carritos.indexOf(iterator)).edit(index,new Item(nuevaCantidad,getProductoByName(producto),-1))){
+                       return true;
+                    }else{
+                       return false; 
+                    } 
+                 }
+             }
+         }
+         return false;
+     }
+     
+     //Limpiar el carrito
+     public void cleanCarrito(String nombreCarrito,Cliente cliente){
+         for(CarritoCompras car : this.carritos){
+             if(car.getNombreCarrito().equals(nombreCarrito) && car.getCliente().getCedula().equals(cliente.getCedula())){
+                 this.carritos.get(this.carritos.indexOf(car)).cleanCarrito();
+             }
+         }
+     }
     //</editor-fold>
 
     
@@ -720,6 +892,21 @@ public class DiarioFacil implements Icrud {
        }catch(Exception e){
            niceCasting  = false;
        }
+       //</editor-fold>
+       //<editor-fold defaultstate="collapsed" desc="Eliminar carrito">
+            try{
+                //Implementacion en el futuro
+                CarritoCompras car = (CarritoCompras)data;
+                for(CarritoCompras c: this.carritos){
+                    if(c.getNombreCarrito().equals(car.getNombreCarrito())&& c.getCliente().getCedula().equals(car.getCliente().getCedula())){
+                        this.carritos.remove(this.carritos.indexOf(c));
+                        return true;
+                    }
+                }
+            }catch(Exception e){
+                System.err.println(""+e.getMessage());
+                niceCasting = false;
+            }
        //</editor-fold>
        return niceCasting;
     }

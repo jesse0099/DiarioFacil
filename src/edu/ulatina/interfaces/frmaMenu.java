@@ -33,7 +33,7 @@ public class frmaMenu extends javax.swing.JFrame {
         //Pone el background invisible
         AWTUtilities.setWindowOpaque(this, false);
         
-        this.setResizable(true);
+
         
     }
 

@@ -7,8 +7,11 @@ package edu.ulatina.interfaces;
 
 import com.sun.awt.AWTUtilities;
 import edu.ulatina.entidades.Administrador;
+import edu.ulatina.entidades.CarritoCompras;
 import edu.ulatina.entidades.Cliente;
 import edu.ulatina.entidades.Constantes;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import rojeru_san.RSPanelsSlider;
@@ -55,16 +58,18 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         rSPanelImage2 = new rojerusan.RSPanelImage();
         rSPanelCircleImage1 = new rojerusan.RSPanelCircleImage();
         rSButtonIconI6 = new rojerusan.RSButtonIconI();
-        rSButtonIconI4 = new rojerusan.RSButtonIconI();
         rSButtonIconI5 = new rojerusan.RSButtonIconI();
         rSButtonIconI7 = new rojerusan.RSButtonIconI();
+        btnHome = new rojerusan.RSButtonIconI();
+        rSButtonIconI4 = new rojerusan.RSButtonIconI();
+        rSButtonIconI8 = new rojerusan.RSButtonIconI();
         jPanel1 = new javax.swing.JPanel();
         btnClose = new rojeru_san.RSButton();
         rSPanelsSlider1 = new rojeru_san.RSPanelsSlider();
-        pnlHomeUI1 = new edu.ulatina.interfaces.pnlHomeUI();
         pnlPromociones1 = new edu.ulatina.interfaces.pnlPromociones();
         pnlInventarioCliente1 = new edu.ulatina.interfaces.pnlInventarioCliente();
         pnlCarritos1 = new edu.ulatina.interfaces.pnlCarritos();
+        pnlHomeUI1 = new edu.ulatina.interfaces.pnlHomeUI();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1265, 758));
@@ -123,16 +128,6 @@ public class frmaMenuCliente extends javax.swing.JFrame {
             }
         });
 
-        rSButtonIconI4.setBorder(null);
-        rSButtonIconI4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-price-tag-24.png"))); // NOI18N
-        rSButtonIconI4.setText("Promociones ");
-        rSButtonIconI4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        rSButtonIconI4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonIconI4ActionPerformed(evt);
-            }
-        });
-
         rSButtonIconI5.setBorder(null);
         rSButtonIconI5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-mobile-order-24.png"))); // NOI18N
         rSButtonIconI5.setText("Carrito");
@@ -153,6 +148,37 @@ public class frmaMenuCliente extends javax.swing.JFrame {
             }
         });
 
+        btnHome.setBorder(null);
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-home-24.png"))); // NOI18N
+        btnHome.setText("Inicio");
+        btnHome.setInheritsPopupMenu(true);
+        btnHome.setName("btnHome"); // NOI18N
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+
+        rSButtonIconI4.setBorder(null);
+        rSButtonIconI4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-price-tag-24.png"))); // NOI18N
+        rSButtonIconI4.setText("Promociones ");
+        rSButtonIconI4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rSButtonIconI4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconI4ActionPerformed(evt);
+            }
+        });
+
+        rSButtonIconI8.setBorder(null);
+        rSButtonIconI8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-shopping-24.png"))); // NOI18N
+        rSButtonIconI8.setText("Compras");
+        rSButtonIconI8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rSButtonIconI8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconI8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout rSPanelGradiente1Layout = new javax.swing.GroupLayout(rSPanelGradiente1);
         rSPanelGradiente1.setLayout(rSPanelGradiente1Layout);
         rSPanelGradiente1Layout.setHorizontalGroup(
@@ -162,20 +188,26 @@ public class frmaMenuCliente extends javax.swing.JFrame {
                 .addComponent(rSPanelImage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(rSButtonIconI6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(rSButtonIconI4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(rSButtonIconI5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(rSButtonIconI7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rSButtonIconI4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rSButtonIconI8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         rSPanelGradiente1Layout.setVerticalGroup(
             rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rSPanelGradiente1Layout.createSequentialGroup()
                 .addComponent(rSPanelImage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rSButtonIconI7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonIconI4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonIconI5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonIconI7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rSButtonIconI8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rSButtonIconI6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -202,7 +234,6 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         });
 
         rSPanelsSlider1.setBackground(new java.awt.Color(255, 255, 255));
-        rSPanelsSlider1.add(pnlHomeUI1, "card2");
 
         pnlPromociones1.setName("pnlPromo"); // NOI18N
         rSPanelsSlider1.add(pnlPromociones1, "card3");
@@ -213,29 +244,32 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         pnlCarritos1.setName("pnlCarritos"); // NOI18N
         rSPanelsSlider1.add(pnlCarritos1, "card5");
 
+        pnlHomeUI1.setName("pnlHomeUI"); // NOI18N
+        rSPanelsSlider1.add(pnlHomeUI1, "card2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(rSPanelsSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSPanelsSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, Short.MAX_VALUE))
+            .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -254,6 +288,7 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         edu.ulatina.interfaces.DiarioFacilTester.frmaPrincipal.show();
         Constantes.ADMINLOGUEADO = new Administrador();
         Constantes.USUARIOLOGUEADO = new Cliente();
+        this.rSPanelsSlider1.setPanelSlider(1,pnlHomeUI1,RSPanelsSlider.DIRECT.RIGHT);
         this.dispose();
     }//GEN-LAST:event_rSButtonIconI6ActionPerformed
 
@@ -271,7 +306,12 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         if(Constantes.USUARIOLOGUEADO.getCedula()!=null){
             if(DiarioFacilTester.diarioFacil.clienteCarritos(Constantes.USUARIOLOGUEADO)){
                 //Do nothing
+                pnlCarritos1.loadCombo();
             }else{
+                pnlCarritos1.loadCombo();
+                List<CarritoCompras> car  = new ArrayList<>();
+                pnlCarritos1.loadTable(car);
+                pnlCarritos1.cleanScreen();
                 JOptionPane.showMessageDialog(null,"No tiene ningun carrito creado,cree uno!","Sys",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
             }
         }
@@ -282,6 +322,14 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         this.rSPanelsSlider1.setPanelSlider(1,pnlInventarioCliente1,RSPanelsSlider.DIRECT.RIGHT);
         
     }//GEN-LAST:event_rSButtonIconI7ActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+         this.rSPanelsSlider1.setPanelSlider(1,pnlHomeUI1,RSPanelsSlider.DIRECT.RIGHT);
+    }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void rSButtonIconI8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonIconI8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,6 +368,7 @@ public class frmaMenuCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojeru_san.RSButton btnClose;
+    private rojerusan.RSButtonIconI btnHome;
     private javax.swing.JPanel jPanel1;
     private edu.ulatina.interfaces.pnlCarritos pnlCarritos1;
     private edu.ulatina.interfaces.pnlHomeUI pnlHomeUI1;
@@ -329,6 +378,7 @@ public class frmaMenuCliente extends javax.swing.JFrame {
     private rojerusan.RSButtonIconI rSButtonIconI5;
     private rojerusan.RSButtonIconI rSButtonIconI6;
     private rojerusan.RSButtonIconI rSButtonIconI7;
+    private rojerusan.RSButtonIconI rSButtonIconI8;
     private rojerusan.RSPanelCircleImage rSPanelCircleImage1;
     private rspanelgradiente.RSPanelGradiente rSPanelGradiente1;
     private rojerusan.RSPanelImage rSPanelImage2;

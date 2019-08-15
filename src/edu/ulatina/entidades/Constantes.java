@@ -21,6 +21,7 @@ import java.util.List;
 public final  class Constantes {
     //<editor-fold defaultstate="collapsed" desc ="Cliente por defecto">
         public static final Cliente CLIENTEDEFAULT= new Cliente("1","Jese","Chavez","1@gmail.com","jeseCliente","12345","Administrador",Date.from(Instant.now()));
+        public static final Cliente CLIENTEDEFAULT2= new Cliente("2","JeseX","ChavezX","1X@gmail.com","jeseClienteX","12345","AdministradorX",Date.from(Instant.now()));
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Proveedor por defecto">
         public static final Proveedor DEFAULTPROV = new Proveedor("Coca-cola","90892833","48393889X","Daniel","Apellido","daniel@gmail.com"); 
@@ -63,20 +64,22 @@ public final  class Constantes {
             public static final List<Categoria> CATEGORIAS = Arrays.asList(new Categoria[]{new Categoria("Lacteos","Productos derivados de la leche"),new Categoria("Carnes","carnes crudas"),new Categoria("Panaderia","Panaderia"),new Categoria("Bebidas","refrigerados liquidos"),new Categoria("Embutidos","embutidos LMAO")});
             //Productos para un par de categorias
             public static void loadInventory(){
-                CATEGORIAS.get(0).create(new Producto("A",0,10.0,10,10));
-                CATEGORIAS.get(0).create(new Producto("A1",1,10.0,30,10));
-                CATEGORIAS.get(1).create(new Producto("B",2,10.0,30,10));
-                CATEGORIAS.get(2).create(new Producto("C",3,10.0,30,10));
+                CATEGORIAS.get(0).create(new Producto("Producto A",0,10.0,10,10));
+                CATEGORIAS.get(0).create(new Producto("Producto B",1,10.0,30,10));
+                CATEGORIAS.get(1).create(new Producto("Producto C",2,10.0,30,10));
+                CATEGORIAS.get(2).create(new Producto("Producto D",3,10.0,30,10));
+                CATEGORIAS.get(2).create(new Producto("Producto E",3,10.0,30,10));
+                CATEGORIAS.get(2).create(new Producto("Producto F",3,10.0,30,10));
             }
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Promociones">
             public static final List<Promocion> PROMODEFAULT = new ArrayList<>();
             public static void loadPromociones() throws ParseException{
                 SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");  
-                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("12/8/2019"),true,"Producto A",0,10.0,10,10));
-                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("13/8/2019"),true,"Producto B",0,10.0,10,10));
-                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("14/8/2019"),true,"Producto C",0,10.0,10,10));
-                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("15/8/2019"),true,"Producto D",0,10.0,10,10));
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("16/8/2019"),true,"Producto A",0,10.0,10,10));
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("18/8/2019"),true,"Producto B",0,10.0,10,10));
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("25/8/2019"),true,"Producto C",0,10.0,10,10));
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("21/8/2019"),true,"Producto D",0,10.0,10,10));
             }
     //</editor-fold>
 }
