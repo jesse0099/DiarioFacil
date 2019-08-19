@@ -338,6 +338,19 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Component class="edu.ulatina.interfaces.pnlFinalizarCompra" name="pnlCompraFinal1">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="pnlCompraFinal1" noResource="true"/>
+          </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="pnlCompraFinal1"/>
+          </AccessibilityProperties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="card6"/>
+            </Constraint>
+          </Constraints>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

@@ -70,6 +70,7 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         pnlInventarioCliente1 = new edu.ulatina.interfaces.pnlInventarioCliente();
         pnlCarritos1 = new edu.ulatina.interfaces.pnlCarritos();
         pnlHomeUI1 = new edu.ulatina.interfaces.pnlHomeUI();
+        pnlCompraFinal1 = new edu.ulatina.interfaces.pnlFinalizarCompra();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1265, 758));
@@ -247,6 +248,10 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         pnlHomeUI1.setName("pnlHomeUI"); // NOI18N
         rSPanelsSlider1.add(pnlHomeUI1, "card2");
 
+        pnlCompraFinal1.setName("pnlCompraFinal1"); // NOI18N
+        rSPanelsSlider1.add(pnlCompraFinal1, "card6");
+        pnlCompraFinal1.getAccessibleContext().setAccessibleName("pnlCompraFinal1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -328,7 +333,12 @@ public class frmaMenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void rSButtonIconI8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI8ActionPerformed
-        // TODO add your handling code here:
+    /* pnlCompraFinal1*/
+        this.rSPanelsSlider1.setPanelSlider(1,pnlCompraFinal1,RSPanelsSlider.DIRECT.RIGHT);
+        this.pnlCompraFinal1.loadCarrito(Constantes.USUARIOLOGUEADO);
+        
+       /* pnlCompraFinal1*/
+        
     }//GEN-LAST:event_rSButtonIconI8ActionPerformed
 
     /**
@@ -356,8 +366,9 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frmaMenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -371,6 +382,7 @@ public class frmaMenuCliente extends javax.swing.JFrame {
     private rojerusan.RSButtonIconI btnHome;
     private javax.swing.JPanel jPanel1;
     private edu.ulatina.interfaces.pnlCarritos pnlCarritos1;
+    private edu.ulatina.interfaces.pnlFinalizarCompra pnlCompraFinal1;
     private edu.ulatina.interfaces.pnlHomeUI pnlHomeUI1;
     private edu.ulatina.interfaces.pnlInventarioCliente pnlInventarioCliente1;
     private edu.ulatina.interfaces.pnlPromociones pnlPromociones1;

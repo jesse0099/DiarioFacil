@@ -6,8 +6,11 @@
 package edu.ulatina.interfaces;
 
 import edu.ulatina.entidades.CarritoCompras;
+import edu.ulatina.entidades.Categoria;
+import edu.ulatina.entidades.Compra;
 import edu.ulatina.entidades.Constantes;
 import edu.ulatina.entidades.Item;
+import edu.ulatina.entidades.Producto;
 import edu.ulatina.entidades.Promocion;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -418,9 +421,96 @@ public class pnlCarritos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCleanActionPerformed
 
     private void btnClean1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClean1ActionPerformed
-        // TODO add your handling code here:
+    // <editor-fold defaultstate="collapsed" desc="Variables">    
+            CarritoCompras carrito= DiarioFacilTester.diarioFacil.carritoSeleccionado(lblCarritoNombre.getText(),Constantes.USUARIOLOGUEADO ).get(0);
+           /*Lista de Items en carrito*/
+           List<Item> productoDummy = carrito.getProductos();
+           List<Categoria> dummyCategoria = DiarioFacilTester.diarioFacil.getInventario();
+            /*Lista de Items en Genarl*/
+           List<Producto> dummyProductos = new ArrayList<>();
+           boolean check = false;
+           /*Lista de Promociones*/
+          String nombreCompleto = Constantes.USUARIOLOGUEADO.getNombre()+" "+ Constantes.USUARIOLOGUEADO.getApellido();
+          String fecha = String.valueOf(Date.from(Instant.now()));
+          int numCompra = 1;
+        // </editor-fold>  
+           
+     // <editor-fold defaultstate="collapsed" desc="Traer lista de Productos">   
+           /*-------------------------------------------------*/
+           /*Trae la lista de Productos en general*/
+           for(int inv=0; inv < dummyCategoria.size() ; inv++){
+            List<Producto> productosDentro = dummyCategoria.get(inv).getProductos();
+                for(int pd=0; pd < productosDentro.size();pd++){
+                     dummyProductos.add(productosDentro.get(pd));
+                }
+           }
+           /*----------------------------------------------*/
+  // </editor-fold>  
+           
+      // <editor-fold defaultstate="collapsed" desc="Funcion">     
+           /*Check y agregacion de la compra*/
+           for(int i=0; i < productoDummy.size() ; i++){
+               /*Extrae de la lista del carrito de productos el nombre y la cantidad oredenada de cada uno*/
+              Producto productoLista = productoDummy.get(i).getProducto();
+              String nombreLista = productoLista.getNombre();
+              int cantidadLista = productoDummy.get(i).getCantidad();
+              /*Recorre la lista de Productos en general*/
+              
+             for(int y=0;y < dummyProductos.size();y++){
+                 /*Verifica que el nombre del producto sea igual al de lista :Productos*/
+                 if( dummyProductos.get(y).getNombre().equals(nombreLista)){
+                     /*Verifica si la cantidad de la lista es menor o igual : Productos*/
+                     if(cantidadLista <= dummyProductos.get(y).getExistencias()){
+                      check = false; 
+                     }else{
+                      JOptionPane.showMessageDialog(null,"La cantidad del producto: "+nombreLista +" excede nuestras existencias. El numero en inventario es de: "+dummyProductos.get(y).getExistencias());
+                      check = true;
+                      i =  productoDummy.size()+1;
+                     }/*Resultado negativo : Productos*/
+                 }/*Fin de Igualdad de Productos : Productos*/
+             } /*Fin de Revision de Productos*/
+               
+           }
+           /*-------------------------------------------*/
+           
+           // </editor-fold> 
+      // <editor-fold defaultstate="collapsed" desc="Factura">      
+       if(check == false){
+           /*Cambiar Numero de Compra*/ 
+           Compra compra = new Compra(Constantes.USUARIOLOGUEADO,numCompra,carrito,Date.from(Instant.now()));
+            
+            double total=0;
+            String out = generarFactura(lblCarritoNombre.getText(),nombreCompleto,fecha );
+            
+            for(int i=0; i < productoDummy.size() ; i++){
+                
+               Producto prod =productoDummy.get(i).getProducto();
+               
+               if(prod instanceof Promocion){
+                    out+=" Consecutivo: "+productoDummy.get(i).getConsecutivo()+"    Producto: "+prod.getNombre()+"    Precio: "+((Promocion)prod).getPrecioPromocional()+"\n";
+                    total +=((Promocion)prod).getPrecioPromocional();
+               }else{
+                   out+=" Consecutivo: "+productoDummy.get(i).getConsecutivo()+"    Producto: "+prod.getNombre()+"    Precio: "+prod.getPrecio()+"\n";
+                   total += prod.getPrecio();
+               }
+            }
+            out+="Total: "+total;
+            DiarioFacilTester.diarioFacil.addCompra(compra);
+            numCompra++;
+            JOptionPane.showMessageDialog(null,"Compra realizada con  éxito!");
+            System.out.println(out);
+       }
+        // </editor-fold> 
     }//GEN-LAST:event_btnClean1ActionPerformed
-
+    
+    public String generarFactura(String NombreCarrito, String NombreCliente, String Fecha){
+        String out="   ---- F A C T U R A ---   \n"
+                + "Nombre: "+NombreCliente+"          Fecha: "+Fecha+"\n"
+                +"Carrito: "+NombreCarrito+"\n"
+                +"   ---- Detalle: ---   \n"; 
+        return out;
+    }
+    
     private void rSButtonRiple2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple2ActionPerformed
         // TODO add your handling code here:
         if(txtNewCarrito.getText().isEmpty()){
@@ -479,7 +569,7 @@ public class pnlCarritos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnClean2ActionPerformed
 
     private void rSButtonRiple1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple1ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_rSButtonRiple1ActionPerformed
 
     private void txtBuscarCarritoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCarritoKeyTyped

@@ -76,10 +76,10 @@ public final  class Constantes {
             public static final List<Promocion> PROMODEFAULT = new ArrayList<>();
             public static void loadPromociones() throws ParseException{
                 SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");  
-                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("16/8/2019"),true,"Producto A",0,10.0,10,10));
-                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("18/8/2019"),true,"Producto B",0,10.0,10,10));
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("21/8/2019"),true,"Producto A",0,10.0,10,10));
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("23/8/2019"),true,"Producto B",0,10.0,10,10));
                 PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("25/8/2019"),true,"Producto C",0,10.0,10,10));
-                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("21/8/2019"),true,"Producto D",0,10.0,10,10));
+                PROMODEFAULT.add(new Promocion(40.2,formatter1.parse("26/8/2019"),true,"Producto D",0,10.0,10,10));
             }
     //</editor-fold>
 }
