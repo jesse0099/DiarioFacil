@@ -462,6 +462,7 @@ public class pnlCarritos extends javax.swing.JPanel {
                      /*Verifica si la cantidad de la lista es menor o igual : Productos*/
                      if(cantidadLista <= dummyProductos.get(y).getExistencias()){
                       check = false; 
+                       DiarioFacilTester.diarioFacil.reducirExcistencias(dummyProductos.get(y),cantidadLista);
                      }else{
                       JOptionPane.showMessageDialog(null,"La cantidad del producto: "+nombreLista +" excede nuestras existencias. El numero en inventario es de: "+dummyProductos.get(y).getExistencias());
                       check = true;
@@ -510,6 +511,8 @@ public class pnlCarritos extends javax.swing.JPanel {
                 +"   ---- Detalle: ---   \n"; 
         return out;
     }
+    
+ 
     
     private void rSButtonRiple2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple2ActionPerformed
         // TODO add your handling code here:

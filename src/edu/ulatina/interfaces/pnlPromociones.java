@@ -51,6 +51,7 @@ public class pnlPromociones extends javax.swing.JPanel {
     
     
     public void loadPanels(){
+        this.jPanel1.removeAll();
         JPanel pan;
         JLabel lab;
         JLabel prod;
@@ -64,7 +65,7 @@ public class pnlPromociones extends javax.swing.JPanel {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
             pan = new JPanel(new BorderLayout());
             lab = new JLabel(p.getNombre()+"            Vence : "+formatter.format(p.getFechaVencimiento()));
-            prod = new JLabel("Precio promocional : "+p.getPrecioPromocional() + "  Precio original : " +p.getPrecio());
+            prod = new JLabel("Precio promocional : "+p.getPrecioPromocional() + "  Precio original : " +p.getPrecio()+"  Diponibles : "+p.getExistencias());
             comprar = new JButton("Agregar al carrito ");
             icon = new JLabel();
             icon2 = new JLabel();
@@ -147,7 +148,7 @@ public class pnlPromociones extends javax.swing.JPanel {
         }
         lay.setRows(DiarioFacilTester.diarioFacil.getPromocionesFiltradas().size()/2);
         jPanel1.setLayout(lay);
-        jPanel1.repaint();
+        jPanel1.revalidate();
     }
     
     public void searchPromociones(List<Promocion> promos){
@@ -164,7 +165,7 @@ public class pnlPromociones extends javax.swing.JPanel {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
             pan = new JPanel(new BorderLayout());
             lab = new JLabel(p.getNombre()+"            Vence : "+formatter.format(p.getFechaVencimiento()));
-            prod = new JLabel("Precio promocional : "+p.getPrecioPromocional() + "  Precio original : " +p.getPrecio());
+            prod = new JLabel("Precio promocional : "+p.getPrecioPromocional() + "  Precio original : " +p.getPrecio()+"  Diponibles : "+p.getExistencias());
             comprar = new JButton("Agregar al carrito ");
             icon = new JLabel();
             icon2 = new JLabel();

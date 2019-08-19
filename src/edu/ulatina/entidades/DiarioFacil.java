@@ -911,6 +911,21 @@ public class DiarioFacil implements Icrud {
        return niceCasting;
     }
     
+       public void reducirExcistencias(Producto producto, int cantidad){
+           this.inventario.stream().forEach((Categoria cat) -> {
+               cat.getProductos().stream().filter((pro) -> (producto.getNombre().equals(pro.getNombre()))).forEach((pro) -> {
+                   int actual = pro.getExistencias();
+                   this.inventario.get(this.inventario.indexOf(cat)).getProductos().get(this.inventario.get(this.inventario.indexOf(cat)).getProductos().indexOf(pro)).setExistencias(actual-cantidad);
+               });
+        });
+        for(Promocion promo : this.promociones){
+            if(promo.getNombre().equals(producto.getNombre())){
+                int actual = promo.getExistencias();
+                this.promociones.get(this.promociones.indexOf(promo)).setExistencias(actual-cantidad);
+            }
+        }
+
+    }
 
     //Listado de las categorias
     public List<Categoria>  getCategoria(){

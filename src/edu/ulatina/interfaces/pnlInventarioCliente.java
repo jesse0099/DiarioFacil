@@ -43,6 +43,7 @@ public class pnlInventarioCliente extends javax.swing.JPanel {
         loadPanels();
     }
         public void loadPanels(){
+        this.jPanel2.removeAll();
         JPanel pan;
         JLabel lab;
         JLabel prod;
@@ -137,7 +138,7 @@ public class pnlInventarioCliente extends javax.swing.JPanel {
         }
         lay.setRows(DiarioFacilTester.diarioFacil.getProductosFiltrados().size()/2);
         jPanel2.setLayout(lay);
-        jPanel2.repaint();
+        jPanel2.revalidate();
     }
         
         private void searchInventario(List<Producto> productos){

@@ -301,6 +301,7 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         //<editor-fold defaultstate="collapsed" desc="Revision de permiso de entrada al modulo de paquetes y promociones">
             //Entrada al modulo a implementar proximamente
             this.rSPanelsSlider1.setPanelSlider(1,pnlPromociones1,RSPanelsSlider.DIRECT.RIGHT);
+            pnlPromociones1.loadPanels();
         //</editor-fold>
     }//GEN-LAST:event_rSButtonIconI4ActionPerformed
 
@@ -325,6 +326,7 @@ public class frmaMenuCliente extends javax.swing.JFrame {
     private void rSButtonIconI7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI7ActionPerformed
         // TODO add your handling code here:
         this.rSPanelsSlider1.setPanelSlider(1,pnlInventarioCliente1,RSPanelsSlider.DIRECT.RIGHT);
+        pnlInventarioCliente1.loadPanels();
         
     }//GEN-LAST:event_rSButtonIconI7ActionPerformed
 
