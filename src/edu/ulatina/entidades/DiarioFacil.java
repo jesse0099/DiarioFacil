@@ -31,6 +31,7 @@ public class DiarioFacil implements Icrud {
     private List<CarritoCompras> carritos;
     private List<Compra> compras;
     private List<Promocion>  promociones;
+    private List<Paquete> paquetes;
    
     public DiarioFacil(){
         this.promociones = new ArrayList<>();
@@ -39,6 +40,7 @@ public class DiarioFacil implements Icrud {
         this.inventario = new ArrayList<>();
         this.carritos = new ArrayList<>();
         this.compras = new ArrayList<>();
+        this.paquetes=new ArrayList<>();
     }
     
     public void addPromos(ArrayList<Promocion> promos){
@@ -427,7 +429,17 @@ public class DiarioFacil implements Icrud {
     public void addCompra(Compra compra){
         this.compras.add(compra);
     }
-    
+
+    public List<Paquete> getPaquetes() {
+        return paquetes;
+    }
+
+    public void setPaquetes(List<Paquete> paquetes) {
+        this.paquetes = paquetes;
+    }
+    public void addPaquete(Paquete paquete){
+        this.paquetes.add(paquete);
+    }
     
     public boolean login(String user,String contra){
         this.clientes.stream().filter(x-> x.nombreUsuario.equals(user) && x.contrasena.equals(contra)).forEach((Usuario action) -> {
@@ -926,7 +938,14 @@ public class DiarioFacil implements Icrud {
         }
 
     }
-
+ 
+    public void editarPaquete(int index,Paquete paquete){
+        paquetes.set(index, paquete);
+    }
+    
+     public void eliminarPaquete(int index){
+        paquetes.remove(index);
+    }
     //Listado de las categorias
     public List<Categoria>  getCategoria(){
         return this.inventario;
