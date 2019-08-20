@@ -65,7 +65,51 @@ public class DiarioFacil implements Icrud {
     
     
    //<editor-fold defaultstate="collapsed" desc="Otros metodos">
+        public Date getPromoDate(String nombreProducto){
+           for(Promocion promo : this.promociones){
+               if(promo.getNombre().equals(nombreProducto)){
+                   return promo.getFechaVencimiento();
+               }
+           }
+            return null;
+        }
+        public double getPromoPrecio(String nombreProducto){
+            for(Categoria cat : this.inventario){
+                for(Producto pro : cat.getProductos()){
+                    if(pro.getNombre().equals(nombreProducto)){
+                        return pro.getPrecio();
+                    }
+                }
+            }
+            return -1;
+        }
     
+        public int getPromoExistencias(String nombreProducto){
+            for(Categoria cat : this.inventario){
+                for(Producto pro : cat.getProductos()){
+                    if(pro.getNombre().equals(nombreProducto)){
+                        return pro.getExistencias();
+                    }
+                }
+            }
+            return -1;
+        }
+        
+        public int getPromoExistenciaMinima(String nombreProducto){
+            for(Categoria cat : this.inventario){
+                for(Producto pro : cat.getProductos()){
+                    if(pro.getNombre().equals(nombreProducto)){
+                        return pro.getExistenciaMin();
+                    }
+                }
+            }
+            return -1;
+        }
+    
+        public void delPromocion(int index){
+            this.promociones.remove(index);
+        }
+
         public CarritoCompras carritoCompradoDetalle(String nombreCLienteCarro,int index){
             String nombreCliente = nombreCLienteCarro.split("-")[1];
             //String nombreCarrito = nombreCLienteCarro.split("-")[0];
@@ -543,6 +587,26 @@ public class DiarioFacil implements Icrud {
                 System.err.println(""+e.getMessage());
             }
         //</editor-fold>
+       //<editor-fold defaultstate="collapsed" desc="Crear una promocion">
+            try{
+                returnedX=false;
+                Promocion promo = (Promocion)newData;
+                this.promociones.forEach(x->{
+                    if(x.getNombre().equals(promo.getNombre())){
+                        returnedX = true;
+                    }
+                });
+                if(returnedX)
+                    return false;
+                else{
+                    this.promociones.add(promo);
+                    return true;
+                }
+            }catch(Exception e){
+                System.err.println(""+e.getMessage());
+                niceCasting = false;
+            }
+       //</editor-fold>
         return niceCasting;
     }
 
@@ -848,6 +912,17 @@ public class DiarioFacil implements Icrud {
         }catch(Exception e){
             niceCasting =false;
         }
+       //</editor-fold>
+       //<editor-fold defaultstate="collapsed" desc="Edicion de promociones">
+            try{
+               Promocion promo = (Promocion)newData;
+               //Actualizar
+               this.promociones.set(index, promo);
+               return true;
+
+            }catch(Exception e){
+                System.err.println(""+e.getMessage());
+            }
        //</editor-fold>
        return niceCasting;
     }

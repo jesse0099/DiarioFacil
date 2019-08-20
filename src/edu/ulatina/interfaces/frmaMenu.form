@@ -87,7 +87,7 @@
                   <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
               </Group>
               <Component id="btnAdminProveedor" alignment="0" max="32767" attributes="0"/>
-              <Component id="rSButtonIconI4" alignment="0" max="32767" attributes="0"/>
+              <Component id="btnPromociones" alignment="0" max="32767" attributes="0"/>
               <Component id="btnAdmins" alignment="0" max="32767" attributes="0"/>
               <Component id="btnAdministrarProductos" alignment="0" max="32767" attributes="0"/>
               <Component id="btnAdminClientes" alignment="0" max="32767" attributes="0"/>
@@ -110,7 +110,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="rSButtonIconI7" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="rSButtonIconI4" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="btnPromociones" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAdministrarProductos" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -236,7 +236,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonIconI6ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="rojerusan.RSButtonIconI" name="rSButtonIconI4">
+        <Component class="rojerusan.RSButtonIconI" name="btnPromociones">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -244,11 +244,11 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/edu/ulatina/ejemplos/img/icons8-price-tag-24.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Promociones y paquetes"/>
+            <Property name="text" type="java.lang.String" value="Promociones "/>
             <Property name="horizontalAlignment" type="int" value="11"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonIconI4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPromocionesActionPerformed"/>
           </Events>
         </Component>
         <Component class="rojerusan.RSButtonIconI" name="btnHome">
@@ -416,6 +416,16 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="card8"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="edu.ulatina.interfaces.pnlAdminPromociones" name="pnlAdminPromociones1">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="pnlPromociones1" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="card9"/>
             </Constraint>
           </Constraints>
         </Component>
