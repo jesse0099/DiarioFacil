@@ -65,6 +65,20 @@ public class DiarioFacil implements Icrud {
     
     
    //<editor-fold defaultstate="collapsed" desc="Otros metodos">
+    
+        public CarritoCompras carritoCompradoDetalle(String nombreCLienteCarro,int index){
+            String nombreCliente = nombreCLienteCarro.split("-")[1];
+            //String nombreCarrito = nombreCLienteCarro.split("-")[0];
+            for(Compra com : this.compras){
+                if(com.getCliente().getNombreUsuario().equals(nombreCliente)){
+                   if(this.compras.indexOf(com)==index){
+                       return com.getCarritoComprado();
+                   }
+                }
+            }
+            return null;
+        }
+    
         public List<Producto> searchProductos(String value){
             List<Producto> returned = new ArrayList<>();
             for(Categoria ca: this.inventario){

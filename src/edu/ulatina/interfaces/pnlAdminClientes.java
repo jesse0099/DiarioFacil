@@ -11,6 +11,12 @@ import edu.ulatina.entidades.DiarioFacil;
 import edu.ulatina.entidades.Permiso;
 import edu.ulatina.entidades.Usuario;
 import edu.ulatina.entidades.Compra;
+import edu.ulatina.entidades.Item;
+import edu.ulatina.entidades.Producto;
+import edu.ulatina.entidades.Promocion;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,9 +24,15 @@ import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import rojerusan.RSTableMetro;
 /**
  *
  * @author Daniel
@@ -175,6 +187,7 @@ public class pnlAdminClientes extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCompras = new javax.swing.JTable();
+        btnEdit1 = new rojerusan.RSButtonIconI();
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -420,24 +433,39 @@ public class pnlAdminClientes extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tblCompras);
         tblCompras.getAccessibleContext().setAccessibleName("tblCompras1");
 
+        btnEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-panel-de-detalles-24.png"))); // NOI18N
+        btnEdit1.setText("Ver detalles de la compra");
+        btnEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEdit1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(194, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(167, 167, 167))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .addComponent(btnEdit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -458,17 +486,17 @@ public class pnlAdminClientes extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(117, 117, 117)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 37, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(272, 272, 272)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 266, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,10 +668,53 @@ public class pnlAdminClientes extends javax.swing.JPanel {
               
     }//GEN-LAST:event_btnEditActionPerformed
 
+    private void btnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdit1ActionPerformed
+        // TODO add your handling code here:
+         //<editor-fold defaultstate="collapsed" desc="Detalles de una compra">
+        if(tblCompras.getRowCount()>0){
+            if(tblCompras.getSelectedRow()>-1){
+                Double calcSubTotal =0.00;
+                DefaultTableModel modelDetail = new DefaultTableModel(){
+                    @Override
+                    public boolean isCellEditable(int row,int column){
+                        return false;
+                    }
+                };
+
+                modelDetail.addColumn("Consecutivo");
+                modelDetail.addColumn("Producto");
+                modelDetail.addColumn("Cantidad");
+                modelDetail.addColumn("Precio unidad");
+                modelDetail.addColumn("Comprado en promocion");
+                modelDetail.addColumn("SubTotal");
+                for(Item i : DiarioFacilTester.diarioFacil.carritoCompradoDetalle(String.valueOf(tblCompras.getValueAt(tblCompras.getSelectedRow(),2)), Integer.parseInt(tblCompras.getValueAt(tblCompras.getSelectedRow(),0).toString())).getProductos()){
+                   if(!(i.getProducto() instanceof Promocion)){
+                        modelDetail.addRow(new Object[]{i.getConsecutivo(),i.getProducto().getNombre(),i.getCantidad(),i.getProducto().getPrecio(),false,i.getCantidad()*i.getProducto().getPrecio()});
+                        calcSubTotal = calcSubTotal+(i.getCantidad()*i.getProducto().getPrecio());
+                   }else{
+                       modelDetail.addRow(new Object[]{i.getConsecutivo(),i.getProducto().getNombre(),i.getCantidad(),((Promocion)i.getProducto()).getPrecioPromocional(),true,i.getCantidad()*((Promocion)i.getProducto()).getPrecioPromocional()});
+                       calcSubTotal = calcSubTotal+(i.getCantidad()*((Promocion)i.getProducto()).getPrecioPromocional());
+                   }
+                }
+                JPanel pnlOkis  = new JPanel();
+                JLabel total = new JLabel("Total : "+((calcSubTotal*0.13)+calcSubTotal) +"  subTotal:"+calcSubTotal);
+                pnlOkis.setLayout(new BorderLayout());
+                RSTableMetro tblDetails = new RSTableMetro();
+                tblDetails.setModel(modelDetail);
+                pnlOkis.add(new JScrollPane(tblDetails,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS),BorderLayout.CENTER);
+                pnlOkis.add(total,BorderLayout.PAGE_START);
+                JComponent[] componente = new JComponent[]{pnlOkis};
+                JOptionPane.showMessageDialog(null, componente, "sys", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+         //</editor-fold>
+    }//GEN-LAST:event_btnEdit1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSButtonIconI btnDelete;
     private rojerusan.RSButtonIconI btnEdit;
+    private rojerusan.RSButtonIconI btnEdit1;
     private rojerusan.RSComboMetro cbFiltros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
