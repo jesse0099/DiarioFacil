@@ -35,7 +35,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnClose" min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="pnlSlider" pref="1010" max="32767" attributes="0"/>
+                  <Component id="pnlSlider" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -90,7 +90,12 @@
               <Component id="btnPromociones" alignment="0" max="32767" attributes="0"/>
               <Component id="btnAdmins" alignment="0" max="32767" attributes="0"/>
               <Component id="btnAdministrarProductos" alignment="0" max="32767" attributes="0"/>
-              <Component id="btnAdminClientes" alignment="0" max="32767" attributes="0"/>
+              <Component id="btnAdminPaquetes" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnAdminClientes1" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -116,8 +121,10 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnAdmins" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnAdminClientes" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="btnAdminClientes1" min="-2" pref="24" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnAdminPaquetes" min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Component id="rSButtonIconI6" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -320,7 +327,22 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdministrarProductosActionPerformed"/>
           </Events>
         </Component>
-        <Component class="rojerusan.RSButtonIconI" name="btnAdminClientes">
+        <Component class="rojerusan.RSButtonIconI" name="btnAdminPaquetes">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/edu/ulatina/ejemplos/img/ecbd19ae690e1d43da0b06ba052efefb-paquete-de-carton-vista-frontal.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Paquetes"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminPaquetesActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="rojerusan.RSButtonIconI" name="btnAdminClientes1">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -332,7 +354,7 @@
             <Property name="horizontalAlignment" type="int" value="11"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminClientesActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminClientes1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

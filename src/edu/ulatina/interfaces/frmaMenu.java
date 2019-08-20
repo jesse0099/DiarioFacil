@@ -59,7 +59,8 @@ public class frmaMenu extends javax.swing.JFrame {
         btnAdminProveedor = new rojerusan.RSButtonIconI();
         btnAdmins = new rojerusan.RSButtonIconI();
         btnAdministrarProductos = new rojerusan.RSButtonIconI();
-        btnAdminClientes = new rojerusan.RSButtonIconI();
+        btnAdminPaquetes = new rojerusan.RSButtonIconI();
+        btnAdminClientes1 = new rojerusan.RSButtonIconI();
         pnlSlider = new rojeru_san.RSPanelsSlider();
         pnlHomeUI2 = new edu.ulatina.interfaces.pnlHomeUI();
         pnlAdminProducts2 = new edu.ulatina.interfaces.pnlAdminProductsCategories();
@@ -69,6 +70,7 @@ public class frmaMenu extends javax.swing.JFrame {
         pnlAdminClientes1 = new edu.ulatina.interfaces.pnlAdminClientes();
         pnlAdminClientes2 = new edu.ulatina.interfaces.pnlAdminClientes();
         pnlAdminPromociones1 = new edu.ulatina.interfaces.pnlAdminPromociones();
+        pnlAdminPaquetes1 = new edu.ulatina.interfaces.pnlAdminPaquetes();
         jPanel1 = new javax.swing.JPanel();
         btnClose = new rojeru_san.RSButton();
 
@@ -213,13 +215,23 @@ public class frmaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnAdminClientes.setBorder(null);
-        btnAdminClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/cliente_1.png"))); // NOI18N
-        btnAdminClientes.setText("Clientes");
-        btnAdminClientes.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        btnAdminClientes.addActionListener(new java.awt.event.ActionListener() {
+        btnAdminPaquetes.setBorder(null);
+        btnAdminPaquetes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/ecbd19ae690e1d43da0b06ba052efefb-paquete-de-carton-vista-frontal.png"))); // NOI18N
+        btnAdminPaquetes.setText("Paquetes");
+        btnAdminPaquetes.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnAdminPaquetes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdminClientesActionPerformed(evt);
+                btnAdminPaquetesActionPerformed(evt);
+            }
+        });
+
+        btnAdminClientes1.setBorder(null);
+        btnAdminClientes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/cliente_1.png"))); // NOI18N
+        btnAdminClientes1.setText("Clientes");
+        btnAdminClientes1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnAdminClientes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminClientes1ActionPerformed(evt);
             }
         });
 
@@ -241,7 +253,11 @@ public class frmaMenu extends javax.swing.JFrame {
             .addComponent(btnPromociones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnAdmins, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnAdministrarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnAdminClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnAdminPaquetes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(rSPanelGradiente1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAdminClientes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         rSPanelGradiente1Layout.setVerticalGroup(
             rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,8 +282,10 @@ public class frmaMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdmins, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAdminClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdminClientes1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdminPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
                 .addComponent(rSButtonIconI6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -296,6 +314,9 @@ public class frmaMenu extends javax.swing.JFrame {
 
         pnlAdminPromociones1.setName("pnlPromociones1"); // NOI18N
         pnlSlider.add(pnlAdminPromociones1, "card9");
+        pnlAdminPaquetes1.setName("pnlAdminPaquetes"); // NOI18N
+        pnlSlider.add(pnlAdminPaquetes1, "card9");
+        pnlAdminPaquetes1.getAccessibleContext().setAccessibleName("pnlAdminPaquetes1");
 
         jPanel1.setBackground(new java.awt.Color(0, 112, 192));
 
@@ -503,11 +524,11 @@ public class frmaMenu extends javax.swing.JFrame {
         //</editor-fold>
     }//GEN-LAST:event_btnAdministrarProductosActionPerformed
 
-    private void btnAdminClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminClientesActionPerformed
+    private void btnAdminPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminPaquetesActionPerformed
         //  pnlAdminClientes1
         
          if(Constantes.ADMINLOGUEADO.checkCredentials("EUSUARIO")){
-            if(!btnAdminClientes.isSelected()){
+            if(!btnAdminPaquetes.isSelected()){
                btnAdminCategoria.setSelected(true);
                btnHome.setSelected(false);
                btnPromociones.setSelected(false);
@@ -516,9 +537,8 @@ public class frmaMenu extends javax.swing.JFrame {
                btnAdministrarProductos.setSelected(false);
                btnAdminProveedor.setSelected(false);
                 this.btnAdminCategoria.setSelected(false);
-               pnlSlider.setPanelSlider(1, pnlAdminClientes1,RSPanelsSlider.DIRECT.RIGHT);
-               pnlAdminClientes1.checkEdit();
-               this.pnlAdminClientes1.load();
+               pnlSlider.setPanelSlider(1, pnlAdminPaquetes1,RSPanelsSlider.DIRECT.RIGHT);
+             
             }
         }else{
             JOptionPane.showMessageDialog(null, "No tiene acceso al modulo", "Sys", JOptionPane.ERROR_MESSAGE, new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png")); 
@@ -526,7 +546,11 @@ public class frmaMenu extends javax.swing.JFrame {
 
          
         
-    }//GEN-LAST:event_btnAdminClientesActionPerformed
+    }//GEN-LAST:event_btnAdminPaquetesActionPerformed
+
+    private void btnAdminClientes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminClientes1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdminClientes1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -565,7 +589,8 @@ public class frmaMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSButtonIconI btnAdminCategoria;
-    private rojerusan.RSButtonIconI btnAdminClientes;
+    private rojerusan.RSButtonIconI btnAdminClientes1;
+    private rojerusan.RSButtonIconI btnAdminPaquetes;
     private rojerusan.RSButtonIconI btnAdminProveedor;
     private rojerusan.RSButtonIconI btnAdministrarProductos;
     private rojerusan.RSButtonIconI btnAdmins;
@@ -577,6 +602,7 @@ public class frmaMenu extends javax.swing.JFrame {
     private edu.ulatina.interfaces.pnlAdminClientes pnlAdminClientes1;
     private edu.ulatina.interfaces.pnlAdminClientes pnlAdminClientes2;
     private edu.ulatina.interfaces.pnlAdminInventario pnlAdminInventario1;
+    private edu.ulatina.interfaces.pnlAdminPaquetes pnlAdminPaquetes1;
     private edu.ulatina.interfaces.pnlAdminProductsCategories pnlAdminProducts2;
     private edu.ulatina.interfaces.pnlAdminPromociones pnlAdminPromociones1;
     private edu.ulatina.interfaces.pnlAdminProveedorHome pnlAdminProveedorHome2;

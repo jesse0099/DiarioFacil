@@ -5,8 +5,12 @@
  */
 package edu.ulatina.interfaces;
 
+import edu.ulatina.entidades.CarritoCompras;
+import edu.ulatina.entidades.Cliente;
 import edu.ulatina.entidades.Compra;
+import edu.ulatina.entidades.Item;
 import edu.ulatina.entidades.Usuario;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +29,7 @@ public class pnlFinalizarCompra extends javax.swing.JPanel {
      */
     public pnlFinalizarCompra() {
         initComponents();
+        construirDesglose();
         
     }
     
@@ -45,14 +50,59 @@ public class pnlFinalizarCompra extends javax.swing.JPanel {
       
         for(Compra compra  : DiarioFacilTester.diarioFacil.getCompras()){
             
-          if(compra.getCliente().equals(cliente)){
+        if(compra.getCliente().equals(cliente)){
               
-          modelo.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getCompras().indexOf(compra)), String.valueOf(compra.getIdCompra()), String.valueOf(compra.getCarritoComprado()), String.valueOf(compra.getFechacompra())});
+         modelo.addRow(new String[]{String.valueOf(DiarioFacilTester.diarioFacil.getCompras().indexOf(compra)), String.valueOf(compra.getIdCompra()),String.valueOf(compra.getCarritoComprado().getNombreCarrito()), String.valueOf(compra.getFechacompra())});
         
           }       
         }
          this.tblCarritos.setModel(modelo);
     }
+    
+    
+    public void construirDesglose(){
+        /*tblDesglose*/
+          modelo  = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row,int column){
+                return false;
+            }
+        };
+        modelo.addColumn("Consecutivo");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Subtotal");
+        this.tblDesglose.setModel(modelo);
+       
+    }
+    
+      public void fillDesglose(List<Item> items){
+        /*tblDesglose*/
+          modelo  = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row,int column){
+                return false;
+            }
+        };
+        modelo.addColumn("Consecutivo");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Subtotal");
+         double total =0;        
+          for (int i = 0; i < items.size(); i++) {
+              modelo.addRow(new String[]{ String.valueOf(items.get(i).getConsecutivo()), String.valueOf(items.get(i).getProducto().getNombre()),String.valueOf(items.get(i).getCantidad()),String.valueOf(items.get(i).getProducto().getPrecio()),String.valueOf(items.get(i).getCantidad() * items.get(i).getProducto().getPrecio())});
+              total+= items.get(i).getCantidad() * items.get(i).getProducto().getPrecio(); 
+          }
+          total= total+(total*0.13);
+          this.txtNombre.setText(String.valueOf(total));
+         tblDesglose.setModel(modelo);
+       
+    }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,8 +116,13 @@ public class pnlFinalizarCompra extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblCarritos = new rojerusan.RSTableMetro();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblCarritos = new javax.swing.JTable();
+        tblDesglose = new rojerusan.RSTableMetro();
+        jLabel6 = new javax.swing.JLabel();
+        txtNombre = new rojeru_san.RSMTextFull();
 
         jLabel1.setText("Compra Final");
 
@@ -84,17 +139,46 @@ public class pnlFinalizarCompra extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblCarritos);
+        tblCarritos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCarritosMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblCarritos);
+
+        jLabel3.setText("Desgolse");
+
+        tblDesglose.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblDesglose);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(408, 408, 408)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(395, 395, 395)
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,40 +186,93 @@ public class pnlFinalizarCompra extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
+
+        jLabel6.setText("Total:");
+
+        txtNombre.setFont(new java.awt.Font("Roboto Bold", 1, 12)); // NOI18N
+        txtNombre.setPlaceholder("total");
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(656, 656, 656))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(513, 513, 513)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel6)
+                                .addGap(55, 55, 55)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(425, 425, 425)
+                        .addComponent(jLabel1)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 88, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void tblCarritosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCarritosMouseClicked
+        // TODO add your handling code here:
+        
+         int in= Integer.parseInt((String) this.tblCarritos.getValueAt( tblCarritos.getSelectedRow(),1));
+        List<Compra> compras = DiarioFacilTester.diarioFacil.getCompras();
+        CarritoCompras car = null;
+        List<Item> items;
+
+        for (int i = 0; i < compras.size(); i++) {
+            if(in == compras.get(i).getIdCompra()){
+                car =  compras.get(i).getCarritoComprado();
+                i = compras.size()+1;
+            }
+        }
+
+        items = car.getProductos();
+        fillDesglose(items);
+    }//GEN-LAST:event_tblCarritosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblCarritos;
+    private javax.swing.JScrollPane jScrollPane3;
+    private rojerusan.RSTableMetro tblCarritos;
+    private rojerusan.RSTableMetro tblDesglose;
+    private rojeru_san.RSMTextFull txtNombre;
     // End of variables declaration//GEN-END:variables
 }
