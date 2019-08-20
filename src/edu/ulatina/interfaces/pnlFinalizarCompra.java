@@ -8,8 +8,10 @@ package edu.ulatina.interfaces;
 import edu.ulatina.entidades.CarritoCompras;
 import edu.ulatina.entidades.Cliente;
 import edu.ulatina.entidades.Compra;
+import edu.ulatina.entidades.Constantes;
 import edu.ulatina.entidades.Item;
 import edu.ulatina.entidades.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -245,20 +247,12 @@ public class pnlFinalizarCompra extends javax.swing.JPanel {
 
     private void tblCarritosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCarritosMouseClicked
         // TODO add your handling code here:
-        
-         int in= Integer.parseInt((String) this.tblCarritos.getValueAt( tblCarritos.getSelectedRow(),1));
-        List<Compra> compras = DiarioFacilTester.diarioFacil.getCompras();
-        CarritoCompras car = null;
-        List<Item> items;
-
-        for (int i = 0; i < compras.size(); i++) {
-            if(in == compras.get(i).getIdCompra()){
-                car =  compras.get(i).getCarritoComprado();
-                i = compras.size()+1;
-            }
+        List<Item> items = new ArrayList<>();
+        int in= Integer.parseInt((String) this.tblCarritos.getValueAt( tblCarritos.getSelectedRow(),0));
+        String carritoNombre  = "DEFT-"+Constantes.USUARIOLOGUEADO.getNombreUsuario();
+        for(Item i: DiarioFacilTester.diarioFacil.carritoCompradoDetalle(carritoNombre, in).getProductos()){
+            items.add(i);
         }
-
-        items = car.getProductos();
         fillDesglose(items);
     }//GEN-LAST:event_tblCarritosMouseClicked
 

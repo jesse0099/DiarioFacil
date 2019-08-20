@@ -67,6 +67,19 @@ public class DiarioFacil implements Icrud {
     
     
    //<editor-fold defaultstate="collapsed" desc="Otros metodos">
+       public boolean aplicaPromos(Cliente c){
+          int compraCounter=1;
+          for(Compra comp: this.compras){
+              if(comp.getCliente().getCedula().equals(c.getCedula())){
+                  compraCounter+=1;
+              }
+          }
+          if(compraCounter>=5)
+              return true;
+          else
+              return false;
+       }
+    
         public Date getPromoDate(String nombreProducto){
            for(Promocion promo : this.promociones){
                if(promo.getNombre().equals(nombreProducto)){

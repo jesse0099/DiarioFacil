@@ -30,7 +30,7 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         AWTUtilities.setWindowOpaque(this, true);
-
+        this.rSPanelsSlider1.setPanelSlider(1,pnlHomeUI1,RSPanelsSlider.DIRECT.RIGHT);
         
     }
     
@@ -62,7 +62,8 @@ public class frmaMenuCliente extends javax.swing.JFrame {
         rSButtonIconI7 = new rojerusan.RSButtonIconI();
         btnHome = new rojerusan.RSButtonIconI();
         rSButtonIconI4 = new rojerusan.RSButtonIconI();
-        rSButtonIconI8 = new rojerusan.RSButtonIconI();
+        btnCompras = new rojerusan.RSButtonIconI();
+        btnPaquetes = new rojerusan.RSButtonIconI();
         jPanel1 = new javax.swing.JPanel();
         btnClose = new rojeru_san.RSButton();
         rSPanelsSlider1 = new rojeru_san.RSPanelsSlider();
@@ -170,13 +171,23 @@ public class frmaMenuCliente extends javax.swing.JFrame {
             }
         });
 
-        rSButtonIconI8.setBorder(null);
-        rSButtonIconI8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-shopping-24.png"))); // NOI18N
-        rSButtonIconI8.setText("Compras");
-        rSButtonIconI8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        rSButtonIconI8.addActionListener(new java.awt.event.ActionListener() {
+        btnCompras.setBorder(null);
+        btnCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-shopping-24.png"))); // NOI18N
+        btnCompras.setText("Compras");
+        btnCompras.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonIconI8ActionPerformed(evt);
+                btnComprasActionPerformed(evt);
+            }
+        });
+
+        btnPaquetes.setBorder(null);
+        btnPaquetes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/ulatina/ejemplos/img/icons8-paquete-24.png"))); // NOI18N
+        btnPaquetes.setText("Paquetes");
+        btnPaquetes.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnPaquetes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPaquetesActionPerformed(evt);
             }
         });
 
@@ -193,7 +204,8 @@ public class frmaMenuCliente extends javax.swing.JFrame {
             .addComponent(rSButtonIconI7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(rSButtonIconI4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(rSButtonIconI8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnPaquetes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         rSPanelGradiente1Layout.setVerticalGroup(
             rSPanelGradiente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +220,9 @@ public class frmaMenuCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonIconI5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonIconI8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rSButtonIconI6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -300,8 +314,13 @@ public class frmaMenuCliente extends javax.swing.JFrame {
     private void rSButtonIconI4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI4ActionPerformed
         //<editor-fold defaultstate="collapsed" desc="Revision de permiso de entrada al modulo de paquetes y promociones">
             //Entrada al modulo a implementar proximamente
-            this.rSPanelsSlider1.setPanelSlider(1,pnlPromociones1,RSPanelsSlider.DIRECT.RIGHT);
-            pnlPromociones1.loadPanels();
+            if(DiarioFacilTester.diarioFacil.aplicaPromos(Constantes.USUARIOLOGUEADO)){
+                this.rSPanelsSlider1.setPanelSlider(1,pnlPromociones1,RSPanelsSlider.DIRECT.RIGHT);
+                pnlPromociones1.loadPanels();
+            }else{
+                JOptionPane.showMessageDialog(null,"No tiene acceso a las promociones","Sys",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("src/edu/ulatina/ejemplos/img/icons8-error-32.png"));
+            }
+
         //</editor-fold>
     }//GEN-LAST:event_rSButtonIconI4ActionPerformed
 
@@ -334,14 +353,18 @@ public class frmaMenuCliente extends javax.swing.JFrame {
          this.rSPanelsSlider1.setPanelSlider(1,pnlHomeUI1,RSPanelsSlider.DIRECT.RIGHT);
     }//GEN-LAST:event_btnHomeActionPerformed
 
-    private void rSButtonIconI8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconI8ActionPerformed
+    private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
     /* pnlCompraFinal1*/
         this.rSPanelsSlider1.setPanelSlider(1,pnlCompraFinal1,RSPanelsSlider.DIRECT.RIGHT);
         this.pnlCompraFinal1.loadCarrito(Constantes.USUARIOLOGUEADO);
         
        /* pnlCompraFinal1*/
         
-    }//GEN-LAST:event_rSButtonIconI8ActionPerformed
+    }//GEN-LAST:event_btnComprasActionPerformed
+
+    private void btnPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaquetesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPaquetesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -381,7 +404,9 @@ public class frmaMenuCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojeru_san.RSButton btnClose;
+    private rojerusan.RSButtonIconI btnCompras;
     private rojerusan.RSButtonIconI btnHome;
+    private rojerusan.RSButtonIconI btnPaquetes;
     private javax.swing.JPanel jPanel1;
     private edu.ulatina.interfaces.pnlCarritos pnlCarritos1;
     private edu.ulatina.interfaces.pnlFinalizarCompra pnlCompraFinal1;
@@ -392,7 +417,6 @@ public class frmaMenuCliente extends javax.swing.JFrame {
     private rojerusan.RSButtonIconI rSButtonIconI5;
     private rojerusan.RSButtonIconI rSButtonIconI6;
     private rojerusan.RSButtonIconI rSButtonIconI7;
-    private rojerusan.RSButtonIconI rSButtonIconI8;
     private rojerusan.RSPanelCircleImage rSPanelCircleImage1;
     private rspanelgradiente.RSPanelGradiente rSPanelGradiente1;
     private rojerusan.RSPanelImage rSPanelImage2;

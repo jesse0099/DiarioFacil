@@ -422,7 +422,12 @@ public class pnlCarritos extends javax.swing.JPanel {
 
     private void btnClean1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClean1ActionPerformed
     // <editor-fold defaultstate="collapsed" desc="Variables">    
-            CarritoCompras carrito= DiarioFacilTester.diarioFacil.carritoSeleccionado(lblCarritoNombre.getText(),Constantes.USUARIOLOGUEADO ).get(0);
+            CarritoCompras carrito= new CarritoCompras();
+            carrito.setNombreCarrito(DiarioFacilTester.diarioFacil.carritoSeleccionado(lblCarritoNombre.getText(),Constantes.USUARIOLOGUEADO ).get(0).getNombreCarrito());
+            for( Item c :  DiarioFacilTester.diarioFacil.carritoSeleccionado(lblCarritoNombre.getText(),Constantes.USUARIOLOGUEADO ).get(0).getProductos()){
+                carrito.create(c);
+            }
+                   
            /*Lista de Items en carrito*/
            List<Item> productoDummy = carrito.getProductos();
            List<Categoria> dummyCategoria = DiarioFacilTester.diarioFacil.getInventario();
